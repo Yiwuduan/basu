@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Heart, Users, Lightbulb, Target } from 'lucide-react';
-import amandaImage from '@assets/IMG_0856_1758972649085.jpeg';
+import amandaImage from '@assets/AmandaBasuRoy_269 Revison2 WEB_1758973124399.jpg';
 import fallbackImage from '@assets/IMG_4089_1758970285467.jpeg';
 
 const values = [
