@@ -42,7 +42,7 @@ export default function HeroSection() {
           </div>
           
           {/* Massive BEYOND SCHOOL title on one line across screen */}
-          <h1 className="font-serif text-[12vw] sm:text-[14vw] md:text-[16vw] lg:text-[18vw] xl:text-[20vw] font-bold text-white leading-none mb-8 tracking-tight px-4 whitespace-nowrap overflow-hidden">
+          <h1 className="font-serif text-[6vw] sm:text-[7vw] md:text-[8vw] lg:text-[9vw] xl:text-[10vw] font-bold text-white leading-none mb-8 tracking-tight px-4 whitespace-nowrap">
             BEYOND SCHOOL
           </h1>
           
