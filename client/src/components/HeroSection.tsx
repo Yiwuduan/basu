@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { ArrowDown, Play } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import amandaBackgroundPhoto from '@assets/PHOTO-2025-08-28-14-02-49 3_1758972025432.jpg';
+import amandaBackgroundPhoto from '@assets/PHOTO-2025-08-28-14-02-49_1758973315512.jpg';
 
 export default function HeroSection() {
   const scrollToAbout = () => {
