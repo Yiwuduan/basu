@@ -38,29 +38,68 @@ export default function SignupSection() {
       return;
     }
 
+    if (!formData.parentName || !formData.email || !formData.childName) {
+      toast({
+        title: "Required Fields Missing",
+        description: "Please fill in your name, email, and child's name.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
+    try {
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          parentName: formData.parentName,
+          email: formData.email,
+          childName: formData.childName,
+          childAge: formData.childAge || null,
+          message: formData.message || null,
+          newsletter: formData.newsletter
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        toast({
+          title: "Thank you for your interest!",
+          description: result.message || "We'll be in touch soon with more details about the workshop.",
+        });
+        
+        // Reset form
+        setFormData({
+          parentName: '',
+          email: '',
+          childName: '',
+          childAge: '',
+          message: '',
+          newsletter: false,
+          privacy: false
+        });
+      } else {
+        toast({
+          title: "Signup Error",
+          description: result.error || "Something went wrong. Please try again.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
       toast({
-        title: "Thank you for your interest!",
-        description: "We'll be in touch soon with more details about the workshop.",
+        title: "Connection Error",
+        description: "Please check your internet connection and try again.",
+        variant: "destructive"
       });
-      
-      // Reset form
-      setFormData({
-        parentName: '',
-        email: '',
-        childName: '',
-        childAge: '',
-        message: '',
-        newsletter: false,
-        privacy: false
-      });
-      
+    } finally {
       setIsSubmitting(false);
-    }, 2000);
+    }
   };
 
   return (
