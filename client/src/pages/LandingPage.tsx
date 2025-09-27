@@ -16,8 +16,8 @@ export default function LandingPage() {
       <main>
         <HeroSection />
         <BrandSection />
-        <AboutSection />
         <PhilosophySection />
+        <AboutSection />
         <WorkshopSection />
         <GallerySection />
         <StatsSection />
