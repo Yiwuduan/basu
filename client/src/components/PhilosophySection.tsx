@@ -56,7 +56,7 @@ export default function PhilosophySection() {
         {/* Philosophy Cards */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {principles.map((principle, index) => (
-            <Card key={index} className="p-8 hover-elevate border-card-border relative overflow-hidden">
+            <Card key={index} className="aspect-square p-8 hover-elevate border-card-border relative overflow-hidden">
               {/* Background Image */}
               <div className="absolute inset-0 z-0">
                 <img 
