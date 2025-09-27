@@ -40,7 +40,7 @@ const principles = [
 export default function PhilosophySection() {
   return (
     <section id="philosophy" className="py-20 bg-muted/30">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-8 sm:px-12 lg:px-16 xl:px-20">
         {/* Header */}
         <div className="text-center mb-16">
           <Badge variant="secondary" className="mb-4">Our Philosophy</Badge>
@@ -54,7 +54,7 @@ export default function PhilosophySection() {
         </div>
 
         {/* Philosophy Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 xl:gap-16 mb-16">
           {principles.map((principle, index) => (
             <Card key={index} className="aspect-square p-4 hover-elevate border-card-border relative overflow-hidden">
               {/* Background Image */}
@@ -91,7 +91,7 @@ export default function PhilosophySection() {
           {/* Background Image for quote section */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="@assets/IMG_4089_1758972710503.jpeg"
+              src={img4089}
               alt="Workshop atmosphere"
               className="w-full h-full object-cover opacity-30"
               onError={(e) => {
