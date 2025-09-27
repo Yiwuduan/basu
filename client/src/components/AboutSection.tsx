@@ -1,5 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Heart, Users, Lightbulb, Target } from 'lucide-react';
+import amandaImage from '@assets/IMG_0856_1758972649085.jpeg';
 
 const values = [
   {
@@ -40,7 +41,7 @@ export default function AboutSection() {
               <Card className="p-8 bg-card border-card-border">
                 <div className="aspect-square rounded-xl overflow-hidden mb-6">
                   <img 
-                    src="@assets/IMG_0856_1758972649085.jpeg"
+                    src={amandaImage}
                     alt="Amanda teaching and mentoring"
                     className="w-full h-full object-cover"
                     onError={(e) => {
