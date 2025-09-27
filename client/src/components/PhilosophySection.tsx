@@ -54,9 +54,9 @@ export default function PhilosophySection() {
         </div>
 
         {/* Philosophy Cards */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {principles.map((principle, index) => (
-            <Card key={index} className="aspect-square p-8 hover-elevate border-card-border relative overflow-hidden">
+            <Card key={index} className="aspect-square p-4 hover-elevate border-card-border relative overflow-hidden">
               {/* Background Image */}
               <div className="absolute inset-0 z-0">
                 <img 
@@ -73,13 +73,13 @@ export default function PhilosophySection() {
               </div>
               
               {/* Content */}
-              <div className="relative z-10 flex items-start gap-4">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${principle.color} backdrop-blur-sm border border-white/20`}>
-                  <principle.icon className="w-6 h-6" />
+              <div className="relative z-10 flex flex-col items-center text-center h-full justify-center">
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${principle.color} backdrop-blur-sm border border-white/20 mb-3`}>
+                  <principle.icon className="w-4 h-4" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-xl text-white mb-3 drop-shadow-lg">{principle.title}</h3>
-                  <p className="text-white/90 leading-relaxed font-medium drop-shadow-md">{principle.description}</p>
+                <div>
+                  <h3 className="font-bold text-sm text-white mb-2 drop-shadow-lg">{principle.title}</h3>
+                  <p className="text-white/90 text-xs leading-relaxed font-medium drop-shadow-md">{principle.description}</p>
                 </div>
               </div>
             </Card>
