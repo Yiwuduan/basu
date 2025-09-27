@@ -40,7 +40,7 @@ export default function AboutSection() {
               <Card className="p-8 bg-card border-card-border">
                 <div className="aspect-square rounded-xl overflow-hidden mb-6">
                   <img 
-                    src="@assets/IMG_4081_1758970285467.jpeg"
+                    src="@assets/IMG_0856_1758972649085.jpeg"
                     alt="Amanda teaching and mentoring"
                     className="w-full h-full object-cover"
                     onError={(e) => {
