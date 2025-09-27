@@ -40,26 +40,29 @@ export default function AboutSection() {
               <Card className="p-8 bg-card border-card-border">
                 <div className="aspect-square rounded-xl overflow-hidden mb-6">
                   <img 
-                    src="@assets/IMG_4060_1758970285466.jpeg"
+                    src="@assets/IMG_4081_1758970285467.jpeg"
                     alt="Amanda teaching and mentoring"
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      // Fallback if image doesn't load
+                      // Fallback to another colorful image
                       const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const parent = target.parentElement;
-                      if (parent) {
-                        parent.innerHTML = `
-                          <div class="w-full h-full bg-gradient-to-br from-accent/20 to-primary/10 rounded-xl flex items-center justify-center">
-                            <div class="text-center">
-                              <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
-                                <span class="text-3xl">🌱</span>
+                      target.src = "@assets/IMG_4089_1758970285467.jpeg";
+                      target.onerror = () => {
+                        target.style.display = 'none';
+                        const parent = target.parentElement;
+                        if (parent) {
+                          parent.innerHTML = `
+                            <div class="w-full h-full bg-gradient-to-br from-accent/20 to-primary/10 rounded-xl flex items-center justify-center">
+                              <div class="text-center">
+                                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
+                                  <span class="text-3xl">🌱</span>
+                                </div>
+                                <p class="text-sm text-muted-foreground">Fostering Growth</p>
                               </div>
-                              <p class="text-sm text-muted-foreground">Fostering Growth</p>
                             </div>
-                          </div>
-                        `;
-                      }
+                          `;
+                        }
+                      };
                     }}
                   />
                 </div>
