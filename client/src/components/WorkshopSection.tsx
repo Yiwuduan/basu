@@ -49,8 +49,16 @@ export default function WorkshopSection() {
         </div>
 
         {/* Workshop Details Card */}
-        <Card className="p-8 mb-12 border-card-border">
-          <div className="grid lg:grid-cols-3 gap-8">
+        <Card className="p-8 mb-12 border-card-border overflow-hidden relative">
+          {/* Background image for workshop atmosphere */}
+          <div className="absolute inset-0 opacity-5">
+            <img 
+              src="@assets/IMG_4068_1758970285466.jpeg"
+              alt="Workshop atmosphere"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="relative z-10 grid lg:grid-cols-3 gap-8">
             {/* Left Column - Key Info */}
             <div className="lg:col-span-1">
               <h3 className="font-semibold text-xl text-foreground mb-6">Workshop Details</h3>

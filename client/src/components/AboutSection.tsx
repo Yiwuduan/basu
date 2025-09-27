@@ -38,13 +38,30 @@ export default function AboutSection() {
               
               {/* Main content card */}
               <Card className="p-8 bg-card border-card-border">
-                <div className="aspect-square bg-gradient-to-br from-accent/20 to-primary/10 rounded-xl flex items-center justify-center mb-6">
-                  <div className="text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
-                      <span className="text-3xl">🌱</span>
-                    </div>
-                    <p className="text-sm text-muted-foreground">Fostering Growth</p>
-                  </div>
+                <div className="aspect-square rounded-xl overflow-hidden mb-6">
+                  <img 
+                    src="@assets/IMG_4060_1758970285466.jpeg"
+                    alt="Amanda teaching and mentoring"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback if image doesn't load
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent) {
+                        parent.innerHTML = `
+                          <div class="w-full h-full bg-gradient-to-br from-accent/20 to-primary/10 rounded-xl flex items-center justify-center">
+                            <div class="text-center">
+                              <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
+                                <span class="text-3xl">🌱</span>
+                              </div>
+                              <p class="text-sm text-muted-foreground">Fostering Growth</p>
+                            </div>
+                          </div>
+                        `;
+                      }
+                    }}
+                  />
                 </div>
                 
                 <blockquote className="text-lg italic text-muted-foreground leading-relaxed">

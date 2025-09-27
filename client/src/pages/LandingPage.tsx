@@ -1,8 +1,11 @@
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
+import BrandSection from '@/components/BrandSection';
 import AboutSection from '@/components/AboutSection';
 import PhilosophySection from '@/components/PhilosophySection';
 import WorkshopSection from '@/components/WorkshopSection';
+import GallerySection from '@/components/GallerySection';
+import StatsSection from '@/components/StatsSection';
 import SignupSection from '@/components/SignupSection';
 import Footer from '@/components/Footer';
 
@@ -12,9 +15,12 @@ export default function LandingPage() {
       <Navigation />
       <main>
         <HeroSection />
+        <BrandSection />
         <AboutSection />
         <PhilosophySection />
         <WorkshopSection />
+        <GallerySection />
+        <StatsSection />
         <SignupSection />
       </main>
       <Footer />
