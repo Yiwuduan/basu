@@ -1,6 +1,7 @@
 import { Card } from '@/components/ui/card';
 import { Heart, Users, Lightbulb, Target } from 'lucide-react';
 import amandaImage from '@assets/IMG_0856_1758972649085.jpeg';
+import fallbackImage from '@assets/IMG_4089_1758970285467.jpeg';
 
 const values = [
   {
@@ -47,7 +48,7 @@ export default function AboutSection() {
                     onError={(e) => {
                       // Fallback to another colorful image
                       const target = e.target as HTMLImageElement;
-                      target.src = "@assets/IMG_4089_1758970285467.jpeg";
+                      target.src = fallbackImage;
                       target.onerror = () => {
                         target.style.display = 'none';
                         const parent = target.parentElement;

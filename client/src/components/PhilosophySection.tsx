@@ -1,6 +1,10 @@
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Brain, Music, Palette, Users2, Clock, MapPin } from 'lucide-react';
+import img0848 from '@assets/IMG_0848_1758972710502.jpeg';
+import img2125 from '@assets/IMG_2125_1758972710502.jpeg';
+import img4045 from '@assets/IMG_4045_1758972710502.jpeg';
+import img4089 from '@assets/IMG_4089_1758972710503.jpeg';
 
 const principles = [
   {
@@ -8,28 +12,28 @@ const principles = [
     title: "Embodied Learning",
     description: "Our bodies and senses carry wisdom. We slow down and listen to unlock natural learning pathways.",
     color: "bg-white/20 text-white",
-    backgroundImage: "@assets/IMG_0848_1758972710502.jpeg"
+    backgroundImage: img0848
   },
   {
     icon: Music,
     title: "Creative Flow",
     description: "Learning through music, movement, and creative expression that awakens the senses and imagination.",
     color: "bg-white/20 text-white",
-    backgroundImage: "@assets/IMG_2125_1758972710502.jpeg"
+    backgroundImage: img2125
   },
   {
     icon: Palette,
     title: "Authentic Expression",
     description: "Every child has a unique voice. We create space for authentic self-expression and personal storytelling.",
     color: "bg-white/20 text-white",
-    backgroundImage: "@assets/IMG_4045_1758972710502.jpeg"
+    backgroundImage: img4045
   },
   {
     icon: Users2,
     title: "Community Building",
     description: "Learning happens in relationship. We build community through shared craft, mentorship, and celebration.",
     color: "bg-white/20 text-white",
-    backgroundImage: "@assets/IMG_4089_1758972710503.jpeg"
+    backgroundImage: img4089
   }
 ];
 
