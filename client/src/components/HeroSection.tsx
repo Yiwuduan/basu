@@ -17,8 +17,8 @@ export default function HeroSection() {
   // Refs for each parallax image container
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
   
-  // Speed multipliers for each image
-  const speeds = [1.2, 1.8, 2.5, 3.2, 3.8, 4.5];
+  // Speed multipliers for each image - 3x faster: [3.6, 5.4, 7.5, 9.6, 11.4, 13.5]
+  const speeds = [3.6, 5.4, 7.5, 9.6, 11.4, 13.5];
 
   useEffect(() => {
     const imageColumn = imageColumnRef.current;
@@ -132,14 +132,18 @@ export default function HeroSection() {
 
   return (
     <section id="home" className="relative min-h-screen flex flex-row">
-      {/* Left 60% - Vertically stacked parallax images */}
-      <div ref={imageColumnRef} className="w-[60%] relative flex-shrink-0 overflow-hidden bg-black">
+      {/* Left 60% - Fixed viewport with parallax images (non-scrollable) */}
+      <div 
+        ref={imageColumnRef} 
+        className="w-[60%] h-screen overflow-hidden bg-black fixed top-0 left-0"
+        style={{ position: 'fixed' }}
+      >
         {/* Container for stacked images with parallax */}
-        <div className="relative" style={{ minHeight: '100vh' }}>
+        <div className="relative h-full flex flex-col justify-center">
           {/* Image 1 */}
           <div 
             ref={(el) => (imageRefs.current[0] = el)}
-            className="relative w-full h-[70vh] mb-8"
+            className="absolute top-0 left-0 w-full h-[70vh]"
             style={{ willChange: 'transform' }}
             data-testid="parallax-container-1"
           >
@@ -153,7 +157,7 @@ export default function HeroSection() {
           {/* Image 2 */}
           <div 
             ref={(el) => (imageRefs.current[1] = el)}
-            className="relative w-full h-[70vh] mb-8"
+            className="absolute top-[15vh] left-0 w-full h-[70vh]"
             style={{ willChange: 'transform' }}
             data-testid="parallax-container-2"
           >
@@ -167,7 +171,7 @@ export default function HeroSection() {
           {/* Image 3 - Main featured */}
           <div 
             ref={(el) => (imageRefs.current[2] = el)}
-            className="relative w-full h-[80vh] mb-8"
+            className="absolute top-[30vh] left-0 w-full h-[80vh]"
             style={{ willChange: 'transform' }}
             data-testid="img-founder"
           >
@@ -181,7 +185,7 @@ export default function HeroSection() {
           {/* Image 4 */}
           <div 
             ref={(el) => (imageRefs.current[3] = el)}
-            className="relative w-full h-[70vh] mb-8"
+            className="absolute top-[50vh] left-0 w-full h-[70vh]"
             style={{ willChange: 'transform' }}
             data-testid="parallax-container-4"
           >
@@ -195,7 +199,7 @@ export default function HeroSection() {
           {/* Image 5 */}
           <div 
             ref={(el) => (imageRefs.current[4] = el)}
-            className="relative w-full h-[70vh] mb-8"
+            className="absolute top-[65vh] left-0 w-full h-[70vh]"
             style={{ willChange: 'transform' }}
             data-testid="parallax-container-5"
           >
@@ -209,7 +213,7 @@ export default function HeroSection() {
           {/* Image 6 */}
           <div 
             ref={(el) => (imageRefs.current[5] = el)}
-            className="relative w-full h-[70vh]"
+            className="absolute top-[80vh] left-0 w-full h-[70vh]"
             style={{ willChange: 'transform' }}
             data-testid="parallax-container-6"
           >
@@ -226,7 +230,7 @@ export default function HeroSection() {
       </div>
 
       {/* Right 40% - Fixed text block */}
-      <div className="w-[40%] flex-shrink-0 sticky top-0 h-screen flex items-center justify-center px-12 bg-black">
+      <div className="w-[40%] h-screen flex items-center justify-center px-12 bg-black fixed top-0 right-0">
         <div className="max-w-[520px] w-full">
           {/* Small tag line */}
           <p className="text-[18px] uppercase text-[#FF4D00] tracking-[2px] mb-8" data-testid="text-tagline">
