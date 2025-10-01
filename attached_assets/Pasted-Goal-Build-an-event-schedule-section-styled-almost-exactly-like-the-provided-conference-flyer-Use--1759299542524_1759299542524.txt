@@ -1,0 +1,86 @@
+Goal:
+Build an event schedule section styled almost exactly like the provided conference flyer. Use clean, modern typography, generous spacing, subtle dividers, and left-aligned structured blocks. The style should look editorial, minimal, and precise.
+
+Layout Specifications
+
+Section Container
+
+Full width, light gray background (#f5f5f5 or similar).
+
+Inner container centered, max width ~960px, padding top/bottom 80px, left/right 40px.
+
+Heading Row
+
+Large, bold title at top-left: "Conference" (or "Events" if you want literal).
+
+Top-right space reserved for optional logo or circular badge (like "Tickets $125").
+
+Below title, include a wide banner image (placeholder for now).
+
+Date Range Line
+
+Large, bold, centered text showing overall event range:
+Example: "14 — 22.12.2019"
+
+Use letterspacing and wide en-dash, all uppercase digits.
+
+Event Rows (Core structure to replicate)
+
+Grid layout with 3 columns:
+
+Left Column (Location/Room): Narrow, lighter gray text, uppercase small caps.
+
+Middle Column (Title + Date/Time): Bold title, then date/time underneath.
+
+Right Column (Description): Regular-weight text, small size, left-aligned.
+
+Each event row has:
+
+Thin divider line above (except first).
+
+Spacing: 24px padding top/bottom.
+
+Subtext (organizers/chairs, breaks, etc.) in lighter gray, smaller font size.
+
+Typography
+
+Heading: Large, bold sans-serif (e.g., Helvetica Neue Bold or Inter Extra Bold).
+
+Subtext: Lighter weight, gray (#666).
+
+Dates/times: Monospace or bold condensed font for precision feel.
+
+Event Blocks from Your File
+Use your workshop info as the content. Here’s how it maps:
+
+Event 1
+
+Location: Studio (or leave blank if none)
+
+Title: STYLE BEYOND THE MATERIAL
+
+Date/Time: Friday Evenings (4–9pm)
+
+Description:
+Embodied Craft Studio for Girls (10–15). Upcycle your wardrobe, harness creative flow and awaken your signature style.
+
+Studio Flow (with music journey)
+
+Awaken the Senses: embodiment practice
+
+Theme: story
+
+Technical Skills: pattern drafting, garment construction, sewing, fabric technology
+
+Organizers: Right Fit Studio
+
+Event 2
+(Optional if you have more events later in the file — coder should repeat structure for each)
+
+Additional Details
+
+Add subtle hover states (title underline or date highlight).
+
+Ensure mobile responsiveness:
+
+On small screens, collapse into vertical blocks with left column (location) stacked above main text.
