@@ -19,11 +19,11 @@ export default function WorkshopSection() {
             </h3>
 
             {/* Event Details */}
-            <div className="space-y-8 mb-8">
-              <p className="text-[20px] text-[#CCCCCC] leading-[2]" data-testid="text-event-schedule">
+            <div className="mb-8">
+              <p className="text-[20px] text-[#CCCCCC] leading-[1.65] mb-8" data-testid="text-event-schedule">
                 Friday Evenings (4–9pm)
               </p>
-              <p className="text-[20px] text-[#CCCCCC] leading-[2]" data-testid="text-event-description">
+              <p className="text-[20px] text-[#CCCCCC] leading-[1.65]" data-testid="text-event-description">
                 Upcycle your wardrobe, harness creative flow, awaken your signature style.
               </p>
             </div>
@@ -37,8 +37,8 @@ export default function WorkshopSection() {
                 "Harness the power of seasons & cycles of the creative feminine"
               ].map((item, index) => (
                 <div key={index} className="flex items-start gap-4" data-testid={`list-item-${index}`}>
-                  <Check className="w-6 h-6 text-white flex-shrink-0 mt-1" />
-                  <p className="text-[18px] text-[#CCCCCC]">{item}</p>
+                  <Check className="w-6 h-6 text-[#FF4D00] flex-shrink-0 mt-1" />
+                  <p className="text-[20px] text-[#CCCCCC] leading-[1.65]">{item}</p>
                 </div>
               ))}
             </div>
