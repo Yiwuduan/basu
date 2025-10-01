@@ -50,11 +50,11 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex flex-row">
+    <section id="home" className="relative h-screen flex flex-row">
       {/* Left 60% - Vertically stacked parallax images */}
-      <div className="w-[60%] relative flex-shrink-0 overflow-hidden bg-black">
+      <div className="w-[60%] relative flex-shrink-0 overflow-hidden bg-black h-screen">
         {/* Container for stacked images with parallax */}
-        <div className="relative" style={{ minHeight: '100vh' }}>
+        <div className="relative">
           {/* Image 1 */}
           <div 
             className="relative w-full h-[70vh] mb-8"
