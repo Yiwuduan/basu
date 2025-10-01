@@ -50,14 +50,14 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative h-screen flex flex-row overflow-hidden -z-10">
-      {/* Left 60% - Parallax images with strict clipping */}
-      <div className="w-[60%] h-full overflow-hidden bg-black" style={{ clipPath: 'inset(0)' }}>
-        {/* Inner wrapper for parallax content */}
-        <div className="relative w-full h-full overflow-hidden">
+    <section id="home" className="relative min-h-screen flex flex-row">
+      {/* Left 60% - Vertically stacked parallax images */}
+      <div className="w-[60%] relative flex-shrink-0 overflow-hidden bg-black">
+        {/* Container for stacked images with parallax */}
+        <div className="relative" style={{ minHeight: '100vh' }}>
           {/* Image 1 */}
           <div 
-            className="absolute top-0 left-0 w-full h-[70vh]"
+            className="relative w-full h-[70vh] mb-8"
             style={getParallaxStyle(1.2)}
           >
             <img 
@@ -69,7 +69,7 @@ export default function HeroSection() {
 
           {/* Image 2 */}
           <div 
-            className="absolute top-[15vh] left-0 w-full h-[70vh]"
+            className="relative w-full h-[70vh] mb-8"
             style={getParallaxStyle(1.8)}
           >
             <img 
@@ -81,7 +81,7 @@ export default function HeroSection() {
 
           {/* Image 3 - Main featured */}
           <div 
-            className="absolute top-[30vh] left-0 w-full h-[80vh]"
+            className="relative w-full h-[80vh] mb-8"
             style={getParallaxStyle(2.5)}
             data-testid="img-founder"
           >
@@ -94,7 +94,7 @@ export default function HeroSection() {
 
           {/* Image 4 */}
           <div 
-            className="absolute top-[50vh] left-0 w-full h-[70vh]"
+            className="relative w-full h-[70vh] mb-8"
             style={getParallaxStyle(3.2)}
           >
             <img 
@@ -106,7 +106,7 @@ export default function HeroSection() {
 
           {/* Image 5 */}
           <div 
-            className="absolute top-[65vh] left-0 w-full h-[70vh]"
+            className="relative w-full h-[70vh] mb-8"
             style={getParallaxStyle(3.8)}
           >
             <img 
@@ -118,7 +118,7 @@ export default function HeroSection() {
 
           {/* Image 6 */}
           <div 
-            className="absolute top-[80vh] left-0 w-full h-[70vh]"
+            className="relative w-full h-[70vh]"
             style={getParallaxStyle(4.5)}
           >
             <img 
@@ -133,8 +133,8 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30 pointer-events-none" />
       </div>
 
-      {/* Right 40% - Text block */}
-      <div className="w-[40%] h-full flex items-center justify-center px-12 bg-black">
+      {/* Right 40% - Fixed text block */}
+      <div className="w-[40%] flex-shrink-0 sticky top-0 h-screen flex items-center justify-center px-12 bg-black">
         <div className="max-w-[520px] w-full">
           {/* Small tag line */}
           <p className="text-[18px] uppercase text-[#FF4D00] tracking-[2px] mb-8" data-testid="text-tagline">
