@@ -17,7 +17,7 @@ export default function AboutSection() {
         </p>
 
         {/* 3 Tiles */}
-        <div className="flex justify-center gap-12 mt-20">
+        <div className="flex justify-center gap-12">
           {[img1, img2, img3].map((img, index) => (
             <div key={index} className="relative w-[300px] h-[300px]" data-testid={`img-tile-${index + 1}`}>
               <img 
