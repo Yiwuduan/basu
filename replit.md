@@ -41,8 +41,11 @@ Preferred communication style: Simple, everyday language.
 - **Color Palette**: Pure black (#000000) background, white (#FFFFFF) text, vivid orange (#FF4D00) accents with HSL color system
 - **Image Treatment**: Grayscale images with orange overlay accents for visual consistency
 - **Typography**: Poppins font family with bold geometric styling - H1: 88px, H2: 56px, H3: 32px, Body: 20px with 1.65 line-height
-- **Spacing Standards**: 160px section padding, 32px element gaps, 24px grid gutters, 16px image corner radius
-- **Interactions**: Button transitions (0.25s ease), scroll animations (fade-in + 20px upward shift on 0.4s), orange focus states
+- **Spacing Standards**: Gallery/About sections at py-24, Workshop at py-10, element gaps, grid gutters, 16px image corner radius
+- **Interactions**: 
+  - Button transitions (0.25s ease), orange focus states
+  - Hero section: Mouse-controlled parallax with 6 layered images that move opposite to vertical mouse movement with momentum-based animation (lerp factor 0.08 for weighted dial-wheel feel)
+  - Gallery carousel: Grayscale images transition to full color on hover
 - **Responsive Design**: Mobile-first approach with Tailwind's responsive utilities
 - **Accessibility**: Radix UI primitives ensure keyboard navigation and screen reader support
 
