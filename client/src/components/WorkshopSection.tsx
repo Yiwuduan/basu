@@ -2,8 +2,8 @@ import workshopImage from '@assets/IMG_4089_1758970285467.jpeg';
 
 export default function WorkshopSection() {
   return (
-    <section id="workshop" className="py-10 bg-background">
-      <div className="max-w-5xl mx-auto px-8">
+    <section id="workshop" className="py-8 lg:py-10 bg-background">
+      <div className="max-w-5xl mx-auto px-4 lg:px-8">
         {/* Header with Title and Badge */}
         <div className="flex justify-between items-start mb-5">
           <div>

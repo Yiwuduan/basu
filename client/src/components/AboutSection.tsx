@@ -1,9 +1,9 @@
 export default function AboutSection() {
   return (
-    <section id="about" className="py-24 bg-background">
+    <section id="about" className="py-16 lg:py-24 bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Headline */}
-        <h2 className="text-[56px] font-bold text-white text-center mb-12" data-testid="text-about-headline">
+        <h2 className="text-[36px] lg:text-[56px] font-bold text-white text-center mb-8 lg:mb-12" data-testid="text-about-headline">
           Crafting Meaningful Learning Spaces
         </h2>
 

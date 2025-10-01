@@ -52,9 +52,10 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative h-screen flex flex-row">
-      {/* Left 60% - Vertically stacked parallax images */}
-      <div className="w-[60%] relative flex-shrink-0 overflow-hidden bg-black h-screen">
+    <section id="home" className="relative min-h-screen lg:h-screen">
+      <div className="flex flex-col lg:flex-row w-full h-full">
+      {/* Left/Top - Vertically stacked parallax images */}
+      <div className="w-full lg:w-[60%] relative flex-shrink-0 overflow-hidden bg-black h-[50vh] lg:h-screen order-1 lg:order-1">
         {/* Container for stacked images with parallax */}
         <div className="relative">
           {/* Image 1 */}
@@ -135,33 +136,34 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30 pointer-events-none" />
       </div>
 
-      {/* Right 40% - Fixed text block */}
-      <div className="w-[40%] flex-shrink-0 sticky top-0 h-screen flex items-center justify-center px-12 bg-black">
+      {/* Right/Bottom - Fixed text block */}
+      <div className="w-full lg:w-[40%] flex-shrink-0 lg:sticky lg:top-0 min-h-[50vh] lg:h-screen flex items-center justify-center px-6 py-12 lg:px-12 lg:py-0 bg-black order-2 lg:order-2">
         <div className="max-w-[520px] w-full">
           {/* Small tag line */}
-          <p className="text-[18px] uppercase text-[#FF4D00] tracking-[2px] mb-8" data-testid="text-tagline">
+          <p className="text-[14px] lg:text-[18px] uppercase text-[#FF4D00] tracking-[2px] mb-4 lg:mb-8" data-testid="text-tagline">
             Mentorship • Projects • Community
           </p>
 
           {/* Main headline */}
-          <h1 className="text-[88px] font-bold text-white leading-[1.1] mb-8" data-testid="text-headline">
+          <h1 className="text-[40px] lg:text-[88px] font-bold text-white leading-[1.1] mb-4 lg:mb-8" data-testid="text-headline">
             Reframing Learning & Life Together
           </h1>
 
           {/* Subcopy */}
-          <p className="text-[20px] text-[#CCCCCC] leading-[1.65] mb-12" data-testid="text-subcopy">
+          <p className="text-[16px] lg:text-[20px] text-[#CCCCCC] leading-[1.65] mb-8 lg:mb-12" data-testid="text-subcopy">
             I believe education should be alive, joyful, and connected. My work is about creating spaces where families learn through craft, movement, and mentorship—not institutions.
           </p>
 
           {/* CTA Button */}
           <button
-            className="bg-[#FF4D00] text-white text-[18px] font-bold uppercase px-14 py-6 rounded-lg cta-transition hover:bg-black hover:text-[#FF4D00] hover:border-2 hover:border-[#FF4D00] border-2 border-transparent"
+            className="bg-[#FF4D00] text-white text-[16px] lg:text-[18px] font-bold uppercase px-10 py-4 lg:px-14 lg:py-6 rounded-lg cta-transition hover:bg-black hover:text-[#FF4D00] hover:border-2 hover:border-[#FF4D00] border-2 border-transparent"
             onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
             data-testid="button-see-work"
           >
             SEE MY WORK
           </button>
         </div>
+      </div>
       </div>
     </section>
   );
