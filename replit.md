@@ -47,10 +47,16 @@ Preferred communication style: Simple, everyday language.
 - **Accessibility**: Radix UI primitives ensure keyboard navigation and screen reader support
 
 ### Form Handling & User Experience
-- **Workshop Signup**: Comprehensive form with parent/child information and optional newsletter subscription
-- **Validation**: Client-side and server-side validation with user-friendly error messages
-- **Feedback**: Toast notifications for success/error states
-- **Privacy**: Built-in privacy agreement checkbox for parent comfort
+- **Workshop Signup**: Multi-step vision alignment form with pictured multiple-choice questions to filter clients aligned with Amanda's educational philosophy
+  - Step 1: Learning approach selection (4 pictured options: craft-based, mentorship, community, creative expression)
+  - Step 2: Participation reason selection (4 pictured options: alternative education, connection, skills, joy)
+  - Step 3: Child information collection (name and age)
+  - Step 4: Parent information and vision message (name, email, detailed vision description)
+- **Progressive Disclosure**: Step-by-step form with progress indicators and navigation (back/next buttons)
+- **Visual Filtering**: Pictured multiple-choice questions help parents self-select based on alignment with vision
+- **Validation**: Multi-level validation with toast notifications for missing fields and errors
+- **Vision Alignment**: Required vision message textarea encourages thoughtful responses about learning philosophy
+- **Feedback**: Toast notifications for success/error states with automatic form reset after successful submission
 
 ### Asset Management
 - **Images**: Local asset storage in `attached_assets` directory
