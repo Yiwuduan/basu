@@ -2,13 +2,18 @@ import workshopImage from '@assets/IMG_4089_1758970285467.jpeg';
 
 export default function WorkshopSection() {
   return (
-    <section id="workshop" className="py-8 bg-background">
+    <section id="workshop" className="py-10 bg-background">
       <div className="max-w-5xl mx-auto px-8">
         {/* Header with Title and Badge */}
-        <div className="flex justify-between items-start mb-6">
-          <h2 className="text-[48px] font-bold text-white leading-none" data-testid="text-workshop-title">
-            Workshop
-          </h2>
+        <div className="flex justify-between items-start mb-5">
+          <div>
+            <h2 className="text-[48px] font-bold text-white leading-none mb-2" data-testid="text-workshop-title">
+              Workshop
+            </h2>
+            <p className="text-[15px] text-[#CCCCCC]">
+              A 6-week embodied craft studio for girls ages 10–15
+            </p>
+          </div>
           <div className="bg-[#FF4D00] rounded-full w-20 h-20 flex flex-col items-center justify-center flex-shrink-0" data-testid="badge-price">
             <div className="text-[9px] text-white uppercase font-semibold tracking-wide">Register</div>
             <div className="text-[22px] text-white font-bold leading-none">$480</div>
@@ -16,7 +21,7 @@ export default function WorkshopSection() {
         </div>
 
         {/* Hero Image with Date Overlay */}
-        <div className="relative rounded-lg overflow-hidden mb-6 h-[140px]">
+        <div className="relative rounded-lg overflow-hidden mb-7 h-[160px]">
           <img 
             src={workshopImage}
             alt="Workshop scene"
@@ -36,7 +41,7 @@ export default function WorkshopSection() {
         {/* Event Details Grid */}
         <div className="space-y-0">
           {/* Event 1: Opening & Studio Flow */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-3 border-t border-[#333333]" data-testid="event-row-1">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-4 border-t border-[#333333]" data-testid="event-row-1">
             <div className="md:col-span-2">
               <div className="text-[11px] text-[#999999] uppercase tracking-wider font-semibold">Studio A</div>
             </div>
@@ -46,14 +51,17 @@ export default function WorkshopSection() {
               <div className="text-[12px] text-[#999999]">4:00 PM — 9:00 PM</div>
             </div>
             <div className="md:col-span-6">
-              <p className="text-[13px] text-[#CCCCCC] leading-relaxed">
+              <p className="text-[13px] text-[#CCCCCC] leading-relaxed mb-1.5">
                 Embodied Craft Studio for Girls (10–15). Upcycle your wardrobe, harness creative flow and awaken your signature style through studio flow, embodiment practice, and storytelling.
+              </p>
+              <p className="text-[12px] text-[#999999] leading-relaxed">
+                Weekly gatherings · Creative expression · Movement & mindfulness
               </p>
             </div>
           </div>
 
           {/* Event 2: Technical Skills */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-3 border-t border-[#333333]" data-testid="event-row-2">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-4 border-t border-[#333333]" data-testid="event-row-2">
             <div className="md:col-span-2">
               <div className="text-[11px] text-[#999999] uppercase tracking-wider font-semibold">Studio A</div>
             </div>
@@ -63,14 +71,17 @@ export default function WorkshopSection() {
               <div className="text-[12px] text-[#999999]">Various sessions</div>
             </div>
             <div className="md:col-span-6">
-              <p className="text-[13px] text-[#CCCCCC] leading-relaxed">
+              <p className="text-[13px] text-[#CCCCCC] leading-relaxed mb-1.5">
                 Advance your skills through pattern drafting, garment construction, sewing by hand and machine, and fabric technology with hands-on practice and expert mentorship.
+              </p>
+              <p className="text-[12px] text-[#999999] leading-relaxed">
+                Build foundational skills · Create wearable pieces · Learn sustainable practices
               </p>
             </div>
           </div>
 
           {/* Event 3: Themes & Practices */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-3 border-t border-[#333333]" data-testid="event-row-3">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-4 border-t border-[#333333]" data-testid="event-row-3">
             <div className="md:col-span-2">
               <div className="text-[11px] text-[#999999] uppercase tracking-wider font-semibold">Studio A</div>
             </div>
@@ -80,14 +91,17 @@ export default function WorkshopSection() {
               <div className="text-[12px] text-[#999999]">All sessions</div>
             </div>
             <div className="md:col-span-6">
-              <p className="text-[13px] text-[#CCCCCC] leading-relaxed">
+              <p className="text-[13px] text-[#CCCCCC] leading-relaxed mb-1.5">
                 Explore embodiment, intuition, and community through crafting, content creation, creative flow states, body awareness, and the seasons and cycles of the creative feminine.
+              </p>
+              <p className="text-[12px] text-[#999999] leading-relaxed">
+                Photography & storytelling · Seasonal themes · Community connection
               </p>
             </div>
           </div>
 
           {/* Event 4: Final Showcase */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-3 border-t border-[#333333]" data-testid="event-row-4">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-4 border-t border-[#333333]" data-testid="event-row-4">
             <div className="md:col-span-2">
               <div className="text-[11px] text-[#999999] uppercase tracking-wider font-semibold">Studio A</div>
             </div>
@@ -97,28 +111,51 @@ export default function WorkshopSection() {
               <div className="text-[12px] text-[#999999]">4:00 PM — 9:00 PM</div>
             </div>
             <div className="md:col-span-6">
-              <p className="text-[13px] text-[#CCCCCC] leading-relaxed">
-                Celebrate growth and share creations. Build community through craft, mentorship, and collaborative events. Organizer: Right Fit Studio
+              <p className="text-[13px] text-[#CCCCCC] leading-relaxed mb-1.5">
+                Celebrate growth and share creations. Build community through craft, mentorship, and collaborative events with families and fellow participants.
+              </p>
+              <p className="text-[12px] text-[#999999] leading-relaxed">
+                Share completed work · Celebrate learning journey · Connect with community
               </p>
             </div>
           </div>
         </div>
 
         {/* Registration CTA */}
-        <div className="mt-5 pt-4 border-t border-[#333333]">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mt-6 pt-5 border-t border-[#333333]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Program Details */}
             <div>
-              <p className="text-[13px] text-[#CCCCCC]">
-                <span className="font-semibold text-white">6-Week Program</span> · Limited to 8 students · Includes studio visit
-              </p>
+              <p className="text-[14px] text-white font-semibold mb-2">What's Included</p>
+              <div className="space-y-1.5">
+                <p className="text-[13px] text-[#CCCCCC]">
+                  • 6 Friday evening sessions (4–9 PM)
+                </p>
+                <p className="text-[13px] text-[#CCCCCC]">
+                  • All materials and studio equipment provided
+                </p>
+                <p className="text-[13px] text-[#CCCCCC]">
+                  • Studio visit to ensure right fit before commitment
+                </p>
+                <p className="text-[13px] text-[#CCCCCC]">
+                  • Limited to 8 students for personalized attention
+                </p>
+              </div>
             </div>
-            <button
-              onClick={() => document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-[#FF4D00] text-white text-[14px] font-bold uppercase px-8 py-3 rounded-lg border-2 border-[#FF4D00] cta-transition hover:bg-black hover:text-[#FF4D00] whitespace-nowrap"
-              data-testid="button-register"
-            >
-              REGISTER NOW
-            </button>
+            
+            {/* CTA */}
+            <div className="flex flex-col justify-center items-start md:items-end gap-3">
+              <p className="text-[13px] text-[#999999]">
+                Registration closes November 1st
+              </p>
+              <button
+                onClick={() => document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-[#FF4D00] text-white text-[14px] font-bold uppercase px-8 py-3 rounded-lg border-2 border-[#FF4D00] cta-transition hover:bg-black hover:text-[#FF4D00] whitespace-nowrap"
+                data-testid="button-register"
+              >
+                REGISTER NOW
+              </button>
+            </div>
           </div>
         </div>
       </div>
