@@ -15,7 +15,9 @@ export const signups = pgTable("signups", {
   email: text("email").notNull(),
   childName: text("child_name").notNull(),
   childAge: text("child_age"),
-  message: text("message"),
+  learningApproach: text("learning_approach"),
+  participationReason: text("participation_reason"),
+  visionMessage: text("vision_message"),
   newsletter: boolean("newsletter").default(false),
   createdAt: timestamp("created_at").default(sql`now()`),
 });

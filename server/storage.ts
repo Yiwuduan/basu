@@ -44,7 +44,9 @@ export class MemStorage implements IStorage {
     const signup: Signup = { 
       ...insertSignup,
       childAge: insertSignup.childAge || null,
-      message: insertSignup.message || null,
+      learningApproach: insertSignup.learningApproach || null,
+      participationReason: insertSignup.participationReason || null,
+      visionMessage: insertSignup.visionMessage || null,
       newsletter: insertSignup.newsletter || false,
       id, 
       createdAt: new Date() 
