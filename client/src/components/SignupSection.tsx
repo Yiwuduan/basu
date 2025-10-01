@@ -181,7 +181,7 @@ export default function SignupSection() {
   };
 
   return (
-    <section id="signup" className="py-[160px] bg-background">
+    <section id="signup" className="py-[160px] bg-black relative z-10" style={{ backgroundColor: '#000000' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Headline */}
         <h2 className="text-[56px] font-bold text-white text-center mb-8" data-testid="text-signup-headline">

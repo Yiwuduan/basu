@@ -50,11 +50,11 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex flex-row">
-      {/* Left 60% - Fixed parallax images (not affected by scroll) */}
-      <div className="w-[60%] fixed left-0 top-0 h-screen overflow-hidden bg-black">
-        {/* Container for stacked images with parallax */}
-        <div className="relative h-full flex flex-col justify-center">
+    <section id="home" className="relative h-screen flex flex-row overflow-hidden -z-10">
+      {/* Left 60% - Parallax images with strict clipping */}
+      <div className="w-[60%] h-full overflow-hidden bg-black" style={{ clipPath: 'inset(0)' }}>
+        {/* Inner wrapper for parallax content */}
+        <div className="relative w-full h-full overflow-hidden">
           {/* Image 1 */}
           <div 
             className="absolute top-0 left-0 w-full h-[70vh]"
@@ -133,8 +133,8 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30 pointer-events-none" />
       </div>
 
-      {/* Right 40% - Fixed text block */}
-      <div className="w-[40%] ml-[60%] sticky top-0 h-screen flex items-center justify-center px-12 bg-black">
+      {/* Right 40% - Text block */}
+      <div className="w-[40%] h-full flex items-center justify-center px-12 bg-black">
         <div className="max-w-[520px] w-full">
           {/* Small tag line */}
           <p className="text-[18px] uppercase text-[#FF4D00] tracking-[2px] mb-8" data-testid="text-tagline">
