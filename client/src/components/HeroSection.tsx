@@ -11,24 +11,19 @@ export default function HeroSection() {
   const targetMouse = useRef(0.5);
   const currentMouse = useRef(0.5);
   const rafId = useRef<number>();
-  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       // Calculate normalized mouse position (0 to 1)
-      // 0 = top of viewport, 1 = bottom of viewport
       const mouseY = e.clientY;
       const viewportHeight = window.innerHeight;
       const normalizedY = mouseY / viewportHeight;
-      
-      // Store target position for smooth animation
       targetMouse.current = normalizedY;
     };
 
-    // Smooth lerp animation with momentum (0.08 = weighted, dial-wheel feel)
+    // Heavier momentum with slower lerp (0.04 = more weighted, slower response)
     const animate = () => {
-      // Linear interpolation for smooth, momentum-based movement
-      currentMouse.current += (targetMouse.current - currentMouse.current) * 0.08;
+      currentMouse.current += (targetMouse.current - currentMouse.current) * 0.04;
       setMouseProgress(currentMouse.current);
       rafId.current = requestAnimationFrame(animate);
     };
@@ -44,12 +39,10 @@ export default function HeroSection() {
     };
   }, []);
 
-  // Calculate parallax transforms based on mouse position
-  // Images move OPPOSITE direction: when mouse goes down, images go up (negative)
-  // Center position (0.5) = no movement
+  // Calculate parallax transforms - larger range, faster response
   const getParallaxStyle = (speed: number) => {
     const centerOffset = mouseProgress - 0.5; // -0.5 to 0.5
-    const movement = -centerOffset * speed * 300; // Negative for opposite direction, 300px range
+    const movement = -centerOffset * speed * 800; // 800px range for more dramatic movement
     return {
       transform: `translate3d(0, ${movement}px, 0)`,
       willChange: 'transform',
@@ -57,94 +50,91 @@ export default function HeroSection() {
   };
 
   return (
-    <section ref={sectionRef} id="home" className="relative min-h-screen flex flex-row">
-      {/* Left 60% - Mouse-controlled parallax image layers */}
-      <div className="w-[60%] relative flex-shrink-0 overflow-hidden">
-        {/* Layer 1 - Slowest, furthest back */}
-        <div 
-          className="absolute inset-0 w-full h-full"
-          style={getParallaxStyle(0.5)}
-        >
-          <img 
-            src={parallaxImg1}
-            alt="Creative expression"
-            className="w-full h-full object-cover grayscale opacity-25"
-            style={{ minHeight: '130vh', objectPosition: 'center' }}
-          />
-        </div>
+    <section id="home" className="relative min-h-screen flex flex-row">
+      {/* Left 60% - Vertically stacked parallax images */}
+      <div className="w-[60%] relative flex-shrink-0 overflow-hidden bg-black">
+        {/* Container for stacked images with parallax */}
+        <div className="relative" style={{ minHeight: '100vh' }}>
+          {/* Image 1 */}
+          <div 
+            className="relative w-full h-[70vh] mb-8"
+            style={getParallaxStyle(1.2)}
+          >
+            <img 
+              src={parallaxImg1}
+              alt="Creative expression"
+              className="w-full h-full object-cover grayscale"
+            />
+          </div>
 
-        {/* Layer 2 */}
-        <div 
-          className="absolute inset-0 w-full h-full"
-          style={getParallaxStyle(0.8)}
-        >
-          <img 
-            src={parallaxImg2}
-            alt="Mentorship"
-            className="w-full h-full object-cover grayscale opacity-30"
-            style={{ minHeight: '130vh', objectPosition: 'center' }}
-          />
-        </div>
+          {/* Image 2 */}
+          <div 
+            className="relative w-full h-[70vh] mb-8"
+            style={getParallaxStyle(1.8)}
+          >
+            <img 
+              src={parallaxImg2}
+              alt="Mentorship"
+              className="w-full h-full object-cover grayscale"
+            />
+          </div>
 
-        {/* Layer 3 */}
-        <div 
-          className="absolute inset-0 w-full h-full"
-          style={getParallaxStyle(1.2)}
-        >
-          <img 
-            src={parallaxImg3}
-            alt="Creative flow"
-            className="w-full h-full object-cover grayscale opacity-25"
-            style={{ minHeight: '130vh', objectPosition: 'center' }}
-          />
-        </div>
-
-        {/* Layer 4 */}
-        <div 
-          className="absolute inset-0 w-full h-full"
-          style={getParallaxStyle(1.6)}
-        >
-          <img 
-            src={parallaxImg4}
-            alt="Embodied learning"
-            className="w-full h-full object-cover grayscale opacity-30"
-            style={{ minHeight: '130vh', objectPosition: 'center' }}
-          />
-        </div>
-
-        {/* Layer 5 */}
-        <div 
-          className="absolute inset-0 w-full h-full"
-          style={getParallaxStyle(2.0)}
-        >
-          <img 
-            src={parallaxImg5}
-            alt="Community connection"
-            className="w-full h-full object-cover grayscale opacity-25"
-            style={{ minHeight: '130vh', objectPosition: 'center' }}
-          />
-        </div>
-
-        {/* Top layer - Fastest, main image */}
-        <div 
-          className="absolute inset-0 w-full h-full"
-          style={getParallaxStyle(2.5)}
-        >
-          <img 
-            src={parallaxImg6}
-            alt="Amanda Basu Roy - Founder"
-            className="w-full h-full object-cover grayscale"
-            style={{ minHeight: '130vh', objectPosition: 'center top' }}
+          {/* Image 3 - Main featured */}
+          <div 
+            className="relative w-full h-[80vh] mb-8"
+            style={getParallaxStyle(2.5)}
             data-testid="img-founder"
-          />
+          >
+            <img 
+              src={parallaxImg6}
+              alt="Amanda Basu Roy - Founder"
+              className="w-full h-full object-cover grayscale"
+            />
+          </div>
+
+          {/* Image 4 */}
+          <div 
+            className="relative w-full h-[70vh] mb-8"
+            style={getParallaxStyle(3.2)}
+          >
+            <img 
+              src={parallaxImg3}
+              alt="Creative flow"
+              className="w-full h-full object-cover grayscale"
+            />
+          </div>
+
+          {/* Image 5 */}
+          <div 
+            className="relative w-full h-[70vh] mb-8"
+            style={getParallaxStyle(3.8)}
+          >
+            <img 
+              src={parallaxImg4}
+              alt="Embodied learning"
+              className="w-full h-full object-cover grayscale"
+            />
+          </div>
+
+          {/* Image 6 */}
+          <div 
+            className="relative w-full h-[70vh]"
+            style={getParallaxStyle(4.5)}
+          >
+            <img 
+              src={parallaxImg5}
+              alt="Community connection"
+              className="w-full h-full object-cover grayscale"
+            />
+          </div>
         </div>
 
         {/* Subtle gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30 pointer-events-none" />
       </div>
 
       {/* Right 40% - Fixed text block */}
-      <div className="w-[40%] flex-shrink-0 flex items-center justify-center px-12 bg-black">
+      <div className="w-[40%] flex-shrink-0 sticky top-0 h-screen flex items-center justify-center px-12 bg-black">
         <div className="max-w-[520px] w-full">
           {/* Small tag line */}
           <p className="text-[18px] uppercase text-[#FF4D00] tracking-[2px] mb-8" data-testid="text-tagline">
