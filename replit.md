@@ -44,7 +44,7 @@ Preferred communication style: Simple, everyday language.
 - **Spacing Standards**: Gallery/About sections at py-24, Workshop at py-10, element gaps, grid gutters, 16px image corner radius
 - **Interactions**: 
   - Button transitions (0.25s ease), orange focus states
-  - Hero section: Mouse-controlled parallax with 6 absolutely-positioned grayscale images in a fixed, non-scrollable viewport that move opposite to vertical mouse movement with heavy momentum-based animation (lerp factor 0.04, 800px movement range, speeds 3.6-13.5× for dramatic parallax depth effect)
+  - Hero section: Mouse-controlled parallax with 6 absolutely-positioned grayscale images in a fixed, non-scrollable viewport (z-index 10) that move opposite to vertical mouse movement with heavy momentum-based animation (lerp factor 0.04, 800px movement range, speeds 3.6-13.5×, active range 50-60% of viewport height for precise control)
   - Gallery carousel: Grayscale images transition to full color on hover
 - **Responsive Design**: Mobile-first approach with Tailwind's responsive utilities
 - **Accessibility**: Radix UI primitives ensure keyboard navigation and screen reader support

@@ -12,7 +12,6 @@ export default function HeroSection() {
   const rafId = useRef<number>();
   const isAnimating = useRef(false);
   const scrollTimeout = useRef<number>();
-  const imageColumnRef = useRef<HTMLDivElement>(null);
   
   // Refs for each parallax image container
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -21,11 +20,21 @@ export default function HeroSection() {
   const speeds = [3.6, 5.4, 7.5, 9.6, 11.4, 13.5];
 
   useEffect(() => {
-    const imageColumn = imageColumnRef.current;
-    if (!imageColumn) {
-      console.warn('Image column ref not found');
-      return;
-    }
+    // Wait for refs to be populated, then initialize positions
+    const initTimeout = setTimeout(() => {
+      // Initialize with current mouse position
+      // Changed range: 50% to 60% of viewport (0.5 to 0.6)
+      const normalizedOffset = (currentMouse.current - 0.5) / 0.1; // Maps 0.5-0.6 to 0-1
+      const clampedOffset = Math.max(0, Math.min(1, normalizedOffset));
+      const centerOffset = clampedOffset - 0.5;
+      
+      imageRefs.current.forEach((el, index) => {
+        if (el) {
+          const movement = -centerOffset * speeds[index] * 800;
+          el.style.transform = `translate3d(0, ${movement}px, 0)`;
+        }
+      });
+    }, 50);
 
     const handleMouseMove = (e: MouseEvent) => {
       const mouseY = e.clientY;
@@ -54,7 +63,11 @@ export default function HeroSection() {
       currentMouse.current += (targetMouse.current - currentMouse.current) * 0.04;
       
       // Update DOM directly - no React re-render
-      const centerOffset = currentMouse.current - 0.5;
+      // Adjusted range: start at 0.5 (50% from top) and end at 0.6 (60% from top)
+      const normalizedOffset = (currentMouse.current - 0.5) / 0.1; // Maps 0.5-0.6 to 0-1
+      const clampedOffset = Math.max(0, Math.min(1, normalizedOffset)); // Clamp to 0-1
+      const centerOffset = clampedOffset - 0.5; // -0.5 to 0.5
+      
       imageRefs.current.forEach((el, index) => {
         if (el) {
           const movement = -centerOffset * speeds[index] * 800;
@@ -71,7 +84,10 @@ export default function HeroSection() {
       currentMouse.current = targetMouse.current;
       
       // Update one final time
-      const centerOffset = currentMouse.current - 0.5;
+      const normalizedOffset = (currentMouse.current - 0.5) / 0.1;
+      const clampedOffset = Math.max(0, Math.min(1, normalizedOffset));
+      const centerOffset = clampedOffset - 0.5;
+      
       imageRefs.current.forEach((el, index) => {
         if (el) {
           const movement = -centerOffset * speeds[index] * 800;
@@ -112,11 +128,12 @@ export default function HeroSection() {
     window.addEventListener('touchstart', touchListener, { passive: true });
     window.addEventListener('keydown', keyListener, { passive: true });
     
-    // Mouse move on the image column
-    imageColumn.addEventListener('mousemove', handleMouseMove, { passive: true });
+    // Mouse move on the entire window - responds even outside image column
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     return () => {
-      imageColumn.removeEventListener('mousemove', handleMouseMove);
+      clearTimeout(initTimeout);
+      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('wheel', wheelListener);
       window.removeEventListener('touchstart', touchListener);
       window.removeEventListener('keydown', keyListener);
@@ -134,17 +151,16 @@ export default function HeroSection() {
     <section id="home" className="relative min-h-screen flex flex-row">
       {/* Left 60% - Fixed viewport with parallax images (non-scrollable) */}
       <div 
-        ref={imageColumnRef} 
-        className="w-[60%] h-screen overflow-hidden bg-black fixed top-0 left-0"
+        className="w-[60%] h-screen overflow-hidden bg-black fixed top-0 left-0 z-10"
         style={{ position: 'fixed' }}
       >
-        {/* Container for stacked images with parallax */}
+        {/* Container for stacked images with parallax - more spacing between images */}
         <div className="relative h-full flex flex-col justify-center">
-          {/* Image 1 */}
+          {/* Image 1 - starts higher to be visible when mouse near top */}
           <div 
             ref={(el) => (imageRefs.current[0] = el)}
-            className="absolute top-0 left-0 w-full h-[70vh]"
-            style={{ willChange: 'transform' }}
+            className="absolute left-0 w-full h-[70vh]"
+            style={{ top: '-10vh', willChange: 'transform' }}
             data-testid="parallax-container-1"
           >
             <img 
@@ -154,11 +170,11 @@ export default function HeroSection() {
             />
           </div>
 
-          {/* Image 2 */}
+          {/* Image 2 - more spacing */}
           <div 
             ref={(el) => (imageRefs.current[1] = el)}
-            className="absolute top-[15vh] left-0 w-full h-[70vh]"
-            style={{ willChange: 'transform' }}
+            className="absolute left-0 w-full h-[70vh]"
+            style={{ top: '10vh', willChange: 'transform' }}
             data-testid="parallax-container-2"
           >
             <img 
@@ -168,11 +184,11 @@ export default function HeroSection() {
             />
           </div>
 
-          {/* Image 3 - Main featured */}
+          {/* Image 3 - Main featured - more spacing */}
           <div 
             ref={(el) => (imageRefs.current[2] = el)}
-            className="absolute top-[30vh] left-0 w-full h-[80vh]"
-            style={{ willChange: 'transform' }}
+            className="absolute left-0 w-full h-[80vh]"
+            style={{ top: '35vh', willChange: 'transform' }}
             data-testid="img-founder"
           >
             <img 
@@ -182,11 +198,11 @@ export default function HeroSection() {
             />
           </div>
 
-          {/* Image 4 */}
+          {/* Image 4 - more spacing */}
           <div 
             ref={(el) => (imageRefs.current[3] = el)}
-            className="absolute top-[50vh] left-0 w-full h-[70vh]"
-            style={{ willChange: 'transform' }}
+            className="absolute left-0 w-full h-[70vh]"
+            style={{ top: '65vh', willChange: 'transform' }}
             data-testid="parallax-container-4"
           >
             <img 
@@ -196,11 +212,11 @@ export default function HeroSection() {
             />
           </div>
 
-          {/* Image 5 */}
+          {/* Image 5 - more spacing */}
           <div 
             ref={(el) => (imageRefs.current[4] = el)}
-            className="absolute top-[65vh] left-0 w-full h-[70vh]"
-            style={{ willChange: 'transform' }}
+            className="absolute left-0 w-full h-[70vh]"
+            style={{ top: '95vh', willChange: 'transform' }}
             data-testid="parallax-container-5"
           >
             <img 
@@ -210,11 +226,11 @@ export default function HeroSection() {
             />
           </div>
 
-          {/* Image 6 */}
+          {/* Image 6 - extends lower to remain visible near bottom */}
           <div 
             ref={(el) => (imageRefs.current[5] = el)}
-            className="absolute top-[80vh] left-0 w-full h-[70vh]"
-            style={{ willChange: 'transform' }}
+            className="absolute left-0 w-full h-[70vh]"
+            style={{ top: '125vh', willChange: 'transform' }}
             data-testid="parallax-container-6"
           >
             <img 
@@ -230,7 +246,7 @@ export default function HeroSection() {
       </div>
 
       {/* Right 40% - Fixed text block */}
-      <div className="w-[40%] h-screen flex items-center justify-center px-12 bg-black fixed top-0 right-0">
+      <div className="w-[40%] h-screen flex items-center justify-center px-12 bg-black fixed top-0 right-0 z-10">
         <div className="max-w-[520px] w-full">
           {/* Small tag line */}
           <p className="text-[18px] uppercase text-[#FF4D00] tracking-[2px] mb-8" data-testid="text-tagline">
