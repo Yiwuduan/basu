@@ -2,7 +2,7 @@ import { Instagram, Facebook, Twitter } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-[#222222]">
+    <footer className="bg-black border-t border-[#222222] relative z-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-10">
         <div className="grid md:grid-cols-3 gap-8 items-start mb-12">
           {/* Left - Logo/Name */}

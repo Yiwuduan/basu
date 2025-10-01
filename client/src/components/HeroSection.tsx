@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import parallaxImg1 from '@assets/PHOTO-2025-08-28-14-02-49 2_1759300881690.jpg';
 import parallaxImg2 from '@assets/PHOTO-2025-08-28-14-02-49 3_1759300881690.jpg';
 import parallaxImg3 from '@assets/PHOTO-2025-08-28-14-02-49 4_1759300881690.jpg';
@@ -7,158 +7,58 @@ import parallaxImg5 from '@assets/PHOTO-2025-08-28-14-02-49 6_1759300881691.jpg'
 import parallaxImg6 from '@assets/PHOTO-2025-08-28-14-02-49_1759300881691.jpg';
 
 export default function HeroSection() {
+  const [mouseProgress, setMouseProgress] = useState(0.5);
   const targetMouse = useRef(0.5);
   const currentMouse = useRef(0.5);
   const rafId = useRef<number>();
-  const isAnimating = useRef(false);
-  const scrollTimeout = useRef<number>();
-  
-  // Refs for each parallax image container
-  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
-  
-  // Speed multipliers for each image - 3x faster: [3.6, 5.4, 7.5, 9.6, 11.4, 13.5]
-  const speeds = [3.6, 5.4, 7.5, 9.6, 11.4, 13.5];
 
   useEffect(() => {
-    // Wait for refs to be populated, then initialize positions
-    const initTimeout = setTimeout(() => {
-      // Initialize with current mouse position
-      // Full range: 0% to 100% of viewport for less sensitivity
-      const normalizedOffset = currentMouse.current; // Already 0-1
-      const centerOffset = normalizedOffset - 0.5; // -0.5 to 0.5
-      
-      imageRefs.current.forEach((el, index) => {
-        if (el) {
-          const movement = -centerOffset * speeds[index] * 800;
-          el.style.transform = `translate3d(0, ${movement}px, 0)`;
-        }
-      });
-    }, 50);
-
     const handleMouseMove = (e: MouseEvent) => {
+      // Calculate normalized mouse position (0 to 1)
       const mouseY = e.clientY;
       const viewportHeight = window.innerHeight;
       const normalizedY = mouseY / viewportHeight;
       targetMouse.current = normalizedY;
-      
-      // Start animation loop if not already running
-      if (!isAnimating.current) {
-        isAnimating.current = true;
-        animate();
-      }
     };
 
-    // Imperative animation - no React state updates
+    // Heavier momentum with slower lerp (0.04 = more weighted, slower response)
     const animate = () => {
-      const diff = Math.abs(targetMouse.current - currentMouse.current);
-      
-      // Stop animation when settled (epsilon check)
-      if (diff < 0.001) {
-        isAnimating.current = false;
-        return;
-      }
-
-      // Heavy momentum with slow lerp
       currentMouse.current += (targetMouse.current - currentMouse.current) * 0.04;
-      
-      // Update DOM directly - no React re-render
-      // Full range: 0% to 100% of viewport for less sensitivity
-      const normalizedOffset = currentMouse.current; // Already 0-1
-      const centerOffset = normalizedOffset - 0.5; // -0.5 to 0.5
-      
-      imageRefs.current.forEach((el, index) => {
-        if (el) {
-          const movement = -centerOffset * speeds[index] * 800;
-          el.style.transform = `translate3d(0, ${movement}px, 0)`;
-        }
-      });
-
+      setMouseProgress(currentMouse.current);
       rafId.current = requestAnimationFrame(animate);
     };
 
-    // Scroll event handlers - pause animation during scroll
-    const handleScrollStart = () => {
-      // Snap animation to target immediately
-      currentMouse.current = targetMouse.current;
-      
-      // Update one final time
-      const normalizedOffset = currentMouse.current;
-      const centerOffset = normalizedOffset - 0.5;
-      
-      imageRefs.current.forEach((el, index) => {
-        if (el) {
-          const movement = -centerOffset * speeds[index] * 800;
-          el.style.transform = `translate3d(0, ${movement}px, 0)`;
-        }
-      });
-      
-      // Cancel animation loop
-      if (rafId.current) {
-        cancelAnimationFrame(rafId.current);
-        isAnimating.current = false;
-      }
-      
-      // Clear any pending restart
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-      
-      // Debounce restart: resume animation 200ms after scroll ends
-      scrollTimeout.current = window.setTimeout(() => {
-        if (!isAnimating.current && Math.abs(targetMouse.current - currentMouse.current) > 0.001) {
-          isAnimating.current = true;
-          animate();
-        }
-      }, 200);
-    };
-
-    // Listen for scroll events
-    const wheelListener = (e: WheelEvent) => handleScrollStart();
-    const touchListener = (e: TouchEvent) => handleScrollStart();
-    const keyListener = (e: KeyboardEvent) => {
-      if (['PageUp', 'PageDown', 'Home', 'End', ' ', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
-        handleScrollStart();
-      }
-    };
-    
-    window.addEventListener('wheel', wheelListener, { passive: true });
-    window.addEventListener('touchstart', touchListener, { passive: true });
-    window.addEventListener('keydown', keyListener, { passive: true });
-    
-    // Mouse move on the entire window - responds even outside image column
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    rafId.current = requestAnimationFrame(animate);
 
     return () => {
-      clearTimeout(initTimeout);
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('wheel', wheelListener);
-      window.removeEventListener('touchstart', touchListener);
-      window.removeEventListener('keydown', keyListener);
-      
       if (rafId.current) {
         cancelAnimationFrame(rafId.current);
-      }
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
       }
     };
   }, []);
 
+  // Calculate parallax transforms - larger range, faster response
+  const getParallaxStyle = (speed: number) => {
+    const centerOffset = mouseProgress - 0.5; // -0.5 to 0.5
+    const movement = -centerOffset * speed * 800; // 800px range for more dramatic movement
+    return {
+      transform: `translate3d(0, ${movement}px, 0)`,
+      willChange: 'transform',
+    };
+  };
+
   return (
-    <section id="home" className="relative min-h-screen flex flex-row">
-      {/* Left 60% - Fixed viewport with parallax images (non-scrollable) */}
-      <div 
-        className="w-[60%] h-screen overflow-hidden bg-black fixed top-0 left-0 z-10"
-        style={{ position: 'fixed' }}
-      >
-        {/* Container for stacked images with parallax - more spacing between images */}
-        <div className="relative h-full flex flex-col justify-center">
-          {/* Image 1 - starts higher to be visible when mouse near top */}
+    <section id="home" className="relative h-screen flex flex-row overflow-hidden -z-10">
+      {/* Left 60% - Parallax images with strict clipping */}
+      <div className="w-[60%] h-full overflow-hidden bg-black" style={{ clipPath: 'inset(0)' }}>
+        {/* Inner wrapper for parallax content */}
+        <div className="relative w-full h-full overflow-hidden">
+          {/* Image 1 */}
           <div 
-            ref={(el) => (imageRefs.current[0] = el)}
-            className="absolute left-0 w-full h-[70vh]"
-            style={{ top: '-10vh', willChange: 'transform' }}
-            data-testid="parallax-container-1"
+            className="absolute top-0 left-0 w-full h-[70vh]"
+            style={getParallaxStyle(1.2)}
           >
             <img 
               src={parallaxImg1}
@@ -167,12 +67,10 @@ export default function HeroSection() {
             />
           </div>
 
-          {/* Image 2 - more spacing */}
+          {/* Image 2 */}
           <div 
-            ref={(el) => (imageRefs.current[1] = el)}
-            className="absolute left-0 w-full h-[70vh]"
-            style={{ top: '10vh', willChange: 'transform' }}
-            data-testid="parallax-container-2"
+            className="absolute top-[15vh] left-0 w-full h-[70vh]"
+            style={getParallaxStyle(1.8)}
           >
             <img 
               src={parallaxImg2}
@@ -181,11 +79,10 @@ export default function HeroSection() {
             />
           </div>
 
-          {/* Image 3 - Main featured - more spacing */}
+          {/* Image 3 - Main featured */}
           <div 
-            ref={(el) => (imageRefs.current[2] = el)}
-            className="absolute left-0 w-full h-[80vh]"
-            style={{ top: '35vh', willChange: 'transform' }}
+            className="absolute top-[30vh] left-0 w-full h-[80vh]"
+            style={getParallaxStyle(2.5)}
             data-testid="img-founder"
           >
             <img 
@@ -195,12 +92,10 @@ export default function HeroSection() {
             />
           </div>
 
-          {/* Image 4 - more spacing */}
+          {/* Image 4 */}
           <div 
-            ref={(el) => (imageRefs.current[3] = el)}
-            className="absolute left-0 w-full h-[70vh]"
-            style={{ top: '65vh', willChange: 'transform' }}
-            data-testid="parallax-container-4"
+            className="absolute top-[50vh] left-0 w-full h-[70vh]"
+            style={getParallaxStyle(3.2)}
           >
             <img 
               src={parallaxImg3}
@@ -209,12 +104,10 @@ export default function HeroSection() {
             />
           </div>
 
-          {/* Image 5 - more spacing */}
+          {/* Image 5 */}
           <div 
-            ref={(el) => (imageRefs.current[4] = el)}
-            className="absolute left-0 w-full h-[70vh]"
-            style={{ top: '95vh', willChange: 'transform' }}
-            data-testid="parallax-container-5"
+            className="absolute top-[65vh] left-0 w-full h-[70vh]"
+            style={getParallaxStyle(3.8)}
           >
             <img 
               src={parallaxImg4}
@@ -223,12 +116,10 @@ export default function HeroSection() {
             />
           </div>
 
-          {/* Image 6 - extends lower to remain visible near bottom */}
+          {/* Image 6 */}
           <div 
-            ref={(el) => (imageRefs.current[5] = el)}
-            className="absolute left-0 w-full h-[70vh]"
-            style={{ top: '125vh', willChange: 'transform' }}
-            data-testid="parallax-container-6"
+            className="absolute top-[80vh] left-0 w-full h-[70vh]"
+            style={getParallaxStyle(4.5)}
           >
             <img 
               src={parallaxImg5}
@@ -242,8 +133,8 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30 pointer-events-none" />
       </div>
 
-      {/* Right 40% - Fixed text block */}
-      <div className="w-[40%] h-screen flex items-center justify-center px-12 bg-black fixed top-0 right-0 z-10">
+      {/* Right 40% - Text block */}
+      <div className="w-[40%] h-full flex items-center justify-center px-12 bg-black">
         <div className="max-w-[520px] w-full">
           {/* Small tag line */}
           <p className="text-[18px] uppercase text-[#FF4D00] tracking-[2px] mb-8" data-testid="text-tagline">
