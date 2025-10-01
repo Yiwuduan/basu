@@ -39,10 +39,10 @@ export default function HeroSection() {
     };
   }, []);
 
-  // Calculate parallax transforms - larger range, faster response
+  // Calculate parallax transforms - 2x sensitivity with 1600px range
   const getParallaxStyle = (speed: number) => {
     const centerOffset = mouseProgress - 0.5; // -0.5 to 0.5
-    const movement = -centerOffset * speed * 800; // 800px range for more dramatic movement
+    const movement = -centerOffset * speed * 1600; // 1600px range for 2x sensitivity
     return {
       transform: `translate3d(0, ${movement}px, 0)`,
       willChange: 'transform',
