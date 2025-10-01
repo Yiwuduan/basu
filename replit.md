@@ -40,7 +40,9 @@ Preferred communication style: Simple, everyday language.
 - **Layout System**: Mixed-column design with specific layouts per section (Hero: 60/40 split, About: 3 tiles, Workshop: 2-column grid)
 - **Color Palette**: Pure black (#000000) background, white (#FFFFFF) text, vivid orange (#FF4D00) accents with HSL color system
 - **Image Treatment**: Grayscale images with orange overlay accents for visual consistency
-- **Typography**: Bold geometric sans-serif styling with large font sizes for impact
+- **Typography**: Poppins font family with bold geometric styling - H1: 88px, H2: 56px, H3: 32px, Body: 20px with 1.65 line-height
+- **Spacing Standards**: 160px section padding, 32px element gaps, 24px grid gutters, 16px image corner radius
+- **Interactions**: Button transitions (0.25s ease), scroll animations (fade-in + 20px upward shift on 0.4s), orange focus states
 - **Responsive Design**: Mobile-first approach with Tailwind's responsive utilities
 - **Accessibility**: Radix UI primitives ensure keyboard navigation and screen reader support
 
