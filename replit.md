@@ -44,7 +44,10 @@ Preferred communication style: Simple, everyday language.
 - **Spacing Standards**: Gallery/About sections at py-24, Workshop at py-10, element gaps, grid gutters, 16px image corner radius
 - **Interactions**: 
   - Button transitions (0.25s ease), orange focus states
-  - Hero section: Mouse-controlled parallax with 6 vertically-stacked grayscale images (70-80vh each) that move opposite to vertical mouse movement with heavy momentum-based animation (lerp factor 0.04, 1600px movement range, speeds 1.2-4.5× for pronounced weighted dial-wheel feel)
+  - Hero section parallax: 
+    - Desktop (1024px+): Mouse-controlled with 6 vertically-stacked grayscale images that move opposite to vertical mouse movement
+    - Mobile (<1024px): Device tilt/orientation-controlled - tilt phone forward/backward to move images
+    - Both use heavy momentum-based animation (lerp factor 0.04, 1600px movement range, speeds 1.2-4.5×)
   - Gallery carousel: Grayscale images transition to full color on hover
 - **Responsive Design**: Mobile-first approach with Tailwind's responsive utilities
 - **Accessibility**: Radix UI primitives ensure keyboard navigation and screen reader support

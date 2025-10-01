@@ -11,14 +11,47 @@ export default function HeroSection() {
   const targetMouse = useRef(0.5);
   const currentMouse = useRef(0.5);
   const rafId = useRef<number>();
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Detect if mobile device
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     const handleMouseMove = (e: MouseEvent) => {
+      if (isMobile) return; // Don't use mouse on mobile
       // Calculate normalized mouse position (0 to 1)
       const mouseY = e.clientY;
       const viewportHeight = window.innerHeight;
       const normalizedY = mouseY / viewportHeight;
       targetMouse.current = normalizedY;
+    };
+
+    const handleDeviceOrientation = (e: DeviceOrientationEvent) => {
+      if (!isMobile) return; // Only use device orientation on mobile
+      
+      // Beta is the front-to-back tilt in degrees (-180 to 180)
+      // Gamma is the left-to-right tilt in degrees (-90 to 90)
+      const beta = e.beta || 0; // Front-to-back tilt
+      
+      // Map beta from typical phone tilt range (30 to 90 degrees when holding phone)
+      // to our 0-1 range. Center around 60 degrees (comfortable viewing angle)
+      const minTilt = 30;  // Phone tilted back
+      const maxTilt = 90;  // Phone tilted forward
+      const centerTilt = 60; // Neutral position
+      const range = 30; // ±30 degrees from center
+      
+      // Normalize to 0-1 range, with 60 degrees = 0.5
+      let normalized = 0.5 + ((beta - centerTilt) / (range * 2));
+      
+      // Clamp between 0 and 1
+      normalized = Math.max(0, Math.min(1, normalized));
+      
+      targetMouse.current = normalized;
     };
 
     // Heavier momentum with slower lerp (0.04 = more weighted, slower response)
@@ -28,16 +61,35 @@ export default function HeroSection() {
       rafId.current = requestAnimationFrame(animate);
     };
 
+    // Add event listeners based on device type
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    
+    // Request permission for iOS 13+ devices
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
+      // iOS 13+ requires permission
+      (DeviceOrientationEvent as any).requestPermission()
+        .then((permissionState: string) => {
+          if (permissionState === 'granted') {
+            window.addEventListener('deviceorientation', handleDeviceOrientation, { passive: true });
+          }
+        })
+        .catch(console.error);
+    } else {
+      // Non-iOS or older iOS - add listener directly
+      window.addEventListener('deviceorientation', handleDeviceOrientation, { passive: true });
+    }
+    
     rafId.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('deviceorientation', handleDeviceOrientation);
+      window.removeEventListener('resize', checkMobile);
       if (rafId.current) {
         cancelAnimationFrame(rafId.current);
       }
     };
-  }, []);
+  }, [isMobile]);
 
   // Calculate parallax transforms - 2x sensitivity with 1600px range
   const getParallaxStyle = (speed: number) => {
