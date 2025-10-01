@@ -232,7 +232,9 @@ export default function SignupSection() {
                     <img
                       src={approach.image}
                       alt={approach.label}
-                      className="w-full h-full object-cover grayscale"
+                      className={`w-full h-full object-cover transition-all duration-300 ${
+                        formData.learningApproach === approach.id ? '' : 'grayscale'
+                      }`}
                     />
                     <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-all" />
                     {formData.learningApproach === approach.id && (
@@ -283,7 +285,9 @@ export default function SignupSection() {
                     <img
                       src={reason.image}
                       alt={reason.label}
-                      className="w-full h-full object-cover grayscale"
+                      className={`w-full h-full object-cover transition-all duration-300 ${
+                        formData.participationReason === reason.id ? '' : 'grayscale'
+                      }`}
                     />
                     <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-all" />
                     {formData.participationReason === reason.id && (

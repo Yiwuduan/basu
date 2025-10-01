@@ -60,6 +60,9 @@ Preferred communication style: Simple, everyday language.
   - Step 4: Parent information and vision message (name, email, detailed vision description)
 - **Progressive Disclosure**: Step-by-step form with progress indicators and navigation (back/next buttons)
 - **Visual Filtering**: Pictured multiple-choice questions help parents self-select based on alignment with vision
+  - Unselected cards: Grayscale images with subtle dark overlay
+  - Selected cards: Full-color images with orange border, checkmark icon, and slight scale (1.02×)
+  - Smooth 300ms transition from grayscale to color when selected
 - **Validation**: Multi-level validation with toast notifications for missing fields and errors
 - **Vision Alignment**: Required vision message textarea encourages thoughtful responses about learning philosophy
 - **Feedback**: Toast notifications for success/error states with automatic form reset after successful submission
