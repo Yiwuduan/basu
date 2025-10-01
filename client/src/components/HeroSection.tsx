@@ -35,7 +35,7 @@ export default function HeroSection() {
 
           {/* CTA Button */}
           <Button
-            className="bg-[#FF4D00] text-white text-[18px] font-bold uppercase px-14 py-6 rounded-lg hover:bg-black hover:text-[#FF4D00] hover:border-[#FF4D00] hover:border-2 transition-all duration-300"
+            className="bg-[#FF4D00] text-white text-[18px] font-bold uppercase px-14 py-6 rounded-lg border-2 border-[#FF4D00]"
             onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
             data-testid="button-see-work"
           >

@@ -34,7 +34,12 @@ export default function SignupSection() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          parentName: formData.name,
+          email: formData.email,
+          childName: formData.name,
+          message: formData.message || null
+        }),
       });
 
       const result = await response.json();
@@ -120,7 +125,7 @@ export default function SignupSection() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-[#FF4D00] text-white text-[20px] font-bold uppercase py-5 rounded-md hover:bg-black hover:text-[#FF4D00] hover:border-2 hover:border-[#FF4D00] transition-all duration-300"
+            className="w-full bg-[#FF4D00] text-white text-[20px] font-bold uppercase py-5 rounded-md border-2 border-[#FF4D00] disabled:opacity-50"
             data-testid="button-submit"
           >
             {isSubmitting ? "SENDING..." : "SIGN UP"}
