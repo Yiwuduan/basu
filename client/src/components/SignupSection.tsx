@@ -96,7 +96,7 @@ export default function SignupSection() {
             onChange={(e) => handleInputChange('name', e.target.value)}
             placeholder="Name"
             required
-            className="w-full text-[20px] p-5 bg-black border border-[#333333] text-white rounded-md mb-8 focus:outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00] transition-all"
+            className="w-full text-[20px] py-5 px-4 bg-[#111111] border border-[#333333] text-white rounded-[6px] mb-8 input-focus transition-all"
             data-testid="input-name"
           />
 
@@ -107,7 +107,7 @@ export default function SignupSection() {
             onChange={(e) => handleInputChange('email', e.target.value)}
             placeholder="Email"
             required
-            className="w-full text-[20px] p-5 bg-black border border-[#333333] text-white rounded-md mb-8 focus:outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00] transition-all"
+            className="w-full text-[20px] py-5 px-4 bg-[#111111] border border-[#333333] text-white rounded-[6px] mb-8 input-focus transition-all"
             data-testid="input-email"
           />
 
@@ -117,7 +117,7 @@ export default function SignupSection() {
             onChange={(e) => handleInputChange('message', e.target.value)}
             placeholder="Message / Interest"
             rows={5}
-            className="w-full text-[20px] p-5 bg-black border border-[#333333] text-white rounded-md mb-12 resize-none focus:outline-none focus:border-[#FF4D00] focus:ring-2 focus:ring-[#FF4D00] transition-all"
+            className="w-full text-[20px] py-5 px-4 bg-[#111111] border border-[#333333] text-white rounded-[6px] mb-12 resize-none input-focus transition-all"
             data-testid="textarea-message"
           />
 
@@ -125,7 +125,7 @@ export default function SignupSection() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-[#FF4D00] text-white text-[20px] font-bold uppercase py-5 rounded-md border-2 border-[#FF4D00] disabled:opacity-50"
+            className="w-full bg-[#FF4D00] text-white text-[18px] font-bold uppercase py-5 rounded-[6px] border-2 border-[#FF4D00] cta-transition hover:bg-black hover:text-[#FF4D00] hover:border-[#FF4D00] disabled:opacity-50 disabled:hover:bg-[#FF4D00] disabled:hover:text-white"
             data-testid="button-submit"
           >
             {isSubmitting ? "SENDING..." : "SIGN UP"}
