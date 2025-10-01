@@ -36,10 +36,10 @@ export default function LandingPage() {
       <main>
         <HeroSection />
         <div className="fade-in-up">
-          <AboutSection />
+          <GallerySection />
         </div>
         <div className="fade-in-up">
-          <GallerySection />
+          <AboutSection />
         </div>
         <div className="fade-in-up">
           <WorkshopSection />

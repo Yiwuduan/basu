@@ -2,9 +2,9 @@ import amandaPhoto from '@assets/PHOTO-2025-08-28-14-02-49_1758973315512.jpg';
 
 export default function HeroSection() {
   return (
-    <section id="home" className="relative min-h-screen flex">
+    <section id="home" className="relative min-h-screen flex flex-row">
       {/* Left 60% - Full-height portrait, grayscale */}
-      <div className="w-[60%] relative">
+      <div className="w-[60%] relative flex-shrink-0">
         <img 
           src={amandaPhoto}
           alt="Amanda Basu Roy - Founder"
@@ -15,8 +15,8 @@ export default function HeroSection() {
       </div>
 
       {/* Right 40% - Stacked text block */}
-      <div className="w-[40%] flex items-center justify-center py-[200px] px-12">
-        <div className="max-w-[520px]">
+      <div className="w-[40%] flex-shrink-0 flex items-center justify-center py-[200px] px-12 bg-black relative z-10">
+        <div className="max-w-[520px] w-full">
           {/* Small tag line */}
           <p className="text-[18px] uppercase text-[#FF4D00] tracking-[2px] mb-8" data-testid="text-tagline">
             Mentorship • Projects • Community
