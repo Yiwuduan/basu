@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import parallaxImg1 from '@assets/PHOTO-2025-08-28-14-02-49 2_1759300881690.jpg';
 import parallaxImg2 from '@assets/PHOTO-2025-08-28-14-02-49 3_1759300881690.jpg';
 import parallaxImg3 from '@assets/PHOTO-2025-08-28-14-02-49 4_1759300881690.jpg';
@@ -7,58 +7,141 @@ import parallaxImg5 from '@assets/PHOTO-2025-08-28-14-02-49 6_1759300881691.jpg'
 import parallaxImg6 from '@assets/PHOTO-2025-08-28-14-02-49_1759300881691.jpg';
 
 export default function HeroSection() {
-  const [mouseProgress, setMouseProgress] = useState(0.5);
   const targetMouse = useRef(0.5);
   const currentMouse = useRef(0.5);
   const rafId = useRef<number>();
+  const isAnimating = useRef(false);
+  const scrollTimeout = useRef<number>();
+  const imageColumnRef = useRef<HTMLDivElement>(null);
+  
+  // Refs for each parallax image container
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  
+  // Speed multipliers for each image
+  const speeds = [1.2, 1.8, 2.5, 3.2, 3.8, 4.5];
 
   useEffect(() => {
+    const imageColumn = imageColumnRef.current;
+    if (!imageColumn) {
+      console.warn('Image column ref not found');
+      return;
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
-      // Calculate normalized mouse position (0 to 1)
       const mouseY = e.clientY;
       const viewportHeight = window.innerHeight;
       const normalizedY = mouseY / viewportHeight;
       targetMouse.current = normalizedY;
+      
+      // Start animation loop if not already running
+      if (!isAnimating.current) {
+        isAnimating.current = true;
+        animate();
+      }
     };
 
-    // Heavier momentum with slower lerp (0.04 = more weighted, slower response)
+    // Imperative animation - no React state updates
     const animate = () => {
+      const diff = Math.abs(targetMouse.current - currentMouse.current);
+      
+      // Stop animation when settled (epsilon check)
+      if (diff < 0.001) {
+        isAnimating.current = false;
+        return;
+      }
+
+      // Heavy momentum with slow lerp
       currentMouse.current += (targetMouse.current - currentMouse.current) * 0.04;
-      setMouseProgress(currentMouse.current);
+      
+      // Update DOM directly - no React re-render
+      const centerOffset = currentMouse.current - 0.5;
+      imageRefs.current.forEach((el, index) => {
+        if (el) {
+          const movement = -centerOffset * speeds[index] * 800;
+          el.style.transform = `translate3d(0, ${movement}px, 0)`;
+        }
+      });
+
       rafId.current = requestAnimationFrame(animate);
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    rafId.current = requestAnimationFrame(animate);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+    // Scroll event handlers - pause animation during scroll
+    const handleScrollStart = () => {
+      // Snap animation to target immediately
+      currentMouse.current = targetMouse.current;
+      
+      // Update one final time
+      const centerOffset = currentMouse.current - 0.5;
+      imageRefs.current.forEach((el, index) => {
+        if (el) {
+          const movement = -centerOffset * speeds[index] * 800;
+          el.style.transform = `translate3d(0, ${movement}px, 0)`;
+        }
+      });
+      
+      // Cancel animation loop
       if (rafId.current) {
         cancelAnimationFrame(rafId.current);
+        isAnimating.current = false;
+      }
+      
+      // Clear any pending restart
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+      
+      // Debounce restart: resume animation 200ms after scroll ends
+      scrollTimeout.current = window.setTimeout(() => {
+        if (!isAnimating.current && Math.abs(targetMouse.current - currentMouse.current) > 0.001) {
+          isAnimating.current = true;
+          animate();
+        }
+      }, 200);
+    };
+
+    // Listen for scroll events
+    const wheelListener = (e: WheelEvent) => handleScrollStart();
+    const touchListener = (e: TouchEvent) => handleScrollStart();
+    const keyListener = (e: KeyboardEvent) => {
+      if (['PageUp', 'PageDown', 'Home', 'End', ' ', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+        handleScrollStart();
+      }
+    };
+    
+    window.addEventListener('wheel', wheelListener, { passive: true });
+    window.addEventListener('touchstart', touchListener, { passive: true });
+    window.addEventListener('keydown', keyListener, { passive: true });
+    
+    // Mouse move on the image column
+    imageColumn.addEventListener('mousemove', handleMouseMove, { passive: true });
+
+    return () => {
+      imageColumn.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('wheel', wheelListener);
+      window.removeEventListener('touchstart', touchListener);
+      window.removeEventListener('keydown', keyListener);
+      
+      if (rafId.current) {
+        cancelAnimationFrame(rafId.current);
+      }
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
       }
     };
   }, []);
 
-  // Calculate parallax transforms - larger range, faster response
-  const getParallaxStyle = (speed: number) => {
-    const centerOffset = mouseProgress - 0.5; // -0.5 to 0.5
-    const movement = -centerOffset * speed * 800; // 800px range for more dramatic movement
-    return {
-      transform: `translate3d(0, ${movement}px, 0)`,
-      willChange: 'transform',
-    };
-  };
-
   return (
     <section id="home" className="relative min-h-screen flex flex-row">
       {/* Left 60% - Vertically stacked parallax images */}
-      <div className="w-[60%] relative flex-shrink-0 overflow-hidden bg-black">
+      <div ref={imageColumnRef} className="w-[60%] relative flex-shrink-0 overflow-hidden bg-black">
         {/* Container for stacked images with parallax */}
         <div className="relative" style={{ minHeight: '100vh' }}>
           {/* Image 1 */}
           <div 
+            ref={(el) => (imageRefs.current[0] = el)}
             className="relative w-full h-[70vh] mb-8"
-            style={getParallaxStyle(1.2)}
+            style={{ willChange: 'transform' }}
+            data-testid="parallax-container-1"
           >
             <img 
               src={parallaxImg1}
@@ -69,8 +152,10 @@ export default function HeroSection() {
 
           {/* Image 2 */}
           <div 
+            ref={(el) => (imageRefs.current[1] = el)}
             className="relative w-full h-[70vh] mb-8"
-            style={getParallaxStyle(1.8)}
+            style={{ willChange: 'transform' }}
+            data-testid="parallax-container-2"
           >
             <img 
               src={parallaxImg2}
@@ -81,8 +166,9 @@ export default function HeroSection() {
 
           {/* Image 3 - Main featured */}
           <div 
+            ref={(el) => (imageRefs.current[2] = el)}
             className="relative w-full h-[80vh] mb-8"
-            style={getParallaxStyle(2.5)}
+            style={{ willChange: 'transform' }}
             data-testid="img-founder"
           >
             <img 
@@ -94,8 +180,10 @@ export default function HeroSection() {
 
           {/* Image 4 */}
           <div 
+            ref={(el) => (imageRefs.current[3] = el)}
             className="relative w-full h-[70vh] mb-8"
-            style={getParallaxStyle(3.2)}
+            style={{ willChange: 'transform' }}
+            data-testid="parallax-container-4"
           >
             <img 
               src={parallaxImg3}
@@ -106,8 +194,10 @@ export default function HeroSection() {
 
           {/* Image 5 */}
           <div 
+            ref={(el) => (imageRefs.current[4] = el)}
             className="relative w-full h-[70vh] mb-8"
-            style={getParallaxStyle(3.8)}
+            style={{ willChange: 'transform' }}
+            data-testid="parallax-container-5"
           >
             <img 
               src={parallaxImg4}
@@ -118,8 +208,10 @@ export default function HeroSection() {
 
           {/* Image 6 */}
           <div 
+            ref={(el) => (imageRefs.current[5] = el)}
             className="relative w-full h-[70vh]"
-            style={getParallaxStyle(4.5)}
+            style={{ willChange: 'transform' }}
+            data-testid="parallax-container-6"
           >
             <img 
               src={parallaxImg5}
