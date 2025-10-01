@@ -1,0 +1,173 @@
+Global Style Adjustments
+
+Background: #000000 (black) site-wide.
+
+Primary text: #FFFFFF (white).
+
+Accent color: #FF4D00 (orange).
+
+Secondary text: #CCCCCC (light gray).
+
+Font family: bold geometric sans-serif (e.g. Poppins / Gilroy).
+
+Font sizes / hierarchy:
+
+H1: 88px, bold, white
+
+H2: 56px, semi-bold, white
+
+H3 / section headers: 32px, bold, orange
+
+Body / paragraphs: 20px, light gray, line-height 1.65
+
+Buttons / CTAs: 18px bold, uppercase, white text on orange background
+
+Spacing standards:
+
+Section padding: 160px top + bottom (unless noted)
+
+Between headline → subcopy → element: 32px
+
+Grid gutter: 24px
+
+Image corner radius: 16px
+
+Interactions:
+
+Buttons: 0.25s ease transition (hover invert effect)
+
+Sections: fade-in + upward shift 20px on scroll
+
+1. Hero / Intro Section (Fix this first)
+
+Layout: left 60% portrait, right 40% text block.
+
+Portrait: grayscale / black-white, edge-to-edge in left area.
+
+Text block (right): vertically centered.
+
+Tag line (small): “Mentorship • Projects • Community” — 18px uppercase, orange, letter-spacing 2px
+
+Main headline: “Reframing Learning & Life Together” — H1, 88px bold, white
+
+Subcopy: “I believe education should be alive, joyful, and connected…” (use your current copy) — 20px light gray, max width 520px
+
+CTA: “SEE MY WORK” — orange background, white bold text, 18px, 24px vertical padding, 56px horizontal, border radius 8px. Hover: black background, orange border 2px, orange text.
+
+Spacing: text block top + bottom padding = 200px. The space between tagline → headline = 32px, headline → subcopy = 32px, subcopy → button = 48px.
+
+2. About / Value Proposition Section (Fix its spacing and style)
+
+Section header: “Crafting Meaningful Learning Spaces” — H2, 56px bold, white, centered.
+
+Subcopy: use the version from your document: “Everything we need is already here … beyond rigid institutions.” — 20px light gray, centered, max width 640px.
+
+Visual tiles:
+
+3 square images (300x300px) in a row, with 48px gaps.
+
+Grayscale images with a subtle orange accent overlay (corner stripe or translucent overlay).
+
+Spacing: 160px padding top + bottom. Text block to images gap: 80px.
+
+3. Carousel / Showcase Section (Make it more dynamic)
+
+Section Header: “Mentorship in Action” — H2, 56px bold, white, centered.
+
+Carousel:
+
+8–10 angled cards (e.g. slight tilt), size 240×300px, corner radius 16px, shadow (black, 40% opacity, 12px blur).
+
+Hover state: flatten card, border glow orange (2px).
+
+Navigation: minimal orange arrow icons left/right.
+
+Caption below carousel: “A glimpse into our circles of craft, movement, and mentorship.” — 20px light gray, centered.
+
+Spacing: 48px gap between header → carousel, 64px between carousel → caption, 160px bottom padding.
+
+4. Event Section (Insert exactly here)
+
+Section layout: two-column, text left, image right.
+
+Left column:
+
+Header: “Style Beyond the Material” — H2 56px bold, white
+
+Subline: “Embodied Craft Studio for Girls (10–15)” — 24px semi-bold, orange
+
+Event details (stacked): 20px light gray, 32px line spacing
+
+Friday Evenings (4–9pm)
+
+Upcycle your wardrobe, harness creative flow, awaken your signature style.
+
+Bulleted list (with check mark icons in orange or white):
+
+Awaken the Senses: embodiment practice
+
+Technical Skills: pattern drafting, garment construction, sewing by hand & machine
+
+Crafting, food, and content creation
+
+Harness the power of seasons & cycles of the creative feminine
+
+Closing line: “Register: right fit, studio visit, class pacs.” — 20px italic orange
+
+Right column:
+
+Large photo (grayscale + orange highlight overlay), dimension to fit column width (approx 500px width).
+
+Spacing: 80px gap between columns. Section top + bottom padding = 160px.
+
+5. Signup Form Section (Ensure it’s prominent)
+
+Header: “Join the Circle” — H2, 56px bold, white, centered
+
+Subcopy: “Let’s connect. Sign up below to explore mentorship, events, and community.” — 20px light gray, centered, max width 560px
+
+Form container: centered, width = 480px
+
+Input: Name — full width, 20px white text, 20px vertical + 16px horizontal padding, background #111111, border 1px #333, border radius 6px
+
+Input: Email — same styling
+
+Textarea: Interest / Message, 5 rows, same styling
+
+Submit button: “SIGN UP” — full width, orange background, white bold text 18px, 20px vertical padding, border radius 6px. Hover: black background, orange border, orange text.
+
+Spacing: 32px between inputs, 48px above button, 160px top + bottom padding for section.
+
+6. Footer (Improve structure & polish)
+
+Divider: 1px line #222222 across full width above footer content.
+
+Footer content: three columns
+
+Left: Logo / name in orange, size ~24px
+
+Center: navigation links (white, hover color orange)
+
+Right: social icons (white → hover orange)
+
+Final line (centered): “Let’s build something meaningful together.” — 20px italic orange
+
+Spacing: 80px top inside footer, 40px bottom. Links spaced 24px apart vertically if stacked, or inline with 32px gaps.
+
+Additional Details + Enhancements
+
+Consistent spacing: use the 160px section padding as baseline—never drop below or overshoot without intention.
+
+Line-length cap: body text lines should not exceed ~70 characters per line.
+
+Scroll animations: each section should fade in and move upward ~20px on scroll, duration ~0.4s.
+
+Button transitions: background / border / text should animate over 0.25s ease.
+
+Input focus states: border glows orange (#FF4D00) on focus.
+
+Image accenting: always overlay or accent images with a subtle orange element so they integrate with the palette (e.g. corner stripe, gradient fade, or highlight accent).
+
+Typography variance: ensure headlines, subheads, and body text are visually distinct in size and weight—no two adjacent levels should feel too close.
+
+Contrast checks: ensure text readability against background images (use overlay behind text if needed).
