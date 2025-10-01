@@ -13,7 +13,7 @@ export default function Footer() {
           </div>
 
           {/* Center - Navigation Links */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-6">
             <a 
               href="#home" 
               className="text-white hover:text-[#FF4D00] transition-colors text-lg"
