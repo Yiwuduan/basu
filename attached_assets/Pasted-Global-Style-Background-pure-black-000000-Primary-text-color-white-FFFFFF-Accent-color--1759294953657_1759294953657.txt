@@ -1,0 +1,179 @@
+Global Style
+
+Background: pure black (#000000).
+
+Primary text color: white (#FFFFFF).
+
+Accent color: vivid orange (#FF4D00).
+
+Secondary text color: light gray (#CCCCCC).
+
+Font family: bold geometric sans-serif (Gilroy / Poppins / Montserrat).
+
+Font hierarchy:
+
+H1: 88px, bold, white.
+
+H2: 56px, semi-bold, white.
+
+H3: 32px, bold, orange.
+
+Body: 20px, light gray, line height 1.65.
+
+Buttons: 18px bold, all caps, white text on orange background.
+
+Spacing:
+
+Section padding: 160px top + bottom.
+
+Between headline → subcopy → element: 32px.
+
+Grid gutters: 24px.
+
+Image treatment: grayscale/black-and-white by default, one orange accent overlay (stripe, highlight, or gradient).
+
+1. Hero (Left Column Start)
+
+Layout:
+
+Left 60%: full-height portrait of the founder, grayscale, edge-to-edge, top-aligned.
+
+Right 40%: stacked text block.
+
+Content:
+
+Small tag line: “Mentorship • Projects • Community” — 18px, uppercase, orange (#FF4D00), letter-spacing 2px.
+
+Main headline: “Reframing Learning & Life Together” — H1, 88px, bold white.
+
+Subcopy: “I believe education should be alive, joyful, and connected. My work is about creating spaces where families learn through craft, movement, and mentorship—not institutions.” — body, 20px gray (#CCCCCC), max width 520px.
+
+CTA Button:
+
+Label: SEE MY WORK
+
+Style: orange background, white text, 18px bold, 24px vertical padding, 56px horizontal padding, 8px corner radius.
+
+Hover: black background, orange border (2px), orange text.
+
+Spacing: Text block vertically centered next to portrait. Padding top + bottom = 200px for strong impact.
+
+2. About / Value Proposition
+
+Headline: “Crafting Meaningful Learning Spaces” — H2, 56px bold, white.
+
+Subcopy: “Everything we need is already here if we design our lives around curiosity, mentorship, and connection. Together, families can thrive beyond rigid institutions.” — 20px, light gray, max width 640px, centered.
+
+Visuals:
+
+3 tiles (300x300px each), displayed horizontally with 48px gaps.
+
+Black-and-white workshop/nature photos, each with subtle orange corner overlay (triangle or stripe).
+
+Spacing: 160px section padding, 80px above visuals.
+
+3. Carousel Showcase
+
+Headline: “Mentorship in Action” — H2, 56px bold, white, centered.
+
+Carousel style:
+
+8–10 angled cards, each 240px x 300px.
+
+Rounded corners: 16px.
+
+Drop shadow: black, 40% opacity, 12px blur.
+
+Hover state: straighten card, border glow in orange (#FF4D00, 2px).
+
+Content: Photos of families, crafts, workshops. Prefer black-and-white with one orange overlay (e.g. stripe or circle).
+
+Navigation: Orange arrow icons left/right, minimal.
+
+Spacing: Headline at top (centered), 48px gap, carousel, 64px gap, small caption below: “A glimpse into our circles of craft, movement, and mentorship.”
+
+4. Event Section (From Document)
+
+Layout: two-column split (left text, right image).
+
+Left Column:
+
+Section header: “Style Beyond the Material” — H2, 56px bold white.
+
+Subline: “Embodied Craft Studio for Girls (10–15)” — 24px semi-bold orange.
+
+Event details in stacked block, 20px gray text with 32px line spacing:
+
+Friday Evenings (4–9pm)
+
+Upcycle your wardrobe, harness creative flow, awaken your signature style.
+
+Bulleted list (white check icons, 18px text, gray):
+
+Awaken the Senses: embodiment practice
+
+Technical Skills: pattern drafting, garment construction, sewing by hand & machine
+
+Crafting, food, and content creation
+
+Harness the power of seasons & cycles of the creative feminine
+
+Closing line: “Register: right fit, studio visit, class pacs.” — 20px orange, italic.
+
+Right Column:
+
+Large photo (grayscale with orange highlight overlay). Image should show youth, creativity, or craft scene.
+
+Spacing: Left + right columns balanced 50/50. 80px gap between them.
+
+5. Signup Form Section
+
+Headline: “Join the Circle” — H2, 56px bold, centered, white.
+
+Subcopy: “Let’s connect. Sign up below to explore mentorship, events, and community.” — 20px gray, centered, max width 560px.
+
+Form layout (centered, max width 480px):
+
+Input 1: Name (full width, 20px text, 20px padding, black background, 1px solid #333, white text).
+
+Input 2: Email (same styling).
+
+Input 3: Message / Interest (textarea, 5 rows, same styling).
+
+Submit Button:
+
+Label: SIGN UP
+
+Style: full width, orange background, white bold text, 20px padding, 6px corner radius.
+
+Hover: black background, orange border, orange text.
+
+Spacing: 32px between inputs, 48px above button.
+
+6. Footer
+
+Background: solid black.
+
+Top divider: 1px line #222222.
+
+Content layout:
+
+Left: Logo/name in orange.
+
+Center: navigation links (white text, hover orange).
+
+Right: socials (white icons, hover orange).
+
+Final line (centered, orange 20px italic): “Let’s build something meaningful together.”
+
+Spacing: 80px top, 40px bottom.
+
+Interaction & Micro-details
+
+Buttons: transition 0.25s ease (hover invert effect).
+
+Section transitions: fade-in + upward motion (20px) on scroll.
+
+Line length cap: 70 characters per body copy line.
+
+Input fields: glow orange border on focus.
