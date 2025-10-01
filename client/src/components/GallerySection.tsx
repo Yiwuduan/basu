@@ -1,91 +1,95 @@
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import img1 from '@assets/IMG_0848_1758970285463.jpeg';
+import img2 from '@assets/IMG_0853_1758970285464.jpeg';
+import img3 from '@assets/IMG_2125_1758970285465.jpeg';
+import img4 from '@assets/IMG_4081_1758970285467.jpeg';
+import img5 from '@assets/IMG_4089_1758970285467.jpeg';
+import img6 from '@assets/IMG_0882_1758970285465.jpeg';
+import img7 from '@assets/IMG_4068_1758970285466.jpeg';
+import img8 from '@assets/IMG_4060_1758970285466.jpeg';
 
-const galleryImages = [
-  {
-    src: '@assets/IMG_0848_1758970285463.jpeg',
-    alt: 'Creative workshop space',
-    caption: 'Our Studio Environment'
-  },
-  {
-    src: '@assets/IMG_0853_1758970285464.jpeg',
-    alt: 'Girls working on projects',
-    caption: 'Hands-on Learning'
-  },
-  {
-    src: '@assets/IMG_2125_1758970285465.jpeg',
-    alt: 'Sewing and craft work',
-    caption: 'Technical Skills Development'
-  },
-  {
-    src: '@assets/IMG_4081_1758970285467.jpeg',
-    alt: 'Completed projects',
-    caption: 'Creative Expression'
-  },
-  {
-    src: '@assets/IMG_4089_1758970285467.jpeg',
-    alt: 'Community building',
-    caption: 'Building Community'
-  },
-  {
-    src: '@assets/IMG_0882_1758970285465.jpeg',
-    alt: 'Mentorship moments',
-    caption: 'Guidance & Support'
-  }
-];
+const carouselImages = [img1, img2, img3, img4, img5, img6, img7, img8];
 
 export default function GallerySection() {
-  return (
-    <section className="py-20 bg-gradient-to-br from-muted/30 to-accent/5">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <Badge variant="secondary" className="mb-4">Workshop Gallery</Badge>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground mb-6">
-            See Learning in Action
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Step into our creative studio where girls discover their authentic voice through 
-            craft, mentorship, and joyful exploration.
-          </p>
-        </div>
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-        {/* Gallery Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {galleryImages.map((image, index) => (
-            <Card key={index} className="overflow-hidden hover-elevate border-card-border group">
-              <div className="aspect-square relative overflow-hidden">
-                <img 
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  onError={(e) => {
-                    // Fallback if image doesn't load
-                    const target = e.target as HTMLImageElement;
-                    target.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23f5f5f5'/%3E%3Ctext x='200' y='180' text-anchor='middle' fill='%23999' font-size='14' font-family='Arial'%3E${encodeURIComponent(image.alt)}%3C/text%3E%3Ctext x='200' y='200' text-anchor='middle' fill='%23666' font-size='12' font-family='Arial'%3E${encodeURIComponent(image.caption)}%3C/text%3E%3C/svg%3E`;
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
+
+  return (
+    <section className="py-[160px] bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Headline */}
+        <h2 className="text-[56px] font-bold text-white text-center mb-12" data-testid="text-carousel-headline">
+          Mentorship in Action
+        </h2>
+
+        {/* Carousel */}
+        <div className="relative mb-16">
+          <div className="overflow-hidden">
+            <div 
+              className="flex gap-8 transition-transform duration-500 ease-in-out"
+              style={{ transform: `translateX(-${currentIndex * (240 + 32)}px)` }}
+            >
+              {carouselImages.map((img, index) => (
+                <div 
+                  key={index}
+                  className="flex-shrink-0 w-[240px] h-[300px] relative group transition-all duration-300"
+                  style={{
+                    transform: currentIndex === index ? 'rotate(0deg)' : 'rotate(-3deg)',
                   }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-white font-medium text-sm">{image.caption}</p>
+                  data-testid={`carousel-card-${index}`}
+                >
+                  <div 
+                    className="w-full h-full rounded-2xl overflow-hidden relative transition-all duration-300"
+                    style={{
+                      boxShadow: '0 12px 24px rgba(0, 0, 0, 0.4)',
+                      border: currentIndex === index ? '2px solid #FF4D00' : '2px solid transparent',
+                    }}
+                  >
+                    <img 
+                      src={img}
+                      alt={`Mentorship moment ${index + 1}`}
+                      className="w-full h-full object-cover grayscale"
+                    />
+                    {/* Orange stripe overlay */}
+                    <div 
+                      className="absolute top-0 left-0 w-full h-2 bg-[#FF4D00]"
+                      style={{ opacity: 0.8 }}
+                    />
                   </div>
                 </div>
-              </div>
-            </Card>
-          ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 w-12 h-12 rounded-full bg-[#FF4D00] text-white flex items-center justify-center hover:bg-[#ff6b35] transition-colors"
+            data-testid="button-carousel-prev"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 w-12 h-12 rounded-full bg-[#FF4D00] text-white flex items-center justify-center hover:bg-[#ff6b35] transition-colors"
+            data-testid="button-carousel-next"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <p className="text-lg text-muted-foreground mb-6">
-            Ready to be part of this creative community?
-          </p>
-          <div className="inline-flex gap-4">
-            <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-            <div className="w-2 h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-            <div className="w-2 h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-          </div>
-        </div>
+        {/* Caption */}
+        <p className="text-[20px] text-[#CCCCCC] text-center" data-testid="text-carousel-caption">
+          A glimpse into our circles of craft, movement, and mentorship.
+        </p>
       </div>
     </section>
   );
