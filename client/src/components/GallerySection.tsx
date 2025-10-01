@@ -40,17 +40,13 @@ export default function GallerySection() {
               {carouselImages.map((img, index) => (
                 <div 
                   key={index}
-                  className="flex-shrink-0 w-[240px] h-[300px] relative group transition-all duration-300"
-                  style={{
-                    transform: currentIndex === index ? 'rotate(0deg)' : 'rotate(-3deg)',
-                  }}
+                  className="flex-shrink-0 w-[240px] h-[300px] relative group transition-all duration-300 -rotate-3 hover:rotate-0"
                   data-testid={`carousel-card-${index}`}
                 >
                   <div 
-                    className="w-full h-full rounded-2xl overflow-hidden relative transition-all duration-300"
+                    className="w-full h-full rounded-[16px] overflow-hidden relative transition-all duration-300 border-2 border-transparent hover:border-[#FF4D00]"
                     style={{
                       boxShadow: '0 12px 24px rgba(0, 0, 0, 0.4)',
-                      border: currentIndex === index ? '2px solid #FF4D00' : '2px solid transparent',
                     }}
                   >
                     <img 
