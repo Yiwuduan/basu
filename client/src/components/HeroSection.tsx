@@ -23,10 +23,9 @@ export default function HeroSection() {
     // Wait for refs to be populated, then initialize positions
     const initTimeout = setTimeout(() => {
       // Initialize with current mouse position
-      // Changed range: 50% to 60% of viewport (0.5 to 0.6)
-      const normalizedOffset = (currentMouse.current - 0.5) / 0.1; // Maps 0.5-0.6 to 0-1
-      const clampedOffset = Math.max(0, Math.min(1, normalizedOffset));
-      const centerOffset = clampedOffset - 0.5;
+      // Full range: 0% to 100% of viewport for less sensitivity
+      const normalizedOffset = currentMouse.current; // Already 0-1
+      const centerOffset = normalizedOffset - 0.5; // -0.5 to 0.5
       
       imageRefs.current.forEach((el, index) => {
         if (el) {
@@ -63,10 +62,9 @@ export default function HeroSection() {
       currentMouse.current += (targetMouse.current - currentMouse.current) * 0.04;
       
       // Update DOM directly - no React re-render
-      // Adjusted range: start at 0.5 (50% from top) and end at 0.6 (60% from top)
-      const normalizedOffset = (currentMouse.current - 0.5) / 0.1; // Maps 0.5-0.6 to 0-1
-      const clampedOffset = Math.max(0, Math.min(1, normalizedOffset)); // Clamp to 0-1
-      const centerOffset = clampedOffset - 0.5; // -0.5 to 0.5
+      // Full range: 0% to 100% of viewport for less sensitivity
+      const normalizedOffset = currentMouse.current; // Already 0-1
+      const centerOffset = normalizedOffset - 0.5; // -0.5 to 0.5
       
       imageRefs.current.forEach((el, index) => {
         if (el) {
@@ -84,9 +82,8 @@ export default function HeroSection() {
       currentMouse.current = targetMouse.current;
       
       // Update one final time
-      const normalizedOffset = (currentMouse.current - 0.5) / 0.1;
-      const clampedOffset = Math.max(0, Math.min(1, normalizedOffset));
-      const centerOffset = clampedOffset - 0.5;
+      const normalizedOffset = currentMouse.current;
+      const centerOffset = normalizedOffset - 0.5;
       
       imageRefs.current.forEach((el, index) => {
         if (el) {
