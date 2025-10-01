@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import amandaPhoto from '@assets/PHOTO-2025-08-28-14-02-49_1758973315512.jpg';
 
 export default function HeroSection() {
@@ -34,13 +33,13 @@ export default function HeroSection() {
           </p>
 
           {/* CTA Button */}
-          <Button
-            className="bg-[#FF4D00] text-white text-[18px] font-bold uppercase px-14 py-6 rounded-lg border-2 border-[#FF4D00]"
+          <button
+            className="bg-[#FF4D00] text-white text-[18px] font-bold uppercase px-14 py-6 rounded-lg cta-transition hover:bg-black hover:text-[#FF4D00] hover:border-2 hover:border-[#FF4D00] border-2 border-transparent"
             onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
             data-testid="button-see-work"
           >
             SEE MY WORK
-          </Button>
+          </button>
         </div>
       </div>
     </section>
