@@ -1,57 +1,79 @@
-import { Heart, Mail, MapPin } from 'lucide-react';
+import { Instagram, Facebook, Twitter } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Left Column - Brand */}
+    <footer className="bg-black border-t border-[#222222]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-10">
+        <div className="grid md:grid-cols-3 gap-8 items-start mb-12">
+          {/* Left - Logo/Name */}
           <div>
-            <h3 className="font-serif text-xl font-bold mb-4">Amanda Basu Roy</h3>
-            <p className="text-primary-foreground/80 mb-4 leading-relaxed">
-              Creating spaces for joyful learning, authentic expression, and meaningful mentorship 
-              beyond traditional educational systems.
-            </p>
-            <div className="flex items-center gap-2 text-primary-foreground/60">
-              <Heart className="w-4 h-4" />
-              <span className="text-sm">Made with love for learning</span>
-            </div>
+            <h3 className="text-2xl font-bold text-[#FF4D00]" data-testid="text-footer-logo">
+              Amanda Basu Roy
+            </h3>
           </div>
 
-          {/* Middle Column - Contact */}
-          <div>
-            <h4 className="font-semibold mb-4">Get in Touch</h4>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-primary-foreground/60" />
-                <span className="text-sm text-primary-foreground/80">hello@amandabasuroy.com</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <MapPin className="w-4 h-4 text-primary-foreground/60" />
-                <span className="text-sm text-primary-foreground/80">Studio visits by appointment</span>
-              </div>
-            </div>
+          {/* Center - Navigation Links */}
+          <div className="flex flex-col gap-3">
+            <a 
+              href="#home" 
+              className="text-white hover:text-[#FF4D00] transition-colors text-lg"
+              data-testid="link-footer-home"
+            >
+              Home
+            </a>
+            <a 
+              href="#about" 
+              className="text-white hover:text-[#FF4D00] transition-colors text-lg"
+              data-testid="link-footer-about"
+            >
+              About
+            </a>
+            <a 
+              href="#workshop" 
+              className="text-white hover:text-[#FF4D00] transition-colors text-lg"
+              data-testid="link-footer-workshop"
+            >
+              Workshop
+            </a>
+            <a 
+              href="#signup" 
+              className="text-white hover:text-[#FF4D00] transition-colors text-lg"
+              data-testid="link-footer-signup"
+            >
+              Join
+            </a>
           </div>
 
-          {/* Right Column - Mission */}
-          <div>
-            <h4 className="font-semibold mb-4">Our Mission</h4>
-            <p className="text-sm text-primary-foreground/80 leading-relaxed">
-              To create learning environments where children thrive through curiosity, 
-              creative expression, and authentic relationships with mentors who love what they do.
-            </p>
+          {/* Right - Social Icons */}
+          <div className="flex gap-6 md:justify-end">
+            <a 
+              href="#" 
+              className="text-white hover:text-[#FF4D00] transition-colors"
+              data-testid="link-instagram"
+            >
+              <Instagram className="w-6 h-6" />
+            </a>
+            <a 
+              href="#" 
+              className="text-white hover:text-[#FF4D00] transition-colors"
+              data-testid="link-facebook"
+            >
+              <Facebook className="w-6 h-6" />
+            </a>
+            <a 
+              href="#" 
+              className="text-white hover:text-[#FF4D00] transition-colors"
+              data-testid="link-twitter"
+            >
+              <Twitter className="w-6 h-6" />
+            </a>
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
-          <p className="text-sm text-primary-foreground/60">
-            © 2025 Amanda Basu Roy. All rights reserved. 
-            <span className="mx-2">•</span>
-            Privacy Policy
-            <span className="mx-2">•</span>
-            Terms of Service
-          </p>
-        </div>
+        {/* Final Line */}
+        <p className="text-center text-[20px] text-[#FF4D00] italic" data-testid="text-footer-tagline">
+          Let's build something meaningful together.
+        </p>
       </div>
     </footer>
   );
