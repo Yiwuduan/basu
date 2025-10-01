@@ -1,6 +1,6 @@
 export default function AboutSection() {
   return (
-    <section id="about" className="py-24 bg-black relative z-10" style={{ backgroundColor: '#000000' }}>
+    <section id="about" className="py-24 bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Headline */}
         <h2 className="text-[56px] font-bold text-white text-center mb-12" data-testid="text-about-headline">

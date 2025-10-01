@@ -23,7 +23,7 @@ export default function GallerySection() {
   };
 
   return (
-    <section className="py-24 bg-black relative z-10" style={{ backgroundColor: '#000000' }} data-testid="section-gallery">
+    <section className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Headline */}
         <h2 className="text-[56px] font-bold text-white text-center mb-12" data-testid="text-carousel-headline">

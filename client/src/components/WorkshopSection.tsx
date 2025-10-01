@@ -2,7 +2,7 @@ import workshopImage from '@assets/IMG_4089_1758970285467.jpeg';
 
 export default function WorkshopSection() {
   return (
-    <section id="workshop" className="py-10 bg-black relative z-10" style={{ backgroundColor: '#000000' }}>
+    <section id="workshop" className="py-10 bg-background">
       <div className="max-w-5xl mx-auto px-8">
         {/* Header with Title and Badge */}
         <div className="flex justify-between items-start mb-5">
