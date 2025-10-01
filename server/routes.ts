@@ -48,19 +48,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all signups (for Amanda to view)
-  app.get("/api/signups", async (req, res) => {
-    try {
-      const signups = await storage.getAllSignups();
-      res.json(signups);
-    } catch (error) {
-      console.error("Error fetching signups:", error);
-      res.status(500).json({ 
-        error: "Failed to fetch signups" 
-      });
-    }
-  });
-
   const httpServer = createServer(app);
 
   return httpServer;
