@@ -14,14 +14,12 @@ export default function HeroSection() {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      // Calculate normalized mouse position (0 to 1)
       const mouseY = e.clientY;
       const viewportHeight = window.innerHeight;
       const normalizedY = mouseY / viewportHeight;
       targetMouse.current = normalizedY;
     };
 
-    // Heavier momentum with slower lerp (0.04 = more weighted, slower response)
     const animate = () => {
       currentMouse.current += (targetMouse.current - currentMouse.current) * 0.04;
       setMouseProgress(currentMouse.current);
@@ -39,10 +37,9 @@ export default function HeroSection() {
     };
   }, []);
 
-  // Calculate parallax transforms - larger range, faster response
   const getParallaxStyle = (speed: number) => {
-    const centerOffset = mouseProgress - 0.5; // -0.5 to 0.5
-    const movement = -centerOffset * speed * 800; // 800px range for more dramatic movement
+    const centerOffset = mouseProgress - 0.5;
+    const movement = -centerOffset * speed * 800;
     return {
       transform: `translate3d(0, ${movement}px, 0)`,
       willChange: 'transform',
@@ -50,11 +47,11 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative h-screen flex flex-row overflow-hidden -z-10">
-      {/* Left 60% - Parallax images with strict clipping */}
-      <div className="w-[60%] h-full overflow-hidden bg-black" style={{ clipPath: 'inset(0)' }}>
+    <section id="home" className="relative h-screen flex flex-row overflow-hidden" style={{ zIndex: -10 }}>
+      {/* Left 60% - Parallax images */}
+      <div className="w-[60%] h-full relative overflow-hidden" style={{ backgroundColor: '#000000', clipPath: 'inset(0)' }}>
         {/* Inner wrapper for parallax content */}
-        <div className="relative w-full h-full overflow-hidden">
+        <div className="relative w-full h-full">
           {/* Image 1 */}
           <div 
             className="absolute top-0 left-0 w-full h-[70vh]"
@@ -129,12 +126,12 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Subtle gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30 pointer-events-none" />
+        {/* Dark gradient overlay for depth */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40 pointer-events-none" style={{ zIndex: 1 }} />
       </div>
 
       {/* Right 40% - Text block */}
-      <div className="w-[40%] h-full flex items-center justify-center px-12 bg-black">
+      <div className="w-[40%] h-full flex items-center justify-center px-12" style={{ backgroundColor: '#000000' }}>
         <div className="max-w-[520px] w-full">
           {/* Small tag line */}
           <p className="text-[18px] uppercase text-[#FF4D00] tracking-[2px] mb-8" data-testid="text-tagline">
