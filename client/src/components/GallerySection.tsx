@@ -23,7 +23,7 @@ export default function GallerySection() {
   };
 
   return (
-    <section className="py-[160px] bg-background">
+    <section className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Headline */}
         <h2 className="text-[56px] font-bold text-white text-center mb-12" data-testid="text-carousel-headline">
@@ -52,7 +52,7 @@ export default function GallerySection() {
                     <img 
                       src={img}
                       alt={`Mentorship moment ${index + 1}`}
-                      className="w-full h-full object-cover grayscale"
+                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
                     />
                     {/* Orange stripe overlay */}
                     <div 
