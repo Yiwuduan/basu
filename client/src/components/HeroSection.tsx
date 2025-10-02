@@ -11,7 +11,13 @@ export default function HeroSection() {
   const targetMouse = useRef(0.5);
   const currentMouse = useRef(0.5);
   const rafId = useRef<number>();
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 1024 : false);
+  const isMobileRef = useRef(isMobile);
+
+  useEffect(() => {
+    // Update the ref whenever isMobile changes
+    isMobileRef.current = isMobile;
+  }, [isMobile]);
 
   useEffect(() => {
     // Detect if mobile device
@@ -23,7 +29,7 @@ export default function HeroSection() {
     window.addEventListener('resize', checkMobile);
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (isMobile) return; // Don't use mouse on mobile
+      if (isMobileRef.current) return; // Don't use mouse on mobile
       // Calculate normalized mouse position (0 to 1)
       const mouseY = e.clientY;
       const viewportHeight = window.innerHeight;
@@ -32,7 +38,7 @@ export default function HeroSection() {
     };
 
     const handleDeviceOrientation = (e: DeviceOrientationEvent) => {
-      if (!isMobile) return; // Only use device orientation on mobile
+      if (!isMobileRef.current) return; // Only use device orientation on mobile
       
       // Beta is the front-to-back tilt in degrees (-180 to 180)
       // Gamma is the left-to-right tilt in degrees (-90 to 90)
@@ -89,7 +95,7 @@ export default function HeroSection() {
         cancelAnimationFrame(rafId.current);
       }
     };
-  }, [isMobile]);
+  }, []);
 
   // Calculate parallax transforms - 2x sensitivity with 1600px range
   const getParallaxStyle = (speed: number) => {
@@ -112,7 +118,7 @@ export default function HeroSection() {
         <div className="relative">
           {/* Image 1 - Bottom layer, slowest */}
           <div 
-            className="relative w-full h-[70vh] mb-8 lg:mb-8 flow-up-slow"
+            className={`relative w-full h-[70vh] mb-8 lg:mb-8 ${isMobile ? 'flow-up-slow' : ''}`}
             style={isMobile ? undefined : getParallaxStyle(1.2)}
           >
             <img 
@@ -124,7 +130,7 @@ export default function HeroSection() {
 
           {/* Image 2 */}
           <div 
-            className="relative w-full h-[70vh] mb-8 lg:mb-8 flow-up-medium"
+            className={`relative w-full h-[70vh] mb-8 lg:mb-8 ${isMobile ? 'flow-up-medium' : ''}`}
             style={isMobile ? undefined : getParallaxStyle(1.8)}
           >
             <img 
@@ -136,7 +142,7 @@ export default function HeroSection() {
 
           {/* Image 3 - Main featured */}
           <div 
-            className="relative w-full h-[80vh] mb-8 lg:mb-8 flow-up-fast"
+            className={`relative w-full h-[80vh] mb-8 lg:mb-8 ${isMobile ? 'flow-up-fast' : ''}`}
             style={isMobile ? undefined : getParallaxStyle(2.5)}
             data-testid="img-founder"
           >
@@ -149,7 +155,7 @@ export default function HeroSection() {
 
           {/* Image 4 */}
           <div 
-            className="relative w-full h-[70vh] mb-8 lg:mb-8 flow-up-faster"
+            className={`relative w-full h-[70vh] mb-8 lg:mb-8 ${isMobile ? 'flow-up-faster' : ''}`}
             style={isMobile ? undefined : getParallaxStyle(3.2)}
           >
             <img 
@@ -161,7 +167,7 @@ export default function HeroSection() {
 
           {/* Image 5 */}
           <div 
-            className="relative w-full h-[70vh] mb-8 lg:mb-8 flow-up-fastest"
+            className={`relative w-full h-[70vh] mb-8 lg:mb-8 ${isMobile ? 'flow-up-fastest' : ''}`}
             style={isMobile ? undefined : getParallaxStyle(3.8)}
           >
             <img 
@@ -173,7 +179,7 @@ export default function HeroSection() {
 
           {/* Image 6 - Top layer, fastest */}
           <div 
-            className="relative w-full h-[70vh] flow-up-ultra"
+            className={`relative w-full h-[70vh] ${isMobile ? 'flow-up-ultra' : ''}`}
             style={isMobile ? undefined : getParallaxStyle(4.5)}
           >
             <img 

@@ -40,7 +40,7 @@ export default function GallerySection() {
               {carouselImages.map((img, index) => (
                 <div 
                   key={index}
-                  className="flex-shrink-0 w-[240px] h-[300px] relative group transition-all duration-300 -rotate-3 hover:rotate-0"
+                  className="flex-shrink-0 w-[240px] h-[300px] relative group transition-all duration-300 lg:-rotate-3 lg:hover:rotate-0"
                   data-testid={`carousel-card-${index}`}
                 >
                   <div 
@@ -65,20 +65,20 @@ export default function GallerySection() {
             </div>
           </div>
 
-          {/* Navigation arrows */}
+          {/* Navigation arrows - Inside container on mobile, outside on desktop */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 w-12 h-12 rounded-full bg-[#FF4D00] text-white flex items-center justify-center hover:bg-[#ff6b35] transition-colors"
+            className="absolute left-2 lg:left-0 top-1/2 -translate-y-1/2 lg:-translate-x-16 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-[#FF4D00] text-white flex items-center justify-center hover:bg-[#ff6b35] transition-colors z-10"
             data-testid="button-carousel-prev"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 lg:w-6 lg:h-6" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 w-12 h-12 rounded-full bg-[#FF4D00] text-white flex items-center justify-center hover:bg-[#ff6b35] transition-colors"
+            className="absolute right-2 lg:right-0 top-1/2 -translate-y-1/2 lg:translate-x-16 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-[#FF4D00] text-white flex items-center justify-center hover:bg-[#ff6b35] transition-colors z-10"
             data-testid="button-carousel-next"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5 lg:w-6 lg:h-6" />
           </button>
         </div>
 
