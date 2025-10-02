@@ -22,7 +22,9 @@ export default function HeroSection() {
   useEffect(() => {
     // Detect if mobile device
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
+      const newIsMobile = window.innerWidth < 1024;
+      console.log('[HeroSection] checkMobile:', { width: window.innerWidth, isMobile: newIsMobile });
+      setIsMobile(newIsMobile);
     };
     
     checkMobile();
@@ -120,6 +122,8 @@ export default function HeroSection() {
           <div 
             className={`relative w-full h-[70vh] mb-8 lg:mb-8 ${isMobile ? 'flow-up-slow' : ''}`}
             style={isMobile ? undefined : getParallaxStyle(1.2)}
+            data-mobile={isMobile}
+            data-has-parallax={!isMobile}
           >
             <img 
               src={parallaxImg1}
