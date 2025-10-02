@@ -110,10 +110,10 @@ export default function HeroSection() {
       <div className="w-full lg:w-[60%] relative flex-shrink-0 overflow-hidden bg-black h-[50vh] lg:h-screen order-1 lg:order-1">
         {/* Container for stacked images with parallax */}
         <div className="relative">
-          {/* Image 1 */}
+          {/* Image 1 - Bottom layer, slowest */}
           <div 
-            className="relative w-full h-[70vh] mb-8"
-            style={getParallaxStyle(1.2)}
+            className="relative w-full h-[70vh] mb-8 lg:mb-8 flow-up-slow"
+            style={isMobile ? undefined : getParallaxStyle(1.2)}
           >
             <img 
               src={parallaxImg1}
@@ -124,8 +124,8 @@ export default function HeroSection() {
 
           {/* Image 2 */}
           <div 
-            className="relative w-full h-[70vh] mb-8"
-            style={getParallaxStyle(1.8)}
+            className="relative w-full h-[70vh] mb-8 lg:mb-8 flow-up-medium"
+            style={isMobile ? undefined : getParallaxStyle(1.8)}
           >
             <img 
               src={parallaxImg2}
@@ -136,8 +136,8 @@ export default function HeroSection() {
 
           {/* Image 3 - Main featured */}
           <div 
-            className="relative w-full h-[80vh] mb-8"
-            style={getParallaxStyle(2.5)}
+            className="relative w-full h-[80vh] mb-8 lg:mb-8 flow-up-fast"
+            style={isMobile ? undefined : getParallaxStyle(2.5)}
             data-testid="img-founder"
           >
             <img 
@@ -149,8 +149,8 @@ export default function HeroSection() {
 
           {/* Image 4 */}
           <div 
-            className="relative w-full h-[70vh] mb-8"
-            style={getParallaxStyle(3.2)}
+            className="relative w-full h-[70vh] mb-8 lg:mb-8 flow-up-faster"
+            style={isMobile ? undefined : getParallaxStyle(3.2)}
           >
             <img 
               src={parallaxImg3}
@@ -161,8 +161,8 @@ export default function HeroSection() {
 
           {/* Image 5 */}
           <div 
-            className="relative w-full h-[70vh] mb-8"
-            style={getParallaxStyle(3.8)}
+            className="relative w-full h-[70vh] mb-8 lg:mb-8 flow-up-fastest"
+            style={isMobile ? undefined : getParallaxStyle(3.8)}
           >
             <img 
               src={parallaxImg4}
@@ -171,10 +171,10 @@ export default function HeroSection() {
             />
           </div>
 
-          {/* Image 6 */}
+          {/* Image 6 - Top layer, fastest */}
           <div 
-            className="relative w-full h-[70vh]"
-            style={getParallaxStyle(4.5)}
+            className="relative w-full h-[70vh] flow-up-ultra"
+            style={isMobile ? undefined : getParallaxStyle(4.5)}
           >
             <img 
               src={parallaxImg5}

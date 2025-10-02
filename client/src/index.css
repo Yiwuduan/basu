@@ -212,10 +212,15 @@
     @apply border-border;
   }
 
+  html {
+    overflow-x: hidden;
+  }
+
   body {
     @apply font-sans antialiased bg-background text-foreground;
     font-size: 20px;
     line-height: 1.65;
+    overflow-x: hidden;
   }
   
   p {
@@ -390,5 +395,41 @@
     outline: none;
     border-color: hsl(var(--accent));
     box-shadow: 0 0 0 2px hsla(var(--accent) / 0.2);
+  }
+
+  /* Hero upward flowing animation for mobile only */
+  @keyframes flowUpward {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(0, -50%, 0);
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .flow-up-slow {
+      animation: flowUpward 40s linear infinite;
+    }
+
+    .flow-up-medium {
+      animation: flowUpward 30s linear infinite;
+    }
+
+    .flow-up-fast {
+      animation: flowUpward 20s linear infinite;
+    }
+
+    .flow-up-faster {
+      animation: flowUpward 15s linear infinite;
+    }
+
+    .flow-up-fastest {
+      animation: flowUpward 12s linear infinite;
+    }
+
+    .flow-up-ultra {
+      animation: flowUpward 10s linear infinite;
+    }
   }
 }
