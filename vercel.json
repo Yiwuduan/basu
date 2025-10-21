@@ -2,21 +2,21 @@
   "version": 2,
   "builds": [
     {
-      "src": "serverless.js",
+      "src": "dist/index.js",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["dist/**", "api/**"]
+        "includeFiles": ["dist/**"]
       }
     }
   ],
   "routes": [
     {
       "src": "/api/signup",
-      "dest": "/api/signup.js"
+      "dest": "/dist/index.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/serverless.js"
+      "dest": "/dist/index.js"
     }
   ]
 }
