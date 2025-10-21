@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import GallerySection from '@/components/GallerySection';
@@ -33,13 +34,15 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <main>
+      <Navigation />
+      <main className="pt-16">
+        {/* Section order as specified in the master prompt */}
         <HeroSection />
         <div className="fade-in-up">
-          <GallerySection />
+          <AboutSection />
         </div>
         <div className="fade-in-up">
-          <AboutSection />
+          <GallerySection />
         </div>
         <div className="fade-in-up">
           <WorkshopSection />

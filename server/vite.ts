@@ -68,18 +68,45 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(import.meta.dirname, "public");
-
+  // In Vercel serverless environment, resolve the path to dist/public
+  // Check different possible locations where files might be in Vercel
+  let distPath = path.resolve(process.cwd(), 'dist', 'public');
+  
+  // If that doesn't exist, try alternative locations
   if (!fs.existsSync(distPath)) {
-    throw new Error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`,
-    );
+    distPath = path.resolve(__dirname, '..', 'dist', 'public');
+  }
+  
+  // If that doesn't exist either, try relative to current file
+  if (!fs.existsSync(distPath)) {
+    distPath = path.resolve(__dirname, '..', '..', 'dist', 'public');
+  }
+  
+  // If none of the paths exist, throw an error
+  if (!fs.existsSync(distPath)) {
+    console.error('Could not find dist/public directory in any expected location');
+    console.error('Tried:', [
+      path.resolve(process.cwd(), 'dist', 'public'),
+      path.resolve(__dirname, '..', 'dist', 'public'),
+      path.resolve(__dirname, '..', '..', 'dist', 'public')
+    ]);
+    // Instead of throwing an error that would crash the function, we'll set up a fallback
+    app.use("*", (_req, res) => {
+      res.status(404).send("Build directory not found");
+    });
+    return;
   }
 
   app.use(express.static(distPath));
 
-  // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
+  // fall through to index.html for client-side routing
+  app.get(/.*/, (req, res) => {
+    // Don't interfere with API routes (though they should be handled first)
+    if (req.path.startsWith('/api/')) {
+      res.status(404).json({ error: 'API endpoint not found' });
+      return;
+    }
+    
     res.sendFile(path.resolve(distPath, "index.html"));
   });
 }

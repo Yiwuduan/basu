@@ -5,7 +5,7 @@ import { Menu, X } from 'lucide-react';
 const navItems = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
-  { id: 'philosophy', label: 'Philosophy' },
+  { id: 'work', label: 'My Work' },
   { id: 'workshop', label: 'Workshop' },
   { id: 'signup', label: 'Sign Up' },
 ];
@@ -47,10 +47,11 @@ export default function Navigation() {
           <div className="flex-shrink-0">
             <button
               onClick={() => scrollToSection('home')}
-              className="font-serif text-xl font-bold text-primary hover-elevate"
+              className="text-xl font-bold text-primary hover-elevate lowercase"
+              style={{ fontFamily: 'var(--font-logo)' }}
               data-testid="button-home"
             >
-              Amanda Basu Roy
+              basu
             </button>
           </div>
 

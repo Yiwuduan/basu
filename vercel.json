@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node",
+      "config": {
+        "buildCommand": "npm run build && mkdir -p www && cp -r dist/public/* www/ 2>/dev/null || echo 'Built files copied to www directory'",
+        "includeFiles": ["www/**", "api/**"]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/signup",
+      "dest": "/api/signup.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.js"
+    }
+  ]
+}

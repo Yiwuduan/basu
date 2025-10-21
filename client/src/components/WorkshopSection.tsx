@@ -1,161 +1,151 @@
-import workshopImage from '@assets/IMG_4089_1758970285467.jpeg';
+import { useState, useEffect } from 'react';
+import img1 from '@assets/IMG_0848_1758970285463.jpeg';
+import img2 from '@assets/IMG_0853_1758970285464.jpeg';
+import img3 from '@assets/IMG_2125_1758970285465.jpeg';
+import img4 from '@assets/IMG_4081_1758970285467.jpeg';
 
 export default function WorkshopSection() {
+  const [hoveredTile, setHoveredTile] = useState<number | null>(null);
+
+  // Tile data for the CSS poster flyer
+  const tiles = [
+    {
+      id: 1,
+      title: "Studio Flow",
+      content: "with music journey",
+      subtitle: "Awaken the Senses: embodiment practice",
+      description: "Theme: story Technical Skills Crafting Food and Content Creation"
+    },
+    {
+      id: 2,
+      title: "Themes",
+      content: "Dive into authentic self-expression.",
+      subtitle: "Activate your imagination in creative flow.",
+      description: "Elevate your craft practice through intuition, discipline and body awareness. Harness your power: seasons and cycles of the creative feminine. Build community through craft: mentorship, events."
+    },
+    {
+      id: 3,
+      title: "Technical Skills",
+      content: "Advance your skills in clothing creation with:",
+      subtitle: "Pattern drafting Garment construction Sewing by hand and machine",
+      description: "Fabric technology Working on the floor"
+    }
+  ];
+
   return (
-    <section id="workshop" className="py-8 lg:py-10 bg-background">
-      <div className="max-w-5xl mx-auto px-4 lg:px-8">
-        {/* Header with Title and Badge */}
-        <div className="flex justify-between items-start mb-5">
-          <div>
-            <h2 className="text-[48px] font-bold text-white leading-none mb-2" data-testid="text-workshop-title">
-              Workshop
-            </h2>
-            <p className="text-[15px] text-[#CCCCCC]">
-              A 6-week embodied craft studio for girls ages 10–15
-            </p>
-          </div>
-          <div className="bg-[#FF4D00] rounded-full w-20 h-20 flex flex-col items-center justify-center flex-shrink-0" data-testid="badge-price">
-            <div className="text-[9px] text-white uppercase font-semibold tracking-wide">Register</div>
-            <div className="text-[22px] text-white font-bold leading-none">$480</div>
-          </div>
+    <section id="workshop" className="py-16 lg:py-24 bg-background">
+      {/* Simplified event poster design with high contrast and typography focus */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Decorative stickers */}
+        <div className="absolute top-8 left-8 w-16 h-16 bg-[#AD2E2C] rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+          !
         </div>
-
-        {/* Hero Image with Date Overlay */}
-        <div className="relative rounded-lg overflow-hidden mb-7 h-[160px]">
-          <img 
-            src={workshopImage}
-            alt="Workshop scene"
-            className="w-full h-full object-cover grayscale"
-            data-testid="img-workshop-hero"
-          />
-          <div className="absolute inset-0 bg-black/40" />
-          
-          {/* Date Range Overlay */}
-          <div className="absolute bottom-3 left-5">
-            <div className="text-[36px] font-bold text-white tracking-wider leading-none" data-testid="text-date-range">
-              08.11 — 13.12.2024
-            </div>
-          </div>
+        <div className="absolute top-24 right-12 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg">
+          NEW
         </div>
-
-        {/* Event Details Grid */}
-        <div className="space-y-0">
-          {/* Event 1: Opening & Studio Flow */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-4 border-t border-[#333333]" data-testid="event-row-1">
-            <div className="md:col-span-2">
-              <div className="text-[11px] text-[#999999] uppercase tracking-wider font-semibold">Studio A</div>
-            </div>
-            <div className="md:col-span-4">
-              <h3 className="text-[17px] font-bold text-white mb-1">Style Beyond the Material</h3>
-              <div className="text-[14px] text-[#FF4D00] font-semibold mb-0.5">Friday Evenings</div>
-              <div className="text-[12px] text-[#999999]">4:00 PM — 9:00 PM</div>
-            </div>
-            <div className="md:col-span-6">
-              <p className="text-[13px] text-[#CCCCCC] leading-relaxed mb-1.5">
-                Embodied Craft Studio for Girls (10–15). Upcycle your wardrobe, harness creative flow and awaken your signature style through studio flow, embodiment practice, and storytelling.
-              </p>
-              <p className="text-[12px] text-[#999999] leading-relaxed">
-                Weekly gatherings · Creative expression · Movement & mindfulness
-              </p>
-            </div>
-          </div>
-
-          {/* Event 2: Technical Skills */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-4 border-t border-[#333333]" data-testid="event-row-2">
-            <div className="md:col-span-2">
-              <div className="text-[11px] text-[#999999] uppercase tracking-wider font-semibold">Studio A</div>
-            </div>
-            <div className="md:col-span-4">
-              <h3 className="text-[17px] font-bold text-white mb-1">Technical Skills</h3>
-              <div className="text-[14px] text-[#FF4D00] font-semibold mb-0.5">Weeks 2–5</div>
-              <div className="text-[12px] text-[#999999]">Various sessions</div>
-            </div>
-            <div className="md:col-span-6">
-              <p className="text-[13px] text-[#CCCCCC] leading-relaxed mb-1.5">
-                Advance your skills through pattern drafting, garment construction, sewing by hand and machine, and fabric technology with hands-on practice and expert mentorship.
-              </p>
-              <p className="text-[12px] text-[#999999] leading-relaxed">
-                Build foundational skills · Create wearable pieces · Learn sustainable practices
-              </p>
-            </div>
-          </div>
-
-          {/* Event 3: Themes & Practices */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-4 border-t border-[#333333]" data-testid="event-row-3">
-            <div className="md:col-span-2">
-              <div className="text-[11px] text-[#999999] uppercase tracking-wider font-semibold">Studio A</div>
-            </div>
-            <div className="md:col-span-4">
-              <h3 className="text-[17px] font-bold text-white mb-1">Creative Practices</h3>
-              <div className="text-[14px] text-[#FF4D00] font-semibold mb-0.5">Throughout</div>
-              <div className="text-[12px] text-[#999999]">All sessions</div>
-            </div>
-            <div className="md:col-span-6">
-              <p className="text-[13px] text-[#CCCCCC] leading-relaxed mb-1.5">
-                Explore embodiment, intuition, and community through crafting, content creation, creative flow states, body awareness, and the seasons and cycles of the creative feminine.
-              </p>
-              <p className="text-[12px] text-[#999999] leading-relaxed">
-                Photography & storytelling · Seasonal themes · Community connection
-              </p>
-            </div>
-          </div>
-
-          {/* Event 4: Final Showcase */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 py-4 border-t border-[#333333]" data-testid="event-row-4">
-            <div className="md:col-span-2">
-              <div className="text-[11px] text-[#999999] uppercase tracking-wider font-semibold">Studio A</div>
-            </div>
-            <div className="md:col-span-4">
-              <h3 className="text-[17px] font-bold text-white mb-1">Community Showcase</h3>
-              <div className="text-[14px] text-[#FF4D00] font-semibold mb-0.5">13.12.2024</div>
-              <div className="text-[12px] text-[#999999]">4:00 PM — 9:00 PM</div>
-            </div>
-            <div className="md:col-span-6">
-              <p className="text-[13px] text-[#CCCCCC] leading-relaxed mb-1.5">
-                Celebrate growth and share creations. Build community through craft, mentorship, and collaborative events with families and fellow participants.
-              </p>
-              <p className="text-[12px] text-[#999999] leading-relaxed">
-                Share completed work · Celebrate learning journey · Connect with community
-              </p>
-            </div>
-          </div>
+        <div className="absolute bottom-24 left-16 w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg">
+          ✨
         </div>
-
-        {/* Registration CTA */}
-        <div className="mt-6 pt-5 border-t border-[#333333]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* Program Details */}
-            <div>
-              <p className="text-[14px] text-white font-semibold mb-2">What's Included</p>
-              <div className="space-y-1.5">
-                <p className="text-[13px] text-[#CCCCCC]">
-                  • 6 Friday evening sessions (4–9 PM)
-                </p>
-                <p className="text-[13px] text-[#CCCCCC]">
-                  • All materials and studio equipment provided
-                </p>
-                <p className="text-[13px] text-[#CCCCCC]">
-                  • Studio visit to ensure right fit before commitment
-                </p>
-                <p className="text-[13px] text-[#CCCCCC]">
-                  • Limited to 8 students for personalized attention
-                </p>
+        
+        <div className="bg-gradient-to-br from-sky-300 to-purple-500 rounded-2xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-white/30 shadow-xl">
+            {/* Main header with high contrast typography */}
+            <div className="text-center mb-8 md:mb-12 relative z-10">
+              <div className="inline-block px-6 py-2 bg-[#AD2E2C] text-white font-bold text-sm uppercase tracking-wider mb-4">
+                Special Workshop
+              </div>
+              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-6 tracking-tight">
+                STYLE BEYOND THE MATERIAL
+              </h2>
+              <div className="bg-gray-900 text-white text-lg md:text-xl font-bold py-3 px-6 rounded-lg inline-block my-2">
+                Embodied Craft Studio for Girls (12-16)
+              </div>
+              <div className="mt-4">
+                <div className="bg-gray-800 text-white text-lg md:text-xl font-bold py-3 px-6 rounded-lg inline-block">
+                  Friday Evenings (4-9pm)
+                </div>
               </div>
             </div>
-            
-            {/* CTA */}
-            <div className="flex flex-col justify-center items-start md:items-end gap-3">
-              <p className="text-[13px] text-[#999999]">
-                Registration closes November 1st
-              </p>
-              <button
-                onClick={() => document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-[#FF4D00] text-white text-[14px] font-bold uppercase px-8 py-3 rounded-lg border-2 border-[#FF4D00] cta-transition hover:bg-black hover:text-[#FF4D00] whitespace-nowrap"
-                data-testid="button-register"
-              >
-                REGISTER NOW
-              </button>
+
+            {/* Main workshop description */}
+            <div className="text-center mb-12 max-w-3xl mx-auto relative z-10">
+              <p className="text-xl md:text-2xl font-bold text-foreground mb-3">Upcycle your wardrobe,</p>
+              <p className="text-xl md:text-2xl font-bold text-foreground mb-3">harness creative flow and</p>
+              <p className="text-2xl md:text-3xl font-black text-foreground">awaken your signature style.</p>
             </div>
+
+            {/* CSS poster tiles grid - simplified with high contrast */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 relative z-10">
+              {tiles.map((tile) => (
+                <div
+                  key={tile.id}
+                  className={`border border-white/20 rounded-xl p-6 cursor-pointer transition-all duration-300 relative overflow-hidden ${
+                    hoveredTile === tile.id 
+                      ? 'bg-gradient-to-b from-amber-900/70 via-red-900/60 to-stone-700/50 scale-105 shadow-xl backdrop-blur-sm' 
+                      : 'bg-gradient-to-b from-amber-800/60 via-red-800/50 to-stone-600/40 backdrop-blur-sm'
+                  }`}
+                  onMouseEnter={() => setHoveredTile(tile.id)}
+                  onMouseLeave={() => setHoveredTile(null)}
+                >
+                  {/* Film grain texture overlay for base state */}
+                  <div className={`absolute inset-0 rounded-xl pointer-events-none ${
+                    hoveredTile === tile.id 
+                      ? 'opacity-20' 
+                      : hoveredTile 
+                        ? 'opacity-0' 
+                        : 'opacity-20'
+                  }`} 
+                       style={{ 
+                         background: `repeating-linear-gradient(
+                           0deg,
+                           rgba(0,0,0,0.15),
+                           rgba(0,0,0,0.15) 1px,
+                           transparent 1px,
+                           transparent 2px
+                         )`
+                       }}></div>
+                  <div className="text-center relative z-10">
+                    <h3 className={`text-xl md:text-2xl font-black mb-3 ${
+                      hoveredTile === tile.id ? 'text-white' : 'text-white'
+                    }`}>{tile.title}</h3>
+                    <p className="text-base md:text-lg text-white/90 mb-2 font-semibold">{tile.content}</p>
+                    <p className="text-sm md:text-base text-white/80 mb-3 font-medium italic">{tile.subtitle}</p>
+                    <p className="text-sm md:text-base text-white/95">{tile.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Workshop images gallery */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 relative z-10">
+              {[img1, img2, img3, img4].map((img, index) => (
+                <div 
+                  key={index} 
+                  className="aspect-square rounded-lg overflow-hidden border-2 border-border"
+                >
+                  <img 
+                    src={img} 
+                    alt={`Workshop activity ${index + 1}`} 
+                    className="w-full h-full object-cover transition-all duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Join our circle CTA - converted to clickable button with glass shine */}
+            <button 
+              className="w-full text-center bg-gray-900 text-foreground rounded-xl p-8 relative z-10 overflow-hidden group"
+              onClick={() => document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <div className="relative z-10">
+                <h3 className="text-2xl md:text-3xl font-black mb-4 text-white">Join our Circle</h3>
+                <p className="text-base md:text-lg mb-4 font-medium text-white">Tell us about you</p>
+                <p className="text-lg font-black bg-white text-gray-900 py-3 px-6 rounded-lg inline-block">
+                  $50/month membership: part of the basu community: workshops, work opportunities
+                </p>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out z-0"></div>
+            </button>
           </div>
         </div>
       </div>

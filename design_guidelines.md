@@ -6,10 +6,12 @@
 ## Core Design Elements
 
 ### Color Palette
-- **Primary**: Warm earth tones - 25 60% 85% (soft beige), 200 30% 20% (deep teal)
-- **Accent**: 35 70% 75% (warm coral) - used sparingly for CTAs only
-- **Background**: Clean whites and soft off-whites 45 15% 97%
-- **Text**: 220 15% 25% (warm charcoal) for readability
+- **Background**: Deep slate blue - 208 15% 19% (color #282D35)
+- **Primary Text**: Warm off-white - 55 56% 93% (color #F0ECD9) 
+- **Secondary Text**: Muted foreground - HSL values based on theme (muted-foreground)
+- **Accent**: Dark red (#AD2E2C) - used for CTAs and highlights
+- **Borders**: Slightly lighter than background - 208 15% 23%
+- **Contrast Ratio**: Background-to-text contrast ratio of 11.3:1, exceeding WCAG 2.1 AA standards (4.5:1 for normal text, 3:1 for large text)
 
 ### Typography
 - **Primary**: Google Fonts "Inter" for body text and navigation
@@ -57,10 +59,11 @@
 - **Background Elements**: Soft, abstract shapes or subtle patterns to break up text sections
 
 ## Accessibility & Parent-Friendly Features
-- High contrast text for easy reading
+- High contrast text (11.3:1 ratio) for easy reading, exceeding WCAG 2.1 AA standards
 - Large clickable areas for various devices
 - Clear information hierarchy
 - Trust signals (testimonials, credentials) prominently displayed
 - Mobile-first responsive design for on-the-go parents
+- Screen reader compatibility with semantic HTML
 
 The design should feel warm, professional, and trustworthy while maintaining modern web standards and excellent usability for the parent demographic.

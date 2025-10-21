@@ -15,7 +15,7 @@ Preferred communication style: Simple, everyday language.
 ### Frontend Architecture
 - **Framework**: React 18 with TypeScript for type safety and modern development
 - **Routing**: Wouter for lightweight client-side routing
-- **Styling**: Tailwind CSS with a custom design system featuring pure black background (#000000), white text (#FFFFFF), and vivid orange accent (#FF4D00)
+- **Styling**: Tailwind CSS with a custom design system featuring deep slate blue background (#282D35), warm off-white text (#F0ECD9), and dark red accent (#AD2E2C)
 - **UI Components**: Radix UI primitives with shadcn/ui component library for accessibility and consistency
 - **Typography**: Google Fonts integration (Inter for body text, Playfair Display for headers)
 - **State Management**: TanStack Query for server state management
@@ -38,7 +38,7 @@ Preferred communication style: Simple, everyday language.
 ### Design System
 - **Component Strategy**: Modular section-based components (HeroSection, AboutSection, GallerySection, WorkshopSection, SignupSection, Footer)
 - **Layout System**: Mixed-column design with specific layouts per section (Hero: 60/40 split, About: 3 tiles, Workshop: detailed event layout with hero image and schedule grid)
-- **Color Palette**: Pure black (#000000) background, white (#FFFFFF) text, vivid orange (#FF4D00) accents with HSL color system
+- **Color Palette**: Deep slate blue (#282D35) background, warm off-white (#F0ECD9) text, dark red (#AD2E2C) accents with HSL color system
 - **Image Treatment**: Grayscale images with orange overlay accents for visual consistency
 - **Typography**: Poppins font family with bold geometric styling - H1: 88px, H2: 56px, H3: 32px, Body: 20px with 1.65 line-height
 - **Spacing Standards**: Gallery/About sections at py-24, Workshop at py-10, element gaps, grid gutters, 16px image corner radius

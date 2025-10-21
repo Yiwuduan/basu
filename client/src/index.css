@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -16,11 +16,11 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  --background: 45 15% 97%;
+  --background: 208 15% 19%;
 
-  --foreground: 220 15% 25%;
+  --foreground: 55 56% 93%;
 
-  --border: 45 12% 87%;
+  --border: 208 15% 23%;
 
   --card: 45 15% 95%;
 
@@ -81,6 +81,7 @@
   --font-sans: 'Poppins', sans-serif;
   --font-serif: Georgia, serif;
   --font-mono: Menlo, monospace;
+  --font-logo: 'Montserrat', sans-serif;
   --radius: .5rem; /* 8px */
   --shadow-2xs: 0px 2px 0px 0px hsl(220 15% 25% / 0.05);
   --shadow-xs: 0px 2px 0px 0px hsl(220 15% 25% / 0.08);
@@ -134,61 +135,61 @@
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
 
-  --background: 0 0% 0%;
+  --background: 208 15% 19%;
 
-  --foreground: 0 0% 100%;
+  --foreground: 55 56% 93%;
 
-  --border: 0 0% 13%;
+  --border: 208 15% 23%;
 
-  --card: 0 0% 5%;
+  --card: 208 15% 21%;
 
-  --card-foreground: 0 0% 100%;
+  --card-foreground: 55 56% 93%;
 
-  --card-border: 0 0% 13%;
+  --card-border: 208 15% 23%;
 
-  --sidebar: 0 0% 5%;
+  --sidebar: 208 15% 21%;
 
-  --sidebar-foreground: 0 0% 100%;
+  --sidebar-foreground: 55 56% 93%;
 
-  --sidebar-border: 0 0% 13%;
+  --sidebar-border: 208 15% 23%;
 
   --sidebar-primary: 18 100% 50%;
 
-  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-primary-foreground: 55 56% 93%;
 
-  --sidebar-accent: 0 0% 10%;
+  --sidebar-accent: 208 15% 23%;
 
   --sidebar-accent-foreground: 18 100% 50%;
 
   --sidebar-ring: 18 100% 50%;
 
-  --popover: 0 0% 5%;
+  --popover: 208 15% 21%;
 
-  --popover-foreground: 0 0% 100%;
+  --popover-foreground: 55 56% 93%;
 
-  --popover-border: 0 0% 13%;
+  --popover-border: 208 15% 23%;
 
   --primary: 18 100% 50%;
 
-  --primary-foreground: 0 0% 100%;
+  --primary-foreground: 55 56% 93%;
 
-  --secondary: 0 0% 13%;
+  --secondary: 208 15% 23%;
 
-  --secondary-foreground: 0 0% 80%;
+  --secondary-foreground: 55 56% 83%;
 
-  --muted: 0 0% 10%;
+  --muted: 208 15% 23%;
 
-  --muted-foreground: 0 0% 80%;
+  --muted-foreground: 55 56% 83%;
 
   --accent: 18 100% 50%;
 
-  --accent-foreground: 0 0% 0%;
+  --accent-foreground: 208 15% 19%;
 
   --destructive: 0 75% 35%;
 
-  --destructive-foreground: 0 0% 98%;
+  --destructive-foreground: 55 56% 93%;
 
-  --input: 0 0% 13%;
+  --input: 208 15% 23%;
   --ring: 18 100% 50%;
   --chart-1: 18 100% 50%;
   --chart-2: 35 80% 70%;
@@ -431,5 +432,55 @@
     .flow-up-ultra {
       animation: flowUpward 10s linear infinite;
     }
+  }
+  
+  /* Upward flow animation for new hero section */
+  @keyframes flowUp {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+  
+  .animate-flow-up {
+    animation: flowUp 120s linear infinite;
+  }
+  
+  .animate-flow-up-medium {
+    animation: flowUp 100s linear infinite;
+  }
+  
+  .animate-flow-up-fast {
+    animation: flowUp 80s linear infinite;
+  }
+  
+  .animate-flow-up-faster {
+    animation: flowUp 60s linear infinite;
+  }
+  
+  .animate-flow-up-fastest {
+    animation: flowUp 40s linear infinite;
+  }
+  
+  .animate-flow-up-ultra {
+    animation: flowUp 20s linear infinite;
+  }
+  
+  /* Marquee animation for gallery section */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .animate-marquee {
+    animation: marquee 60s linear infinite;
+    display: inline-block;
+    width: max-content;
   }
 }

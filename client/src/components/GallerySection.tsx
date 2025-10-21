@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useRef, useEffect } from 'react';
 import img1 from '@assets/IMG_0848_1758970285463.jpeg';
 import img2 from '@assets/IMG_0853_1758970285464.jpeg';
 import img3 from '@assets/IMG_2125_1758970285465.jpeg';
@@ -8,85 +7,116 @@ import img5 from '@assets/IMG_4089_1758970285467.jpeg';
 import img6 from '@assets/IMG_0882_1758970285465.jpeg';
 import img7 from '@assets/IMG_4068_1758970285466.jpeg';
 import img8 from '@assets/IMG_4060_1758970285466.jpeg';
+import img9 from '@assets/IMG_4045_1758970285466.jpeg';
+import img10 from '@assets/IMG_4060_1758970285466.jpeg';
 
-const carouselImages = [img1, img2, img3, img4, img5, img6, img7, img8];
+const galleryImages = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
 
 export default function GallerySection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % carouselImages.length);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Pause animation on hover and touch
+  const handleMouseEnter = () => {
+    if (containerRef.current) {
+      containerRef.current.style.animationPlayState = 'paused';
+    }
   };
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  const handleMouseLeave = () => {
+    if (containerRef.current) {
+      containerRef.current.style.animationPlayState = 'running';
+    }
+  };
+  
+  // Touch events for mobile control
+  const handleTouchStart = () => {
+    if (containerRef.current) {
+      containerRef.current.style.animationPlayState = 'paused';
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (containerRef.current) {
+      containerRef.current.style.animationPlayState = 'running';
+    }
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Headline */}
-        <h2 className="text-[36px] lg:text-[56px] font-bold text-white text-center mb-8 lg:mb-12" data-testid="text-carousel-headline">
-          Mentorship in Action
-        </h2>
+    <section id="work" className="py-16 lg:py-24 bg-background">
+      {/* Headline */}
+      <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-center mb-8 lg:mb-12 px-4 sm:px-6 lg:px-8" data-testid="text-carousel-headline">
+        My Work
+      </h2>
 
-        {/* Carousel */}
-        <div className="relative mb-16">
-          <div className="overflow-hidden">
+      {/* Edge-to-edge animated gallery */}
+      <div 
+        ref={containerRef}
+        className="relative overflow-hidden py-12 -mx-4 sm:-mx-6 lg:-mx-8"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Main gallery container with slow lateral movement creating a left-to-right visual effect */}
+        <div className="flex animate-marquee" style={{ display: 'flex', width: 'max-content' }}>
+          {[...galleryImages, ...galleryImages].map((img, index) => (
             <div 
-              className="flex gap-8 transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * (240 + 32)}px)` }}
+              key={index}
+              className="flex-shrink-0 w-64 lg:w-80 h-80 lg:h-96 mx-4 relative group transition-all duration-300"
+              data-testid={`gallery-item-${index}`}
             >
-              {carouselImages.map((img, index) => (
-                <div 
-                  key={index}
-                  className="flex-shrink-0 w-[240px] h-[300px] relative group transition-all duration-300 lg:-rotate-3 lg:hover:rotate-0"
-                  data-testid={`carousel-card-${index}`}
-                >
-                  <div 
-                    className="w-full h-full rounded-[16px] overflow-hidden relative transition-all duration-300 border-2 border-transparent hover:border-[#FF4D00]"
-                    style={{
-                      boxShadow: '0 12px 24px rgba(0, 0, 0, 0.4)',
-                    }}
-                  >
-                    <img 
-                      src={img}
-                      alt={`Mentorship moment ${index + 1}`}
-                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
-                    />
-                    {/* Orange stripe overlay */}
-                    <div 
-                      className="absolute top-0 left-0 w-full h-2 bg-[#FF4D00]"
-                      style={{ opacity: 0.8 }}
-                    />
-                  </div>
-                </div>
-              ))}
+              <div 
+                className="w-full h-full rounded-xl overflow-hidden relative border-2 border-transparent group-hover:border-[#AD2E2C] transition-all duration-300"
+                style={{
+                  boxShadow: '0 10px 20px rgba(0, 0, 0, 0.15)',
+                }}
+              >
+                <img 
+                  src={img}
+                  alt={`Work example ${index + 1}`}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                  style={{
+                    WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)',
+                    maskImage: 'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)',
+                  }}
+                />
+              </div>
             </div>
-          </div>
-
-          {/* Navigation arrows - Inside container on mobile, outside on desktop */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-2 lg:left-0 top-1/2 -translate-y-1/2 lg:-translate-x-16 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-[#FF4D00] text-white flex items-center justify-center hover:bg-[#ff6b35] transition-colors z-10"
-            data-testid="button-carousel-prev"
-          >
-            <ChevronLeft className="w-5 h-5 lg:w-6 lg:h-6" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-2 lg:right-0 top-1/2 -translate-y-1/2 lg:translate-x-16 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-[#FF4D00] text-white flex items-center justify-center hover:bg-[#ff6b35] transition-colors z-10"
-            data-testid="button-carousel-next"
-          >
-            <ChevronRight className="w-5 h-5 lg:w-6 lg:h-6" />
-          </button>
+          ))}
         </div>
-
-        {/* Caption */}
-        <p className="text-[20px] text-[#CCCCCC] text-center" data-testid="text-carousel-caption">
-          A glimpse into our circles of craft, movement, and mentorship.
-        </p>
       </div>
+
+      {/* Caption */}
+      <p className="text-base lg:text-lg text-muted-foreground text-center mt-12 max-w-2xl mx-auto px-4 sm:px-6 lg:px-8" data-testid="text-carousel-caption">
+        The studio brings together craft, movement and collaboration as tools for personal and collective transformation. Here, making becomes a form of knowing.
+      </p>
+      
+      {/* Add the marquee animation keyframes to the component */}
+      <style>{`
+        @keyframes marquee {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-marquee {
+          animation: marquee 40s linear infinite;
+          display: flex;
+        }
+        
+        /* Hide scrollbars */
+        .overflow-hidden {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
+        
+        .overflow-hidden::-webkit-scrollbar {
+          display: none;  /* Chrome, Safari, Opera */
+        }
+      `}</style>
     </section>
   );
 }

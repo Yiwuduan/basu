@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState, useEffect } from 'react';
 import parallaxImg1 from '@assets/PHOTO-2025-08-28-14-02-49 2_1759300881690.jpg';
 import parallaxImg2 from '@assets/PHOTO-2025-08-28-14-02-49 3_1759300881690.jpg';
 import parallaxImg3 from '@assets/PHOTO-2025-08-28-14-02-49 4_1759300881690.jpg';
@@ -7,226 +7,412 @@ import parallaxImg5 from '@assets/PHOTO-2025-08-28-14-02-49 6_1759300881691.jpg'
 import parallaxImg6 from '@assets/PHOTO-2025-08-28-14-02-49_1759300881691.jpg';
 
 export default function HeroSection() {
-  const [mouseProgress, setMouseProgress] = useState(0.5);
-  const targetMouse = useRef(0.5);
-  const currentMouse = useRef(0.5);
-  const rafId = useRef<number>();
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 1024 : false);
-  const isMobileRef = useRef(isMobile);
 
   useEffect(() => {
-    // Update the ref whenever isMobile changes
-    isMobileRef.current = isMobile;
-  }, [isMobile]);
-
-  useEffect(() => {
-    // Detect if mobile device
     const checkMobile = () => {
-      const newIsMobile = window.innerWidth < 1024;
-      console.log('[HeroSection] checkMobile:', { width: window.innerWidth, isMobile: newIsMobile });
-      setIsMobile(newIsMobile);
+      setIsMobile(window.innerWidth < 1024);
     };
     
     checkMobile();
     window.addEventListener('resize', checkMobile);
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (isMobileRef.current) return; // Don't use mouse on mobile
-      // Calculate normalized mouse position (0 to 1)
-      const mouseY = e.clientY;
-      const viewportHeight = window.innerHeight;
-      const normalizedY = mouseY / viewportHeight;
-      targetMouse.current = normalizedY;
-    };
-
-    const handleDeviceOrientation = (e: DeviceOrientationEvent) => {
-      if (!isMobileRef.current) return; // Only use device orientation on mobile
-      
-      // Beta is the front-to-back tilt in degrees (-180 to 180)
-      // Gamma is the left-to-right tilt in degrees (-90 to 90)
-      const beta = e.beta || 0; // Front-to-back tilt
-      
-      // Map beta from typical phone tilt range (30 to 90 degrees when holding phone)
-      // to our 0-1 range. Center around 60 degrees (comfortable viewing angle)
-      const minTilt = 30;  // Phone tilted back
-      const maxTilt = 90;  // Phone tilted forward
-      const centerTilt = 60; // Neutral position
-      const range = 30; // ±30 degrees from center
-      
-      // Normalize to 0-1 range, with 60 degrees = 0.5
-      let normalized = 0.5 + ((beta - centerTilt) / (range * 2));
-      
-      // Clamp between 0 and 1
-      normalized = Math.max(0, Math.min(1, normalized));
-      
-      targetMouse.current = normalized;
-    };
-
-    // Heavier momentum with slower lerp (0.04 = more weighted, slower response)
-    const animate = () => {
-      currentMouse.current += (targetMouse.current - currentMouse.current) * 0.04;
-      setMouseProgress(currentMouse.current);
-      rafId.current = requestAnimationFrame(animate);
-    };
-
-    // Add event listeners based on device type
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    
-    // Request permission for iOS 13+ devices
-    if (typeof DeviceOrientationEvent !== 'undefined' && typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
-      // iOS 13+ requires permission
-      (DeviceOrientationEvent as any).requestPermission()
-        .then((permissionState: string) => {
-          if (permissionState === 'granted') {
-            window.addEventListener('deviceorientation', handleDeviceOrientation, { passive: true });
-          }
-        })
-        .catch(console.error);
-    } else {
-      // Non-iOS or older iOS - add listener directly
-      window.addEventListener('deviceorientation', handleDeviceOrientation, { passive: true });
-    }
-    
-    rafId.current = requestAnimationFrame(animate);
-
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('deviceorientation', handleDeviceOrientation);
       window.removeEventListener('resize', checkMobile);
-      if (rafId.current) {
-        cancelAnimationFrame(rafId.current);
-      }
     };
   }, []);
 
-  // Calculate parallax transforms - 2x sensitivity with 1600px range
-  const getParallaxStyle = (speed: number) => {
-    const centerOffset = mouseProgress - 0.5; // -0.5 to 0.5
-    // Add baseline offset to position images higher initially
-    const baselineOffset = -400; // Move images up by 400px from center
-    const movement = -centerOffset * speed * 1600 + baselineOffset; // 1600px range for 2x sensitivity
-    return {
-      transform: `translate3d(0, ${movement}px, 0)`,
-      willChange: 'transform',
-    };
+  // Generate random starting positions and animations for each image
+  const generateRandomAnimations = () => {
+    const animations = [];
+    for (let i = 0; i < 6; i++) {
+      // Randomize speed (10-60s range) - faster so they never fully stop
+      const speed = 10 + Math.random() * 50;
+      // Randomize color fade duration (5-8s range) - more frequent fade-ins
+      const colorDuration = 5 + Math.random() * 3;
+      // Randomize delay
+      const delay = Math.random() * 2;
+      // Random starting vertical position (0-5%)
+      const startPosition = Math.random() * 5;
+      
+      animations.push({
+        flowDuration: speed,
+        colorDuration,
+        delay,
+        startPosition
+      });
+    }
+    return animations;
   };
+  
+  const animations = generateRandomAnimations();
 
   return (
-    <section id="home" className="relative min-h-screen lg:h-screen">
+    <section id="home" className="relative min-h-screen lg:h-screen overflow-hidden bg-background">
       <div className="flex flex-col lg:flex-row w-full h-full">
-      {/* Left/Top - Vertically stacked parallax images */}
-      <div className="w-full lg:w-[60%] relative flex-shrink-0 overflow-hidden bg-black h-[50vh] lg:h-screen order-1 lg:order-1">
-        {/* Container for stacked images with parallax */}
-        <div className="relative">
-          {/* Image 1 - Bottom layer, slowest */}
-          <div 
-            className={`relative w-full h-[70vh] mb-8 lg:mb-8 ${isMobile ? 'flow-up-slow' : ''}`}
-            style={isMobile ? undefined : getParallaxStyle(1.2)}
-            data-mobile={isMobile}
-            data-has-parallax={!isMobile}
-          >
-            <img 
-              src={parallaxImg1}
-              alt="Creative expression"
-              className="w-full h-full object-cover grayscale"
-            />
-          </div>
+        {/* Left/Top - Vertically stacked images with enhanced animation */}
+        <div className="w-full lg:w-[60%] relative flex-shrink-0 overflow-hidden bg-background h-[50vh] lg:h-screen order-1 lg:order-1">
 
-          {/* Image 2 */}
-          <div 
-            className={`relative w-full h-[70vh] mb-8 lg:mb-8 ${isMobile ? 'flow-up-medium' : ''}`}
-            style={isMobile ? undefined : getParallaxStyle(1.8)}
-          >
-            <img 
-              src={parallaxImg2}
-              alt="Mentorship"
-              className="w-full h-full object-cover grayscale"
-            />
-          </div>
+          
+          {/* Container for vertically stacked images with enhanced animations */}
+          <div className="relative h-[600%] lg:h-[400%]">
+            {/* Image 1 - Random starting point and animation */}
+            <div 
+              className={`absolute w-full h-[16.66%] ${isMobile ? 'animate-flow-up animate-color-fade-1' : ''}`}
+              style={isMobile ? 
+                undefined : 
+                { 
+                  top: `${animations[0].startPosition}%`, // Consistent random starting vertical position
+                  animation: `flowUp ${animations[0].flowDuration * 2}s linear infinite, colorFade1 ${animations[0].colorDuration}s infinite`,
+                  animationDelay: `${animations[0].delay}s, ${animations[0].delay + Math.random() * 2}s`
+                }
+              }
+            >
+              <img 
+                src={parallaxImg1}
+                alt="Creative expression"
+                className="w-full h-full object-cover transition-all duration-1000 opacity-0 animate-fade-in"
+              />
+            </div>
 
-          {/* Image 3 - Main featured */}
-          <div 
-            className={`relative w-full h-[80vh] mb-8 lg:mb-8 ${isMobile ? 'flow-up-fast' : ''}`}
-            style={isMobile ? undefined : getParallaxStyle(2.5)}
-            data-testid="img-founder"
-          >
-            <img 
-              src={parallaxImg6}
-              alt="Amanda Basu Roy - Founder"
-              className="w-full h-full object-cover grayscale"
-            />
-          </div>
+            {/* Image 2 */}
+            <div 
+              className={`absolute w-full h-[16.66%] ${isMobile ? 'animate-flow-up-medium animate-color-fade-2' : ''}`}
+              style={isMobile ? 
+                undefined : 
+                { 
+                  top: `${animations[1].startPosition}%`, // Consistent random starting vertical position
+                  animation: `flowUp ${animations[1].flowDuration * 2}s linear infinite, colorFade2 ${animations[1].colorDuration}s infinite`,
+                  animationDelay: `${animations[1].delay}s, ${animations[1].delay + Math.random() * 2}s`
+                }
+              }
+            >
+              <img 
+                src={parallaxImg2}
+                alt="Mentorship"
+                className="w-full h-full object-cover transition-all duration-1000 opacity-0 animate-fade-in"
+              />
+            </div>
 
-          {/* Image 4 */}
-          <div 
-            className={`relative w-full h-[70vh] mb-8 lg:mb-8 ${isMobile ? 'flow-up-faster' : ''}`}
-            style={isMobile ? undefined : getParallaxStyle(3.2)}
-          >
-            <img 
-              src={parallaxImg3}
-              alt="Creative flow"
-              className="w-full h-full object-cover grayscale"
-            />
-          </div>
+            {/* Image 3 - Main featured - with adjusted speed */}
+            <div 
+              className={`absolute w-full h-[16.66%] ${isMobile ? 'animate-flow-up-fast animate-color-fade-3' : ''}`}
+              style={isMobile ? 
+                undefined : 
+                { 
+                  top: `${animations[2].startPosition}%`, // Consistent random starting vertical position
+                  animation: `flowUp ${animations[2].flowDuration}s linear infinite, colorFade3 ${animations[2].colorDuration}s infinite`, // Back to normal speed
+                  animationDelay: `${animations[2].delay}s, ${animations[2].delay + Math.random() * 2}s`
+                }
+              }
+            >
+              <img 
+                src={parallaxImg6}
+                alt="Amanda Basu Roy - Founder"
+                className="w-full h-full object-cover transition-all duration-1000 opacity-0 animate-fade-in"
+              />
+            </div>
 
-          {/* Image 5 */}
-          <div 
-            className={`relative w-full h-[70vh] mb-8 lg:mb-8 ${isMobile ? 'flow-up-fastest' : ''}`}
-            style={isMobile ? undefined : getParallaxStyle(3.8)}
-          >
-            <img 
-              src={parallaxImg4}
-              alt="Embodied learning"
-              className="w-full h-full object-cover grayscale"
-            />
-          </div>
+            {/* Image 4 */}
+            <div 
+              className={`absolute w-full h-[16.66%] ${isMobile ? 'animate-flow-up-faster animate-color-fade-4' : ''}`}
+              style={isMobile ? 
+                undefined : 
+                { 
+                  top: `${animations[3].startPosition}%`, // Consistent random starting vertical position
+                  animation: `flowUp ${animations[3].flowDuration * 2}s linear infinite, colorFade4 ${animations[3].colorDuration}s infinite`, // Slower movement
+                  animationDelay: `${animations[3].delay}s, ${animations[3].delay + Math.random() * 2}s`
+                }
+              }
+            >
+              <img 
+                src={parallaxImg3}
+                alt="Creative flow"
+                className="w-full h-full object-cover transition-all duration-1000 opacity-0 animate-fade-in"
+              />
+            </div>
 
-          {/* Image 6 - Top layer, fastest */}
-          <div 
-            className={`relative w-full h-[70vh] ${isMobile ? 'flow-up-ultra' : ''}`}
-            style={isMobile ? undefined : getParallaxStyle(4.5)}
-          >
-            <img 
-              src={parallaxImg5}
-              alt="Community connection"
-              className="w-full h-full object-cover grayscale"
-            />
+            {/* Image 5 */}
+            <div 
+              className={`absolute w-full h-[16.66%] ${isMobile ? 'animate-flow-up-fastest animate-color-fade-5' : ''}`}
+              style={isMobile ? 
+                undefined : 
+                { 
+                  top: `${animations[4].startPosition}%`, // Consistent random starting vertical position
+                  animation: `flowUp ${animations[4].flowDuration * 2}s linear infinite, colorFade5 ${animations[4].colorDuration}s infinite`, // Slower movement
+                  animationDelay: `${animations[4].delay}s, ${animations[4].delay + Math.random() * 2}s`
+                }
+              }
+            >
+              <img 
+                src={parallaxImg4}
+                alt="Embodied learning"
+                className="w-full h-full object-cover transition-all duration-1000 opacity-0 animate-fade-in"
+              />
+            </div>
+
+            {/* Image 6 - normal upward movement */}
+            <div 
+              className={`absolute w-full h-[16.66%] ${isMobile ? 'animate-flow-up-ultra animate-color-fade-6' : ''}`}
+              style={isMobile ? 
+                undefined : 
+                { 
+                  top: `${animations[5].startPosition}%`, // Consistent random starting vertical position
+                  animation: `flowUp ${animations[5].flowDuration * 2}s linear infinite, colorFade6 ${animations[5].colorDuration}s infinite`, // Slower movement
+                  animationDelay: `${animations[5].delay}s, ${animations[5].delay + Math.random() * 2}s`
+                }
+              }
+            >
+              <img 
+                src={parallaxImg5}
+                alt="Community connection"
+                className="w-full h-full object-cover transition-all duration-1000 opacity-0 animate-fade-in"
+              />
+            </div>
           </div>
         </div>
 
-        {/* Subtle gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30 pointer-events-none" />
-      </div>
+        {/* Right/Bottom - Fixed text block with exact copy */}
+        <div className="w-full lg:w-[40%] flex-shrink-0 lg:sticky lg:top-0 min-h-[50vh] lg:h-screen flex items-center justify-center px-6 py-12 lg:px-12 lg:py-0 bg-background order-2 lg:order-2">
+          <div className="max-w-[520px] w-full">
+            {/* Main headline */}
+            <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6" data-testid="text-headline">
+              Embodied Craft Studio
+            </h1>
 
-      {/* Right/Bottom - Fixed text block */}
-      <div className="w-full lg:w-[40%] flex-shrink-0 lg:sticky lg:top-0 min-h-[50vh] lg:h-screen flex items-center justify-center px-6 py-12 lg:px-12 lg:py-0 bg-black order-2 lg:order-2">
-        <div className="max-w-[520px] w-full">
-          {/* Small tag line */}
-          <p className="text-[14px] lg:text-[18px] uppercase text-[#FF4D00] tracking-[2px] mb-4 lg:mb-8" data-testid="text-tagline">
-            Mentorship • Projects • Community
-          </p>
+            {/* Subcopy with exact copy from requirements */}
+            <p className="text-base lg:text-lg text-muted-foreground leading-[1.65] mb-8" data-testid="text-subcopy">
+              where learning is alive, joyful, and deeply connected. The studio brings together craft, movement and collaboration as tools for personal and collective transformation.
+            </p>
 
-          {/* Main headline */}
-          <h1 className="text-[40px] lg:text-[88px] font-bold text-white leading-[1.1] mb-4 lg:mb-8" data-testid="text-headline">
-            Reframing Learning & Life Together
-          </h1>
+            {/* Second paragraph */}
+            <p className="text-base lg:text-lg text-muted-foreground leading-[1.65] mb-8" data-testid="text-subcopy-2">
+              A circle of shared wisdom, where creativity is not a luxury, but a vital way of being.
+            </p>
 
-          {/* Subcopy */}
-          <p className="text-[16px] lg:text-[20px] text-[#CCCCCC] leading-[1.65] mb-8 lg:mb-12" data-testid="text-subcopy">
-            I believe education should be alive, joyful, and connected. My work is about creating spaces where families learn through craft, movement, and mentorship—not institutions.
-          </p>
-
-          {/* CTA Button */}
-          <button
-            className="bg-[#FF4D00] text-white text-[16px] lg:text-[18px] font-bold uppercase px-10 py-4 lg:px-14 lg:py-6 rounded-lg cta-transition hover:bg-black hover:text-[#FF4D00] hover:border-2 hover:border-[#FF4D00] border-2 border-transparent"
-            onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-            data-testid="button-see-work"
-          >
-            SEE MY WORK
-          </button>
+            {/* CTA Button */}
+            <button
+              className="bg-[#AD2E2C] text-foreground text-base font-bold uppercase px-8 py-4 rounded-lg cta-transition hover:bg-foreground hover:text-[#AD2E2C] hover:border-2 hover:border-[#AD2E2C] border-2 border-transparent transition-colors duration-300"
+              onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
+              data-testid="button-see-work"
+            >
+              SEE MY WORK
+            </button>
+          </div>
         </div>
       </div>
-      </div>
+      
+      {/* Add the enhanced animation keyframes to the component */}
+      <style jsx>{`
+        @keyframes flowUp {
+          0% {
+            transform: translateY(0) translateZ(0);
+            filter: blur(0px) opacity(0.8);
+            z-index: 20; /* Starts in front */
+          }
+          5% {
+            transform: translateY(-1%) translateZ(0);
+            filter: blur(0px) opacity(0.9);
+            z-index: 20; /* Stays in front initially */
+          }
+          10% {
+            transform: translateY(-5%) translateZ(0);
+            filter: blur(0px) opacity(0.95);
+            z-index: 15;
+          }
+          45% {
+            filter: blur(0px) opacity(1);
+            z-index: 10;
+          }
+          50% {
+            transform: translateY(-50%) translateZ(0);
+            filter: blur(0px) opacity(1);
+            z-index: 10;
+          }
+          90% {
+            transform: translateY(-95%) translateZ(0);
+            filter: blur(0px) opacity(0.95);
+            z-index: 10;
+          }
+          95% {
+            transform: translateY(-98%) translateZ(-5px);
+            filter: blur(1px) brightness(0.92) opacity(0.9);
+            z-index: 5;
+          }
+          100% {
+            transform: translateY(-100%) translateZ(-10px);
+            filter: blur(1.5px) brightness(0.9) opacity(0.85);
+            z-index: 1; /* Ends behind */
+          }
+        }
+        
+        @keyframes colorFade1 {
+          0% { filter: grayscale(1) opacity(0.7) blur(1px); }
+          10% { filter: grayscale(0.8) opacity(0.8) blur(0.8px); }
+          25% { filter: grayscale(0) opacity(1) blur(0px); }
+          50% { filter: grayscale(0) opacity(1) blur(0px); }
+          75% { filter: grayscale(0.2) opacity(0.9) blur(0.5px); }
+          100% { filter: grayscale(1) opacity(0.7) blur(1px); }
+        }
+        
+        @keyframes colorFade2 {
+          0% { filter: grayscale(1) opacity(0.7) blur(1px); }
+          20% { filter: grayscale(0) opacity(1) blur(0px); }
+          40% { filter: grayscale(0) opacity(1) blur(0px); }
+          60% { filter: grayscale(0) opacity(1) blur(0px); }
+          80% { filter: grayscale(0.3) opacity(0.9) blur(0.5px); }
+          100% { filter: grayscale(1) opacity(0.7) blur(1px); }
+        }
+        
+        @keyframes colorFade3 {
+          0% { filter: grayscale(1) opacity(0.7) blur(1px); }
+          15% { filter: grayscale(0) opacity(1) blur(0px); }
+          30% { filter: grayscale(0) opacity(1) blur(0px); }
+          45% { filter: grayscale(0) opacity(1) blur(0px); }
+          60% { filter: grayscale(0) opacity(1) blur(0px); }
+          75% { filter: grayscale(0.4) opacity(0.9) blur(0.5px); }
+          100% { filter: grayscale(1) opacity(0.7) blur(1px); }
+        }
+        
+        @keyframes colorFade4 {
+          0% { filter: grayscale(1) opacity(0.7) blur(1px); }
+          10% { filter: grayscale(0) opacity(1) blur(0px); }
+          20% { filter: grayscale(0) opacity(1) blur(0px); }
+          30% { filter: grayscale(0) opacity(1) blur(0px); }
+          40% { filter: grayscale(0) opacity(1) blur(0px); }
+          50% { filter: grayscale(0) opacity(1) blur(0px); }
+          60% { filter: grayscale(0) opacity(1) blur(0px); }
+          70% { filter: grayscale(0.2) opacity(0.9) blur(0.5px); }
+          80% { filter: grayscale(0.5) opacity(0.8) blur(0.8px); }
+          100% { filter: grayscale(1) opacity(0.7) blur(1px); }
+        }
+        
+        @keyframes colorFade5 {
+          0% { filter: grayscale(1) opacity(0.7) blur(1px); }
+          5% { filter: grayscale(0) opacity(1) blur(0px); }
+          10% { filter: grayscale(0) opacity(1) blur(0px); }
+          15% { filter: grayscale(0) opacity(1) blur(0px); }
+          20% { filter: grayscale(0) opacity(1) blur(0px); }
+          25% { filter: grayscale(0) opacity(1) blur(0px); }
+          30% { filter: grayscale(0) opacity(1) blur(0px); }
+          35% { filter: grayscale(0) opacity(1) blur(0px); }
+          40% { filter: grayscale(0) opacity(1) blur(0px); }
+          45% { filter: grayscale(0) opacity(1) blur(0px); }
+          50% { filter: grayscale(0) opacity(1) blur(0px); }
+          55% { filter: grayscale(0) opacity(1) blur(0px); }
+          60% { filter: grayscale(0.1) opacity(0.95) blur(0.3px); }
+          65% { filter: grayscale(0.3) opacity(0.9) blur(0.5px); }
+          70% { filter: grayscale(0.5) opacity(0.8) blur(0.8px); }
+          100% { filter: grayscale(1) opacity(0.7) blur(1px); }
+        }
+        
+        @keyframes colorFade6 {
+          0% { filter: grayscale(1) opacity(0.7) blur(1px); }
+          2% { filter: grayscale(0) opacity(1) blur(0px); }
+          4% { filter: grayscale(0) opacity(1) blur(0px); }
+          6% { filter: grayscale(0) opacity(1) blur(0px); }
+          8% { filter: grayscale(0) opacity(1) blur(0px); }
+          10% { filter: grayscale(0) opacity(1) blur(0px); }
+          12% { filter: grayscale(0) opacity(1) blur(0px); }
+          14% { filter: grayscale(0) opacity(1) blur(0px); }
+          16% { filter: grayscale(0) opacity(1) blur(0px); }
+          18% { filter: grayscale(0) opacity(1) blur(0px); }
+          20% { filter: grayscale(0) opacity(1) blur(0px); }
+          22% { filter: grayscale(0) opacity(1) blur(0px); }
+          24% { filter: grayscale(0) opacity(1) blur(0px); }
+          26% { filter: grayscale(0) opacity(1) blur(0px); }
+          28% { filter: grayscale(0) opacity(1) blur(0px); }
+          30% { filter: grayscale(0) opacity(1) blur(0px); }
+          32% { filter: grayscale(0) opacity(1) blur(0px); }
+          34% { filter: grayscale(0) opacity(1) blur(0px); }
+          36% { filter: grayscale(0) opacity(1) blur(0px); }
+          38% { filter: grayscale(0) opacity(1) blur(0px); }
+          40% { filter: grayscale(0) opacity(1) blur(0px); }
+          42% { filter: grayscale(0) opacity(1) blur(0px); }
+          44% { filter: grayscale(0) opacity(1) blur(0px); }
+          46% { filter: grayscale(0) opacity(1) blur(0px); }
+          48% { filter: grayscale(0) opacity(1) blur(0px); }
+          50% { filter: grayscale(0) opacity(1) blur(0px); }
+          52% { filter: grayscale(0) opacity(1) blur(0px); }
+          54% { filter: grayscale(0) opacity(1) blur(0px); }
+          56% { filter: grayscale(0) opacity(1) blur(0px); }
+          58% { filter: grayscale(0) opacity(1) blur(0px); }
+          60% { filter: grayscale(0) opacity(1) blur(0px); }
+          62% { filter: grayscale(0.1) opacity(0.95) blur(0.3px); }
+          64% { filter: grayscale(0.2) opacity(0.9) blur(0.5px); }
+          66% { filter: grayscale(0.3) opacity(0.9) blur(0.5px); }
+          68% { filter: grayscale(0.4) opacity(0.85) blur(0.6px); }
+          70% { filter: grayscale(0.5) opacity(0.8) blur(0.8px); }
+          100% { filter: grayscale(1) opacity(0.7) blur(1px); }
+        }
+        
+        @keyframes fadeIn {
+          0% { 
+            opacity: 0; 
+            transform: scale(0.9);
+          }
+          50% {
+            opacity: 0.8;
+            transform: scale(0.95);
+          }
+          100% { 
+            opacity: 1; 
+            transform: scale(1);
+          }
+        }
+        
+        .animate-flow-up {
+          animation: flowUp 60s linear infinite;
+        }
+        
+        .animate-flow-up-medium {
+          animation: flowUp 50s linear infinite;
+        }
+        
+        .animate-flow-up-fast {
+          animation: flowUp 40s linear infinite;
+        }
+        
+        .animate-flow-up-faster {
+          animation: flowUp 35s linear infinite;
+        }
+        
+        .animate-flow-up-fastest {
+          animation: flowUp 25s linear infinite;
+        }
+        
+        .animate-flow-up-ultra {
+          animation: flowUp 15s linear infinite;
+        }
+        
+        .animate-color-fade-1 {
+          animation: colorFade1 6s infinite;
+        }
+        
+        .animate-color-fade-2 {
+          animation: colorFade2 7s infinite;
+        }
+        
+        .animate-color-fade-3 {
+          animation: colorFade3 6.5s infinite;
+        }
+        
+        .animate-color-fade-4 {
+          animation: colorFade4 5.5s infinite;
+        }
+        
+        .animate-color-fade-5 {
+          animation: colorFade5 6.5s infinite;
+        }
+        
+        .animate-color-fade-6 {
+          animation: colorFade6 5s infinite;
+        }
+        
+        .animate-fade-in {
+          animation: fadeIn 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+      `}</style>
     </section>
   );
 }
