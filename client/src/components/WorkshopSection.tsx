@@ -54,7 +54,7 @@ export default function WorkshopSection() {
               <div className="inline-block px-6 py-2 bg-[#AD2E2C] text-white font-bold text-sm uppercase tracking-wider mb-4">
                 Special Workshop
               </div>
-              <h2 className="text-4xl md:text-6xl font-black text-foreground mb-6 tracking-tight">
+              <h2 className="text-[clamp(4rem,12vw,10rem)] font-display text-foreground mb-6 tracking-tight uppercase tracking-wide">
                 STYLE BEYOND THE MATERIAL
               </h2>
               <div className="bg-gray-900 text-white text-lg md:text-xl font-bold py-3 px-6 rounded-lg inline-block my-2">
@@ -105,7 +105,7 @@ export default function WorkshopSection() {
                          )`
                        }}></div>
                   <div className="text-center relative z-10">
-                    <h3 className={`text-xl md:text-2xl font-black mb-3 ${
+                    <h3 className={`text-[clamp(2rem,6vw,4rem)] font-display mb-3 uppercase tracking-wide ${
                       hoveredTile === tile.id ? 'text-white' : 'text-white'
                     }`}>{tile.title}</h3>
                     <p className="text-base md:text-lg text-white/90 mb-2 font-semibold">{tile.content}</p>
@@ -138,7 +138,7 @@ export default function WorkshopSection() {
               onClick={() => document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <div className="relative z-10">
-                <h3 className="text-2xl md:text-3xl font-black mb-4 text-white">Join our Circle</h3>
+                <h3 className="text-[clamp(2.5rem,8vw,5rem)] font-display mb-4 text-white uppercase tracking-wide">Join our Circle</h3>
                 <p className="text-base md:text-lg mb-4 font-medium text-white">Tell us about you</p>
                 <p className="text-lg font-black bg-white text-gray-900 py-3 px-6 rounded-lg inline-block">
                   $50/month membership: part of the basu community: workshops, work opportunities

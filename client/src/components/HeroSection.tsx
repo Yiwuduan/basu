@@ -5,9 +5,12 @@ import parallaxImg3 from '@assets/PHOTO-2025-08-28-14-02-49 4_1759300881690.jpg'
 import parallaxImg4 from '@assets/PHOTO-2025-08-28-14-02-49 5_1759300881691.jpg';
 import parallaxImg5 from '@assets/PHOTO-2025-08-28-14-02-49 6_1759300881691.jpg';
 import parallaxImg6 from '@assets/PHOTO-2025-08-28-14-02-49_1759300881691.jpg';
+import ScrollSuggestion from './ScrollSuggestion';
 
 export default function HeroSection() {
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 1024 : false);
+
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -17,8 +20,13 @@ export default function HeroSection() {
     checkMobile();
     window.addEventListener('resize', checkMobile);
 
+    const interval = setInterval(() => {
+      setActiveImageIndex((prevIndex) => (prevIndex + 1) % 6);
+    }, 5000); // Change active image every 5 seconds
+
     return () => {
       window.removeEventListener('resize', checkMobile);
+      clearInterval(interval);
     };
   }, []);
 
@@ -28,8 +36,8 @@ export default function HeroSection() {
     for (let i = 0; i < 6; i++) {
       // Randomize speed (10-60s range) - faster so they never fully stop
       const speed = 10 + Math.random() * 50;
-      // Randomize color fade duration (5-8s range) - more frequent fade-ins
-      const colorDuration = 5 + Math.random() * 3;
+      // Randomize color fade duration (10-20s range) - slower refresh
+      const colorDuration = 10 + Math.random() * 10;
       // Randomize delay
       const delay = Math.random() * 2;
       // Random starting vertical position (0-5%)
@@ -64,7 +72,8 @@ export default function HeroSection() {
                 { 
                   top: `${animations[0].startPosition}%`, // Consistent random starting vertical position
                   animation: `flowUp ${animations[0].flowDuration * 2}s ease-in-out infinite, colorFade1 ${animations[0].colorDuration}s infinite`,
-                  animationDelay: `${animations[0].delay}s, ${animations[0].delay + Math.random() * 2}s`
+                  animationDelay: `${animations[0].delay}s, ${animations[0].delay + Math.random() * 2}s`,
+                  zIndex: activeImageIndex === 0 ? 10 : 1
                 }
               }
             >
@@ -83,7 +92,8 @@ export default function HeroSection() {
                 { 
                   top: `${animations[1].startPosition}%`, // Consistent random starting vertical position
                   animation: `flowUp ${animations[1].flowDuration * 2}s ease-in-out infinite, colorFade2 ${animations[1].colorDuration}s infinite`,
-                  animationDelay: `${animations[1].delay}s, ${animations[1].delay + Math.random() * 2}s`
+                  animationDelay: `${animations[1].delay}s, ${animations[1].delay + Math.random() * 2}s`,
+                  zIndex: activeImageIndex === 1 ? 10 : 1
                 }
               }
             >
@@ -102,7 +112,8 @@ export default function HeroSection() {
                 { 
                   top: `${animations[2].startPosition}%`, // Consistent random starting vertical position
                   animation: `flowUp ${animations[2].flowDuration}s ease-in-out infinite, colorFade3 ${animations[2].colorDuration}s infinite`, // Back to normal speed
-                  animationDelay: `${animations[2].delay}s, ${animations[2].delay + Math.random() * 2}s`
+                  animationDelay: `${animations[2].delay}s, ${animations[2].delay + Math.random() * 2}s`,
+                  zIndex: activeImageIndex === 2 ? 10 : 1
                 }
               }
             >
@@ -121,7 +132,8 @@ export default function HeroSection() {
                 { 
                   top: `${animations[3].startPosition}%`, // Consistent random starting vertical position
                   animation: `flowUp ${animations[3].flowDuration * 2}s ease-in-out infinite, colorFade4 ${animations[3].colorDuration}s infinite`, // Slower movement
-                  animationDelay: `${animations[3].delay}s, ${animations[3].delay + Math.random() * 2}s`
+                  animationDelay: `${animations[3].delay}s, ${animations[3].delay + Math.random() * 2}s`,
+                  zIndex: activeImageIndex === 3 ? 10 : 1
                 }
               }
             >
@@ -140,7 +152,8 @@ export default function HeroSection() {
                 { 
                   top: `${animations[4].startPosition}%`, // Consistent random starting vertical position
                   animation: `flowUp ${animations[4].flowDuration * 2}s ease-in-out infinite, colorFade5 ${animations[4].colorDuration}s infinite`, // Slower movement
-                  animationDelay: `${animations[4].delay}s, ${animations[4].delay + Math.random() * 2}s`
+                  animationDelay: `${animations[4].delay}s, ${animations[4].delay + Math.random() * 2}s`,
+                  zIndex: activeImageIndex === 4 ? 10 : 1
                 }
               }
             >
@@ -159,7 +172,8 @@ export default function HeroSection() {
                 { 
                   top: `${animations[5].startPosition}%`, // Consistent random starting vertical position
                   animation: `flowUp ${animations[5].flowDuration * 2}s ease-in-out infinite, colorFade6 ${animations[5].colorDuration}s infinite`, // Slower movement
-                  animationDelay: `${animations[5].delay}s, ${animations[5].delay + Math.random() * 2}s`
+                  animationDelay: `${animations[5].delay}s, ${animations[5].delay + Math.random() * 2}s`,
+                  zIndex: activeImageIndex === 5 ? 10 : 1
                 }
               }
             >
@@ -173,10 +187,11 @@ export default function HeroSection() {
         </div>
 
         {/* Right/Bottom - Fixed text block with exact copy */}
-        <div className="w-full lg:w-[40%] flex-shrink-0 lg:sticky lg:top-0 min-h-[50vh] lg:h-screen flex items-center justify-center px-6 py-12 lg:px-12 lg:py-0 bg-background order-2 lg:order-2">
-          <div className="max-w-[520px] w-full">
+        <div className="w-full lg:w-[40%] flex-shrink-0 lg:sticky lg:top-0 min-h-[50vh] lg:h-screen flex items-start justify-start bg-background order-2 lg:order-2">
+          <div className="w-full px-6 lg:px-12 py-12 lg:py-0">
+            <div className="max-w-[520px]">
             {/* Main headline */}
-            <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6" data-testid="text-headline">
+            <h1 className="text-[clamp(5rem,16vw,12rem)] font-display text-foreground leading-[1.1] mb-6 uppercase tracking-wide" data-testid="text-headline">
               Embodied Craft Studio
             </h1>
 
@@ -192,13 +207,14 @@ export default function HeroSection() {
 
             {/* CTA Button */}
             <button
-              className="bg-[#AD2E2C] text-foreground text-base font-bold uppercase px-8 py-4 rounded-lg cta-transition hover:bg-foreground hover:text-[#AD2E2C] hover:border-2 hover:border-[#AD2E2C] border-2 border-transparent transition-colors duration-300"
+              className="bg-[#AD2E2C] text-foreground text-base font-display uppercase px-8 py-4 rounded-lg cta-transition hover:bg-foreground hover:text-[#AD2E2C] hover:border-2 hover:border-[#AD2E2C] border-2 border-transparent transition-colors duration-300"
               onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
               data-testid="button-see-work"
             >
               SEE MY WORK
             </button>
           </div>
+        </div>
         </div>
       </div>
       
@@ -215,37 +231,49 @@ export default function HeroSection() {
         
         @keyframes colorFade1 {
           0% { filter: grayscale(100%) opacity(0.7); }
-          50% { filter: grayscale(0%) opacity(1); }
+          40% { filter: grayscale(50%) opacity(0.8); }
+          60% { filter: grayscale(0%) opacity(1); }
+          80% { filter: grayscale(50%) opacity(0.8); }
           100% { filter: grayscale(100%) opacity(0.7); }
         }
         
         @keyframes colorFade2 {
           0% { filter: grayscale(100%) opacity(0.7); }
-          50% { filter: grayscale(0%) opacity(1); }
+          40% { filter: grayscale(50%) opacity(0.8); }
+          60% { filter: grayscale(0%) opacity(1); }
+          80% { filter: grayscale(50%) opacity(0.8); }
           100% { filter: grayscale(100%) opacity(0.7); }
         }
         
         @keyframes colorFade3 {
           0% { filter: grayscale(100%) opacity(0.7); }
-          50% { filter: grayscale(0%) opacity(1); }
+          40% { filter: grayscale(50%) opacity(0.8); }
+          60% { filter: grayscale(0%) opacity(1); }
+          80% { filter: grayscale(50%) opacity(0.8); }
           100% { filter: grayscale(100%) opacity(0.7); }
         }
         
         @keyframes colorFade4 {
           0% { filter: grayscale(100%) opacity(0.7); }
-          50% { filter: grayscale(0%) opacity(1); }
+          40% { filter: grayscale(50%) opacity(0.8); }
+          60% { filter: grayscale(0%) opacity(1); }
+          80% { filter: grayscale(50%) opacity(0.8); }
           100% { filter: grayscale(100%) opacity(0.7); }
         }
         
         @keyframes colorFade5 {
           0% { filter: grayscale(100%) opacity(0.7); }
-          50% { filter: grayscale(0%) opacity(1); }
+          40% { filter: grayscale(50%) opacity(0.8); }
+          60% { filter: grayscale(0%) opacity(1); }
+          80% { filter: grayscale(50%) opacity(0.8); }
           100% { filter: grayscale(100%) opacity(0.7); }
         }
         
         @keyframes colorFade6 {
           0% { filter: grayscale(100%) opacity(0.7); }
-          50% { filter: grayscale(0%) opacity(1); }
+          40% { filter: grayscale(50%) opacity(0.8); }
+          60% { filter: grayscale(0%) opacity(1); }
+          80% { filter: grayscale(50%) opacity(0.8); }
           100% { filter: grayscale(100%) opacity(0.7); }
         }
         
@@ -316,6 +344,7 @@ export default function HeroSection() {
           animation: fadeIn 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
       `}</style>
+      <ScrollSuggestion />
     </section>
   );
 }

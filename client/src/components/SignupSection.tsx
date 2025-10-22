@@ -100,7 +100,7 @@ export default function SignupSection() {
     <section id="signup" className="py-16 lg:py-24 bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Headline */}
-        <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-center mb-4 lg:mb-8" data-testid="text-signup-headline">
+        <h2 className="text-[clamp(3rem,10vw,8rem)] font-display text-foreground text-center mb-4 lg:mb-8 uppercase tracking-wide" data-testid="text-signup-headline">
           Join Our Circle
         </h2>
 
@@ -137,7 +137,7 @@ export default function SignupSection() {
         {/* Quiz Steps */}
         {step === 1 && (
           <div className="max-w-4xl mx-auto">
-            <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-6 text-center">What draws you to the Basu Embodied Craft Studio?</h3>
+            <h3 className="text-[clamp(2rem,6vw,4rem)] font-display mb-6 text-center uppercase tracking-wide">What draws you to the Basu Embodied Craft Studio?</h3>
             <p className="text-base lg:text-lg text-center text-muted-foreground mb-10 max-w-2xl mx-auto">
               Select the option that best describes your interest in our studio
             </p>
@@ -162,7 +162,7 @@ export default function SignupSection() {
                   <div className="relative z-10 flex items-start space-x-4">
                     <div className="text-3xl bg-white/50 backdrop-blur-md rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-md">{option.icon}</div>
                     <div className="flex-1">
-                      <h4 className="text-lg font-bold mb-2 bg-white/50 backdrop-blur-md px-3 py-2 rounded-lg inline-block shadow-md">{option.title}</h4>
+                      <h4 className="text-[clamp(1.5rem,4vw,2.5rem)] font-display mb-2 bg-white/50 backdrop-blur-md px-3 py-2 rounded-lg inline-block shadow-md uppercase tracking-wide">{option.title}</h4>
                       <p className="text-base bg-white/50 backdrop-blur-md px-3 py-2 rounded-lg mt-2 inline-block shadow-md" style={{ color: '#282D35' }}>{option.description}</p>
                     </div>
                     <div className="flex items-center z-20">
@@ -200,7 +200,7 @@ export default function SignupSection() {
 
         {step === 2 && (
           <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
-            <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-6 text-center">Stay Connected</h3>
+            <h3 className="text-[clamp(2rem,6vw,4rem)] font-display mb-6 text-center uppercase tracking-wide">Stay Connected</h3>
             <p className="text-base lg:text-lg text-center text-muted-foreground mb-10 max-w-2xl mx-auto">
               Enter your email to join our circle and receive updates
             </p>

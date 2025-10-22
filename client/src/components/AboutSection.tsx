@@ -3,7 +3,7 @@ export default function AboutSection() {
     <section id="about" className="py-16 lg:py-24 bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Headline */}
-        <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-center mb-24 lg:mb-36" data-testid="text-about-headline">
+        <h2 className="text-[clamp(3rem,10vw,8rem)] font-display text-foreground text-center mb-24 lg:mb-36 uppercase tracking-wide" data-testid="text-about-headline">
           Reframing Life and Learning Together
         </h2>
 

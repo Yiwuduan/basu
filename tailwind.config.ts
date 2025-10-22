@@ -84,7 +84,7 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
-        serif: ["Playfair Display", "serif"],
+        display: ["Anton", "sans-serif"],
         mono: ["var(--font-mono)"],
       },
       keyframes: {

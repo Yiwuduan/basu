@@ -47,7 +47,7 @@ export default function Navigation() {
           <div className="flex-shrink-0">
             <button
               onClick={() => scrollToSection('home')}
-              className="text-xl font-bold text-primary hover-elevate lowercase"
+              className="text-xl font-bold text-[#AD2E2C] hover-elevate lowercase"
               style={{ fontFamily: 'var(--font-logo)' }}
               data-testid="button-home"
             >
@@ -64,7 +64,9 @@ export default function Navigation() {
                   variant="ghost"
                   onClick={() => scrollToSection(item.id)}
                   className={`px-4 py-2 text-sm font-medium transition-colors ${
-                    activeSection === item.id
+                    item.id === 'signup'
+                      ? 'bg-[#AD2E2C] text-foreground hover:bg-[#AD2E2C]/80'
+                      : activeSection === item.id
                       ? 'bg-accent text-accent-foreground'
                       : 'text-muted-foreground hover:text-foreground'
                   }`}
@@ -99,7 +101,9 @@ export default function Navigation() {
                   variant="ghost"
                   onClick={() => scrollToSection(item.id)}
                   className={`w-full justify-start px-3 py-2 text-base font-medium ${
-                    activeSection === item.id
+                    item.id === 'signup'
+                      ? 'bg-[#AD2E2C] text-foreground hover:bg-[#AD2E2C]/80'
+                      : activeSection === item.id
                       ? 'bg-accent text-accent-foreground'
                       : 'text-muted-foreground hover:text-foreground'
                   }`}

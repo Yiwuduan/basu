@@ -44,7 +44,7 @@ export default function GallerySection() {
   return (
     <section id="work" className="py-16 lg:py-24 bg-background">
       {/* Headline */}
-      <h2 className="text-3xl lg:text-5xl font-bold text-foreground text-center mb-8 lg:mb-12 px-4 sm:px-6 lg:px-8" data-testid="text-carousel-headline">
+      <h2 className="text-[clamp(3rem,10vw,8rem)] font-display text-foreground text-center mb-8 lg:mb-12 px-4 sm:px-6 lg:px-8 uppercase tracking-wide" data-testid="text-carousel-headline">
         My Work
       </h2>
 
