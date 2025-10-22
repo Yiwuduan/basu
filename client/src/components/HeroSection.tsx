@@ -63,7 +63,7 @@ export default function HeroSection() {
                 undefined : 
                 { 
                   top: `${animations[0].startPosition}%`, // Consistent random starting vertical position
-                  animation: `flowUp ${animations[0].flowDuration * 2}s linear infinite, colorFade1 ${animations[0].colorDuration}s infinite`,
+                  animation: `flowUp ${animations[0].flowDuration * 2}s ease-in-out infinite, colorFade1 ${animations[0].colorDuration}s infinite`,
                   animationDelay: `${animations[0].delay}s, ${animations[0].delay + Math.random() * 2}s`
                 }
               }
@@ -82,7 +82,7 @@ export default function HeroSection() {
                 undefined : 
                 { 
                   top: `${animations[1].startPosition}%`, // Consistent random starting vertical position
-                  animation: `flowUp ${animations[1].flowDuration * 2}s linear infinite, colorFade2 ${animations[1].colorDuration}s infinite`,
+                  animation: `flowUp ${animations[1].flowDuration * 2}s ease-in-out infinite, colorFade2 ${animations[1].colorDuration}s infinite`,
                   animationDelay: `${animations[1].delay}s, ${animations[1].delay + Math.random() * 2}s`
                 }
               }
@@ -101,7 +101,7 @@ export default function HeroSection() {
                 undefined : 
                 { 
                   top: `${animations[2].startPosition}%`, // Consistent random starting vertical position
-                  animation: `flowUp ${animations[2].flowDuration}s linear infinite, colorFade3 ${animations[2].colorDuration}s infinite`, // Back to normal speed
+                  animation: `flowUp ${animations[2].flowDuration}s ease-in-out infinite, colorFade3 ${animations[2].colorDuration}s infinite`, // Back to normal speed
                   animationDelay: `${animations[2].delay}s, ${animations[2].delay + Math.random() * 2}s`
                 }
               }
@@ -120,7 +120,7 @@ export default function HeroSection() {
                 undefined : 
                 { 
                   top: `${animations[3].startPosition}%`, // Consistent random starting vertical position
-                  animation: `flowUp ${animations[3].flowDuration * 2}s linear infinite, colorFade4 ${animations[3].colorDuration}s infinite`, // Slower movement
+                  animation: `flowUp ${animations[3].flowDuration * 2}s ease-in-out infinite, colorFade4 ${animations[3].colorDuration}s infinite`, // Slower movement
                   animationDelay: `${animations[3].delay}s, ${animations[3].delay + Math.random() * 2}s`
                 }
               }
@@ -139,7 +139,7 @@ export default function HeroSection() {
                 undefined : 
                 { 
                   top: `${animations[4].startPosition}%`, // Consistent random starting vertical position
-                  animation: `flowUp ${animations[4].flowDuration * 2}s linear infinite, colorFade5 ${animations[4].colorDuration}s infinite`, // Slower movement
+                  animation: `flowUp ${animations[4].flowDuration * 2}s ease-in-out infinite, colorFade5 ${animations[4].colorDuration}s infinite`, // Slower movement
                   animationDelay: `${animations[4].delay}s, ${animations[4].delay + Math.random() * 2}s`
                 }
               }
@@ -158,7 +158,7 @@ export default function HeroSection() {
                 undefined : 
                 { 
                   top: `${animations[5].startPosition}%`, // Consistent random starting vertical position
-                  animation: `flowUp ${animations[5].flowDuration * 2}s linear infinite, colorFade6 ${animations[5].colorDuration}s infinite`, // Slower movement
+                  animation: `flowUp ${animations[5].flowDuration * 2}s ease-in-out infinite, colorFade6 ${animations[5].colorDuration}s infinite`, // Slower movement
                   animationDelay: `${animations[5].delay}s, ${animations[5].delay + Math.random() * 2}s`
                 }
               }
@@ -206,144 +206,47 @@ export default function HeroSection() {
       <style jsx>{`
         @keyframes flowUp {
           0% {
-            transform: translateY(0) translateZ(0);
-            filter: blur(0px) opacity(0.8);
-            z-index: 20; /* Starts in front */
-          }
-          5% {
-            transform: translateY(-1%) translateZ(0);
-            filter: blur(0px) opacity(0.9);
-            z-index: 20; /* Stays in front initially */
-          }
-          10% {
-            transform: translateY(-5%) translateZ(0);
-            filter: blur(0px) opacity(0.95);
-            z-index: 15;
-          }
-          45% {
-            filter: blur(0px) opacity(1);
-            z-index: 10;
-          }
-          50% {
-            transform: translateY(-50%) translateZ(0);
-            filter: blur(0px) opacity(1);
-            z-index: 10;
-          }
-          90% {
-            transform: translateY(-95%) translateZ(0);
-            filter: blur(0px) opacity(0.95);
-            z-index: 10;
-          }
-          95% {
-            transform: translateY(-98%) translateZ(-5px);
-            filter: blur(1px) brightness(0.92) opacity(0.9);
-            z-index: 5;
+            transform: translateY(0);
           }
           100% {
-            transform: translateY(-100%) translateZ(-10px);
-            filter: blur(1.5px) brightness(0.9) opacity(0.85);
-            z-index: 1; /* Ends behind */
+            transform: translateY(-100%);
           }
         }
         
         @keyframes colorFade1 {
-          0% { filter: grayscale(1) opacity(0.7) blur(1px); }
-          10% { filter: grayscale(0.8) opacity(0.8) blur(0.8px); }
-          25% { filter: grayscale(0) opacity(1) blur(0px); }
-          50% { filter: grayscale(0) opacity(1) blur(0px); }
-          75% { filter: grayscale(0.2) opacity(0.9) blur(0.5px); }
-          100% { filter: grayscale(1) opacity(0.7) blur(1px); }
+          0% { filter: grayscale(100%) opacity(0.7); }
+          50% { filter: grayscale(0%) opacity(1); }
+          100% { filter: grayscale(100%) opacity(0.7); }
         }
         
         @keyframes colorFade2 {
-          0% { filter: grayscale(1) opacity(0.7) blur(1px); }
-          20% { filter: grayscale(0) opacity(1) blur(0px); }
-          40% { filter: grayscale(0) opacity(1) blur(0px); }
-          60% { filter: grayscale(0) opacity(1) blur(0px); }
-          80% { filter: grayscale(0.3) opacity(0.9) blur(0.5px); }
-          100% { filter: grayscale(1) opacity(0.7) blur(1px); }
+          0% { filter: grayscale(100%) opacity(0.7); }
+          50% { filter: grayscale(0%) opacity(1); }
+          100% { filter: grayscale(100%) opacity(0.7); }
         }
         
         @keyframes colorFade3 {
-          0% { filter: grayscale(1) opacity(0.7) blur(1px); }
-          15% { filter: grayscale(0) opacity(1) blur(0px); }
-          30% { filter: grayscale(0) opacity(1) blur(0px); }
-          45% { filter: grayscale(0) opacity(1) blur(0px); }
-          60% { filter: grayscale(0) opacity(1) blur(0px); }
-          75% { filter: grayscale(0.4) opacity(0.9) blur(0.5px); }
-          100% { filter: grayscale(1) opacity(0.7) blur(1px); }
+          0% { filter: grayscale(100%) opacity(0.7); }
+          50% { filter: grayscale(0%) opacity(1); }
+          100% { filter: grayscale(100%) opacity(0.7); }
         }
         
         @keyframes colorFade4 {
-          0% { filter: grayscale(1) opacity(0.7) blur(1px); }
-          10% { filter: grayscale(0) opacity(1) blur(0px); }
-          20% { filter: grayscale(0) opacity(1) blur(0px); }
-          30% { filter: grayscale(0) opacity(1) blur(0px); }
-          40% { filter: grayscale(0) opacity(1) blur(0px); }
-          50% { filter: grayscale(0) opacity(1) blur(0px); }
-          60% { filter: grayscale(0) opacity(1) blur(0px); }
-          70% { filter: grayscale(0.2) opacity(0.9) blur(0.5px); }
-          80% { filter: grayscale(0.5) opacity(0.8) blur(0.8px); }
-          100% { filter: grayscale(1) opacity(0.7) blur(1px); }
+          0% { filter: grayscale(100%) opacity(0.7); }
+          50% { filter: grayscale(0%) opacity(1); }
+          100% { filter: grayscale(100%) opacity(0.7); }
         }
         
         @keyframes colorFade5 {
-          0% { filter: grayscale(1) opacity(0.7) blur(1px); }
-          5% { filter: grayscale(0) opacity(1) blur(0px); }
-          10% { filter: grayscale(0) opacity(1) blur(0px); }
-          15% { filter: grayscale(0) opacity(1) blur(0px); }
-          20% { filter: grayscale(0) opacity(1) blur(0px); }
-          25% { filter: grayscale(0) opacity(1) blur(0px); }
-          30% { filter: grayscale(0) opacity(1) blur(0px); }
-          35% { filter: grayscale(0) opacity(1) blur(0px); }
-          40% { filter: grayscale(0) opacity(1) blur(0px); }
-          45% { filter: grayscale(0) opacity(1) blur(0px); }
-          50% { filter: grayscale(0) opacity(1) blur(0px); }
-          55% { filter: grayscale(0) opacity(1) blur(0px); }
-          60% { filter: grayscale(0.1) opacity(0.95) blur(0.3px); }
-          65% { filter: grayscale(0.3) opacity(0.9) blur(0.5px); }
-          70% { filter: grayscale(0.5) opacity(0.8) blur(0.8px); }
-          100% { filter: grayscale(1) opacity(0.7) blur(1px); }
+          0% { filter: grayscale(100%) opacity(0.7); }
+          50% { filter: grayscale(0%) opacity(1); }
+          100% { filter: grayscale(100%) opacity(0.7); }
         }
         
         @keyframes colorFade6 {
-          0% { filter: grayscale(1) opacity(0.7) blur(1px); }
-          2% { filter: grayscale(0) opacity(1) blur(0px); }
-          4% { filter: grayscale(0) opacity(1) blur(0px); }
-          6% { filter: grayscale(0) opacity(1) blur(0px); }
-          8% { filter: grayscale(0) opacity(1) blur(0px); }
-          10% { filter: grayscale(0) opacity(1) blur(0px); }
-          12% { filter: grayscale(0) opacity(1) blur(0px); }
-          14% { filter: grayscale(0) opacity(1) blur(0px); }
-          16% { filter: grayscale(0) opacity(1) blur(0px); }
-          18% { filter: grayscale(0) opacity(1) blur(0px); }
-          20% { filter: grayscale(0) opacity(1) blur(0px); }
-          22% { filter: grayscale(0) opacity(1) blur(0px); }
-          24% { filter: grayscale(0) opacity(1) blur(0px); }
-          26% { filter: grayscale(0) opacity(1) blur(0px); }
-          28% { filter: grayscale(0) opacity(1) blur(0px); }
-          30% { filter: grayscale(0) opacity(1) blur(0px); }
-          32% { filter: grayscale(0) opacity(1) blur(0px); }
-          34% { filter: grayscale(0) opacity(1) blur(0px); }
-          36% { filter: grayscale(0) opacity(1) blur(0px); }
-          38% { filter: grayscale(0) opacity(1) blur(0px); }
-          40% { filter: grayscale(0) opacity(1) blur(0px); }
-          42% { filter: grayscale(0) opacity(1) blur(0px); }
-          44% { filter: grayscale(0) opacity(1) blur(0px); }
-          46% { filter: grayscale(0) opacity(1) blur(0px); }
-          48% { filter: grayscale(0) opacity(1) blur(0px); }
-          50% { filter: grayscale(0) opacity(1) blur(0px); }
-          52% { filter: grayscale(0) opacity(1) blur(0px); }
-          54% { filter: grayscale(0) opacity(1) blur(0px); }
-          56% { filter: grayscale(0) opacity(1) blur(0px); }
-          58% { filter: grayscale(0) opacity(1) blur(0px); }
-          60% { filter: grayscale(0) opacity(1) blur(0px); }
-          62% { filter: grayscale(0.1) opacity(0.95) blur(0.3px); }
-          64% { filter: grayscale(0.2) opacity(0.9) blur(0.5px); }
-          66% { filter: grayscale(0.3) opacity(0.9) blur(0.5px); }
-          68% { filter: grayscale(0.4) opacity(0.85) blur(0.6px); }
-          70% { filter: grayscale(0.5) opacity(0.8) blur(0.8px); }
-          100% { filter: grayscale(1) opacity(0.7) blur(1px); }
+          0% { filter: grayscale(100%) opacity(0.7); }
+          50% { filter: grayscale(0%) opacity(1); }
+          100% { filter: grayscale(100%) opacity(0.7); }
         }
         
         @keyframes fadeIn {
