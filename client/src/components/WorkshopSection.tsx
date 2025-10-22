@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PrismaticBurst from './PrismaticBurst/PrismaticBurst.jsx';
 import img1 from '@assets/IMG_0848_1758970285463.jpeg';
 import img2 from '@assets/IMG_0853_1758970285464.jpeg';
 import img3 from '@assets/IMG_2125_1758970285465.jpeg';
@@ -47,8 +48,21 @@ export default function WorkshopSection() {
           ✨
         </div>
         
-        <div className="bg-gradient-to-br from-sky-300 to-purple-500 rounded-2xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
-          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-white/30 shadow-xl">
+        <div className="rounded-2xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+          <PrismaticBurst
+            animationType="rotate3d"
+            intensity={2}
+            speed={0.5}
+            distort={1.0}
+            paused={false}
+            offset={{ x: 0, y: 0 }}
+            hoverDampness={0.25}
+            rayCount={24}
+            mixBlendMode="lighten"
+            colors={['#ff007a', '#4d3dff', '#ffffff']}
+            className="absolute inset-0 w-full h-full"
+          />
+          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-white/30 shadow-xl relative z-10">
             {/* Main header with high contrast typography */}
             <div className="text-center mb-8 md:mb-12 relative z-10">
               <div className="inline-block px-6 py-2 bg-[#AD2E2C] text-white font-bold text-sm uppercase tracking-wider mb-4">
@@ -80,8 +94,8 @@ export default function WorkshopSection() {
                 <div
                   key={tile.id}
                   className={`border border-white/20 rounded-xl p-6 cursor-pointer transition-all duration-300 relative overflow-hidden ${
-                    hoveredTile === tile.id 
-                      ? 'bg-gradient-to-b from-amber-900/70 via-red-900/60 to-stone-700/50 scale-105 shadow-xl backdrop-blur-sm' 
+                    hoveredTile === tile.id
+                      ? 'bg-gradient-to-b from-amber-900/70 via-red-900/60 to-stone-700/50 scale-105 shadow-xl backdrop-blur-sm'
                       : 'bg-gradient-to-b from-amber-800/60 via-red-800/50 to-stone-600/40 backdrop-blur-sm'
                   }`}
                   onMouseEnter={() => setHoveredTile(tile.id)}
@@ -89,13 +103,13 @@ export default function WorkshopSection() {
                 >
                   {/* Film grain texture overlay for base state */}
                   <div className={`absolute inset-0 rounded-xl pointer-events-none ${
-                    hoveredTile === tile.id 
-                      ? 'opacity-20' 
-                      : hoveredTile 
-                        ? 'opacity-0' 
+                    hoveredTile === tile.id
+                      ? 'opacity-20'
+                      : hoveredTile
+                        ? 'opacity-0'
                         : 'opacity-20'
-                  }`} 
-                       style={{ 
+                  }`}
+                       style={{
                          background: `repeating-linear-gradient(
                            0deg,
                            rgba(0,0,0,0.15),
@@ -119,13 +133,13 @@ export default function WorkshopSection() {
             {/* Workshop images gallery */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 relative z-10">
               {[img1, img2, img3, img4].map((img, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="aspect-square rounded-lg overflow-hidden border-2 border-border"
                 >
-                  <img 
-                    src={img} 
-                    alt={`Workshop activity ${index + 1}`} 
+                  <img
+                    src={img}
+                    alt={`Workshop activity ${index + 1}`}
                     className="w-full h-full object-cover transition-all duration-300"
                   />
                 </div>
@@ -133,7 +147,7 @@ export default function WorkshopSection() {
             </div>
 
             {/* Join our circle CTA - converted to clickable button with glass shine */}
-            <button 
+            <button
               className="w-full text-center bg-gray-900 text-foreground rounded-xl p-8 relative z-10 overflow-hidden group"
               onClick={() => document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth' })}
             >
@@ -147,6 +161,7 @@ export default function WorkshopSection() {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out z-0"></div>
             </button>
           </div>
+
         </div>
       </div>
     </section>
