@@ -1,10 +1,9 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertSignupSchema } from "@shared/schema";
 import { z } from "zod";
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export async function registerRoutes(app: Express): Promise<void> {
   // Workshop signup route
   app.post("/api/signup", async (req, res) => {
     try {
@@ -12,7 +11,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = insertSignupSchema.parse(req.body);
       
       // Check if email already exists
-      const existingSignup = await storage.getSignupByEmail(validatedData.email);
+      const existingSignup = await (await storage).getSignupByEmail(validatedData.email);
       if (existingSignup) {
         return res.status(400).json({ 
           error: "Email already registered. We'll be in touch soon!" 
@@ -20,7 +19,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Create the signup
-      const signup = await storage.createSignup(validatedData);
+      const signup = await (await storage).createSignup(validatedData);
       
       console.log("New workshop signup:", {
         parentName: signup.parentName,
@@ -47,8 +46,4 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     }
   });
-
-  const httpServer = createServer(app);
-
-  return httpServer;
 }

@@ -162,8 +162,8 @@ export default function SignupSection() {
                   <div className="relative z-10 flex items-start space-x-4">
                     <div className="text-3xl bg-white/50 backdrop-blur-md rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-md">{option.icon}</div>
                     <div className="flex-1">
-                      <h4 className="text-lg font-bold text-foreground mb-2 bg-white/50 backdrop-blur-md px-3 py-2 rounded-lg inline-block shadow-md">{option.title}</h4>
-                      <p className="text-base text-muted-foreground bg-white/50 backdrop-blur-md px-3 py-2 rounded-lg mt-2 inline-block shadow-md">{option.description}</p>
+                      <h4 className="text-lg font-bold mb-2 bg-white/50 backdrop-blur-md px-3 py-2 rounded-lg inline-block shadow-md">{option.title}</h4>
+                      <p className="text-base bg-white/50 backdrop-blur-md px-3 py-2 rounded-lg mt-2 inline-block shadow-md" style={{ color: '#282D35' }}>{option.description}</p>
                     </div>
                     <div className="flex items-center z-20">
                       <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${

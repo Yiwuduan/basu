@@ -68,4 +68,17 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// Conditionally use DB storage in production, memory storage in development
+const isProduction = process.env.NODE_ENV === 'production';
+const hasDatabaseUrl = !!process.env.DATABASE_URL;
+
+async function createStorage(): Promise<IStorage> {
+    if (hasDatabaseUrl && isProduction) {
+        const { DBStorage } = await import('./db-storage.js');
+        return new DBStorage();
+    } else {
+        return new MemStorage();
+    }
+}
+
+export const storage = createStorage();

@@ -39,11 +39,11 @@ export default function PhilosophySection() {
       <div className="w-full px-8 sm:px-12 lg:px-16 xl:px-20">
         {/* Header */}
         <div className="text-center mb-16">
-          <Badge variant="secondary" className="mb-4 text-[#282D35]">Our Philosophy</Badge>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#282D35] mb-6">
+          <Badge variant="secondary" className="mb-4 text-black">Our Philosophy</Badge>
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-black mb-6">
             Learning Beyond the Material
           </h2>
-          <p className="text-xl text-[#282D35] max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-black max-w-3xl mx-auto leading-relaxed">
             Real learning comes from inquiry, from doing, from people who love what they do 
             passing that energy on. We create spaces where wisdom emerges naturally.
           </p>
@@ -52,7 +52,7 @@ export default function PhilosophySection() {
         {/* Philosophy Cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 xl:gap-16 mb-16">
           {principles.map((principle, index) => (
-            <Card key={index} className="w-full h-80 p-4 hover-elevate border border-white/50 relative overflow-hidden rounded-2xl bg-[#F0ECD9] text-[#282D35] shadow-xl hover:shadow-2xl transition-all duration-300">
+            <Card key={index} className="w-full h-80 p-4 hover-elevate border border-white/50 relative overflow-hidden rounded-2xl bg-[#F0ECD9] text-black shadow-xl hover:shadow-2xl transition-all duration-300">
               {/* Background Image */}
               <div className="absolute inset-0 z-0">
                 <img 
@@ -74,8 +74,8 @@ export default function PhilosophySection() {
                   <principle.icon className="w-6 h-6 text-primary" />
                 </div>
                 <div className="flex-1 flex flex-col justify-center">
-                  <h3 className="font-bold text-base text-[#282D35] mb-2">{principle.title}</h3>
-                  <p className="text-[#282D35]/90 text-sm leading-relaxed font-medium">{principle.description}</p>
+                  <h3 className="font-bold text-base text-black mb-2">{principle.title}</h3>
+                  <p className="text-black/90 text-sm leading-relaxed font-medium">{principle.description}</p>
                 </div>
               </div>
             </Card>
@@ -83,7 +83,7 @@ export default function PhilosophySection() {
         </div>
 
         {/* Quote Section */}
-        <Card className="p-12 border border-white/50 relative overflow-hidden rounded-2xl bg-[#F0ECD9] text-[#282D35] shadow-xl hover:shadow-2xl transition-all duration-300">
+        <Card className="p-12 border border-white/50 relative overflow-hidden rounded-2xl bg-[#F0ECD9] text-black shadow-xl hover:shadow-2xl transition-all duration-300">
           {/* Background Image for quote section */}
           <div className="absolute inset-0 z-0">
             <img 
@@ -102,13 +102,13 @@ export default function PhilosophySection() {
             <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-white/40 backdrop-blur-md border border-white/40 flex items-center justify-center shadow-lg shadow-white/20">
               <span className="text-2xl">💭</span>
             </div>
-            <blockquote className="text-2xl font-bold text-[#282D35] mb-6 italic leading-relaxed backdrop-blur-sm">
+            <blockquote className="text-2xl font-bold text-black mb-6 italic leading-relaxed backdrop-blur-sm">
               "Children especially thrive when they're guided by curiosity rather than rigid rules. 
               When we create space for inquiry and authentic expression, wisdom emerges naturally."
             </blockquote>
             <div className="flex items-center justify-center gap-4">
-              <div className="w-px h-8 bg-[#282D35]/60 backdrop-blur-sm"></div>
-              <p className="text-[#282D35]/90 font-semibold backdrop-blur-sm">Amanda's Core Belief</p>
+              <div className="w-px h-8 bg-black/60 backdrop-blur-sm"></div>
+              <p className="text-black/90 font-semibold backdrop-blur-sm">Amanda's Core Belief</p>
             </div>
           </div>
         </Card>

@@ -1,49 +1,58 @@
-// api/index.js - Catch-all route for the frontend
-import fs from 'fs';
-import path from 'path';
+import { createReadStream } from 'fs';
+import { join } from 'path';
+import { stat } from 'fs/promises';
 
+// This API route handles all non-API requests to serve the React frontend
 export default async function handler(req, res) {
-  // This handles all routes that aren't API routes
-  
-  // For API calls, this shouldn't be reached due to routing, but just in case:
-  if (req.url && req.url.startsWith('/api/')) {
-    res.status(404).json({ error: 'API endpoint not found' });
-    return;
+  // If it's an API request, this shouldn't be reached due to Vercel's routing,
+  // but we'll be safe and return 404 if somehow it is
+  if (req.url.startsWith('/api/')) {
+    return res.status(404).json({ error: 'Not found' });
+  }
+
+  // Determine the file path to serve
+  let path = req.url.split('?')[0]; // Remove query string
+  if (path === '/') {
+    path = '/index.html';
   }
   
-  // For all frontend requests, serve the built index.html file
+  const filePath = join(process.cwd(), 'dist/public', path);
+  
   try {
-    // With the updated build process, files should be in www directory
-    const indexPath = path.join(process.cwd(), 'www', 'index.html');
+    // Check if file exists
+    await stat(filePath);
     
-    if (fs.existsSync(indexPath)) {
-      const html = fs.readFileSync(indexPath, 'utf8');
-      res.setHeader('Content-Type', 'text/html; charset=utf-8');
-      res.status(200).send(html);
-    } else {
-      console.error('Index.html not found at expected location:', indexPath);
-      res.status(404).send(`
-        <!DOCTYPE html>
-        <html>
-        <head><title>Not Found</title></head>
-        <body>
-          <h1>Frontend Build Not Found</h1>
-          <p>The frontend build files were not found at: ${indexPath}</p>
-        </body>
-        </html>
-      `);
+    // Serve the file
+    const fileStream = createReadStream(filePath);
+    const ext = filePath.split('.').pop();
+    
+    // Set appropriate content type
+    const contentTypes = {
+      'html': 'text/html',
+      'js': 'application/javascript',
+      'css': 'text/css',
+      'json': 'application/json',
+      'png': 'image/png',
+      'jpg': 'image/jpeg',
+      'jpeg': 'image/jpeg',
+      'gif': 'image/gif',
+      'svg': 'image/svg+xml',
+      'ico': 'image/x-icon',
+      'txt': 'text/plain'
+    };
+    
+    res.setHeader('Content-Type', contentTypes[ext] || 'text/html');
+    fileStream.pipe(res);
+  } catch (err) {
+    // If file doesn't exist, serve index.html for client-side routing
+    const indexPath = join(process.cwd(), 'dist/public', 'index.html');
+    try {
+      await stat(indexPath);
+      res.setHeader('Content-Type', 'text/html');
+      const indexStream = createReadStream(indexPath);
+      indexStream.pipe(res);
+    } catch (indexErr) {
+      res.status(404).send('Page not found');
     }
-  } catch (error) {
-    console.error('Error in API index handler:', error);
-    res.status(500).send(`
-      <!DOCTYPE html>
-      <html>
-      <head><title>Server Error</title></head>
-      <body>
-        <h1>Internal Server Error</h1>
-        <p>${error.message}</p>
-      </body>
-      </html>
-    `);
   }
 }
